@@ -13,7 +13,7 @@ namespace Model
         /// </summary>
         public FileInformation()
         { }
-        #region Model
+        #region FileInformation
         private string _filename;
         private string _filetype;
         private double _filesize;

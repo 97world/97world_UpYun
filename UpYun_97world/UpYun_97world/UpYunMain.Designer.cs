@@ -33,26 +33,37 @@
             this.xafBarManagerMain = new DevExpress.ExpressApp.Win.Templates.Controls.XafBarManager(this.components);
             this.MenuBar = new DevExpress.ExpressApp.Win.Templates.Controls.XafBar();
             this.SubItemOperator = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.BarButtonItemLogin = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemLogout = new DevExpress.XtraBars.BarButtonItem();
             this.SubItemInternet = new DevExpress.XtraBars.BarSubItem();
+            this.BarCheckItemAutoLine = new DevExpress.XtraBars.BarCheckItem();
+            this.BarCheckItemTelecom = new DevExpress.XtraBars.BarCheckItem();
+            this.BarCheckItemUnicom = new DevExpress.XtraBars.BarCheckItem();
+            this.BarCheckItemMobile = new DevExpress.XtraBars.BarCheckItem();
             this.SubItemHelp = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemMyblog = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemAbout = new DevExpress.XtraBars.BarButtonItem();
             this.BottomBar = new DevExpress.ExpressApp.Win.Templates.Controls.XafBar();
+            this.BarStaticItemOperator = new DevExpress.XtraBars.BarStaticItem();
+            this.BarStaticItemUseSpace = new DevExpress.XtraBars.BarStaticItem();
+            this.BarStaticItemStatus = new DevExpress.XtraBars.BarStaticItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barCheckItem4 = new DevExpress.XtraBars.BarCheckItem();
+            this.actionContainerBarItem1 = new DevExpress.ExpressApp.Win.Templates.ActionContainers.ActionContainerBarItem();
+            this.barLinkContainerItem1 = new DevExpress.XtraBars.BarLinkContainerItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.GroupControlLocal = new DevExpress.XtraEditors.GroupControl();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.ListViewLocal = new System.Windows.Forms.ListView();
             this.UrlBarLocal = new UpYun_97world.Controls.UrlBar();
-            this.localToolsBar1 = new UpYun_97world.Controls.LocalToolsBar();
+            this.LocalToolsBarMain = new UpYun_97world.Controls.LocalToolsBar();
             this.GroupControlWeb = new DevExpress.XtraEditors.GroupControl();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.ListViewWeb = new System.Windows.Forms.ListView();
             this.UrlBarWeb = new UpYun_97world.Controls.UrlBar();
-            this.webToolsBar1 = new UpYun_97world.Controls.WebToolsBar();
+            this.WebToolsBarMain = new UpYun_97world.Controls.WebToolsBar();
             this.ImageListToolIcon = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xafBarManagerMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
@@ -77,12 +88,23 @@
             this.SubItemOperator,
             this.SubItemInternet,
             this.SubItemHelp,
-            this.barButtonItem1,
-            this.barButtonItem2,
-            this.barButtonItem3,
-            this.barButtonItem4});
+            this.BarButtonItemLogin,
+            this.barButtonItemLogout,
+            this.barButtonItemMyblog,
+            this.barButtonItemAbout,
+            this.BarCheckItemTelecom,
+            this.BarCheckItemUnicom,
+            this.BarCheckItemMobile,
+            this.barCheckItem4,
+            this.BarCheckItemAutoLine,
+            this.actionContainerBarItem1,
+            this.BarStaticItemOperator,
+            this.barLinkContainerItem1,
+            this.barStaticItem2,
+            this.BarStaticItemUseSpace,
+            this.BarStaticItemStatus});
             this.xafBarManagerMain.MainMenu = this.MenuBar;
-            this.xafBarManagerMain.MaxItemId = 7;
+            this.xafBarManagerMain.MaxItemId = 21;
             this.xafBarManagerMain.StatusBar = this.BottomBar;
             // 
             // MenuBar
@@ -95,6 +117,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemOperator),
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemInternet),
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemHelp)});
+            this.MenuBar.OptionsBar.AllowQuickCustomization = false;
             this.MenuBar.OptionsBar.DrawDragBorder = false;
             this.MenuBar.OptionsBar.MultiLine = true;
             this.MenuBar.OptionsBar.UseWholeRow = true;
@@ -106,48 +129,77 @@
             this.SubItemOperator.Caption = "操作员(&U)";
             this.SubItemOperator.Id = 0;
             this.SubItemOperator.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarButtonItemLogin),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLogout)});
             this.SubItemOperator.Name = "SubItemOperator";
             // 
-            // barButtonItem1
+            // BarButtonItemLogin
             // 
-            this.barButtonItem1.Caption = "登录(&L)";
-            this.barButtonItem1.Id = 3;
-            this.barButtonItem1.Name = "barButtonItem1";
+            this.BarButtonItemLogin.Caption = "登录(&L)";
+            this.BarButtonItemLogin.Id = 3;
+            this.BarButtonItemLogin.Name = "BarButtonItemLogin";
             // 
-            // barButtonItem2
+            // barButtonItemLogout
             // 
-            this.barButtonItem2.Caption = "注销(&C)";
-            this.barButtonItem2.Id = 4;
-            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItemLogout.Caption = "注销(&C)";
+            this.barButtonItemLogout.Id = 4;
+            this.barButtonItemLogout.Name = "barButtonItemLogout";
             // 
             // SubItemInternet
             // 
             this.SubItemInternet.Caption = "网络选择(&I)";
             this.SubItemInternet.Id = 1;
+            this.SubItemInternet.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemAutoLine),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemTelecom),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemUnicom),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemMobile)});
             this.SubItemInternet.Name = "SubItemInternet";
+            // 
+            // BarCheckItemAutoLine
+            // 
+            this.BarCheckItemAutoLine.Caption = "自动识别(&A)";
+            this.BarCheckItemAutoLine.Id = 11;
+            this.BarCheckItemAutoLine.Name = "BarCheckItemAutoLine";
+            // 
+            // BarCheckItemTelecom
+            // 
+            this.BarCheckItemTelecom.Caption = "电信网络(&D)";
+            this.BarCheckItemTelecom.Id = 7;
+            this.BarCheckItemTelecom.Name = "BarCheckItemTelecom";
+            // 
+            // BarCheckItemUnicom
+            // 
+            this.BarCheckItemUnicom.Caption = "联通网络(&L)";
+            this.BarCheckItemUnicom.Id = 8;
+            this.BarCheckItemUnicom.Name = "BarCheckItemUnicom";
+            // 
+            // BarCheckItemMobile
+            // 
+            this.BarCheckItemMobile.Caption = "移动网络(&Y)";
+            this.BarCheckItemMobile.Id = 9;
+            this.BarCheckItemMobile.Name = "BarCheckItemMobile";
             // 
             // SubItemHelp
             // 
             this.SubItemHelp.Caption = "帮助(&H)";
             this.SubItemHelp.Id = 2;
             this.SubItemHelp.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem4)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemMyblog),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAbout)});
             this.SubItemHelp.Name = "SubItemHelp";
             // 
-            // barButtonItem3
+            // barButtonItemMyblog
             // 
-            this.barButtonItem3.Caption = "访问我的BLOG";
-            this.barButtonItem3.Id = 5;
-            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItemMyblog.Caption = "访问我的BLOG";
+            this.barButtonItemMyblog.Id = 5;
+            this.barButtonItemMyblog.Name = "barButtonItemMyblog";
             // 
-            // barButtonItem4
+            // barButtonItemAbout
             // 
-            this.barButtonItem4.Caption = "关于(&A)";
-            this.barButtonItem4.Id = 6;
-            this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItemAbout.Caption = "关于(&A)";
+            this.barButtonItemAbout.Id = 6;
+            this.barButtonItemAbout.Name = "barButtonItemAbout";
             // 
             // BottomBar
             // 
@@ -156,11 +208,39 @@
             this.BottomBar.DockCol = 0;
             this.BottomBar.DockRow = 0;
             this.BottomBar.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            this.BottomBar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.BarStaticItemOperator, DevExpress.XtraBars.BarItemPaintStyle.Standard),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarStaticItemUseSpace),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarStaticItemStatus)});
             this.BottomBar.OptionsBar.AllowQuickCustomization = false;
             this.BottomBar.OptionsBar.DrawDragBorder = false;
             this.BottomBar.OptionsBar.UseWholeRow = true;
             this.BottomBar.TargetPageCategoryColor = System.Drawing.Color.Empty;
             this.BottomBar.Text = "StatusBar";
+            // 
+            // BarStaticItemOperator
+            // 
+            this.BarStaticItemOperator.Caption = "操作员：97world";
+            this.BarStaticItemOperator.Id = 13;
+            this.BarStaticItemOperator.Name = "BarStaticItemOperator";
+            this.BarStaticItemOperator.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // BarStaticItemUseSpace
+            // 
+            this.BarStaticItemUseSpace.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.BarStaticItemUseSpace.Caption = "空间已使用：40.4M";
+            this.BarStaticItemUseSpace.Id = 16;
+            this.BarStaticItemUseSpace.Name = "BarStaticItemUseSpace";
+            this.BarStaticItemUseSpace.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
+            // BarStaticItemStatus
+            // 
+            this.BarStaticItemStatus.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.BarStaticItemStatus.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.BarStaticItemStatus.Caption = "登录成功！";
+            this.BarStaticItemStatus.Id = 18;
+            this.BarStaticItemStatus.Name = "BarStaticItemStatus";
+            this.BarStaticItemStatus.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // barDockControlTop
             // 
@@ -173,25 +253,55 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 536);
-            this.barDockControlBottom.Size = new System.Drawing.Size(774, 23);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 532);
+            this.barDockControlBottom.Size = new System.Drawing.Size(774, 27);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 512);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 508);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(774, 24);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 512);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 508);
+            // 
+            // barCheckItem4
+            // 
+            this.barCheckItem4.Caption = "自动识别(&A)";
+            this.barCheckItem4.Id = 10;
+            this.barCheckItem4.Name = "barCheckItem4";
+            // 
+            // actionContainerBarItem1
+            // 
+            this.actionContainerBarItem1.Caption = "test";
+            this.actionContainerBarItem1.Id = 12;
+            this.actionContainerBarItem1.Name = "actionContainerBarItem1";
+            this.actionContainerBarItem1.TargetPageCategoryColor = System.Drawing.Color.Empty;
+            this.actionContainerBarItem1.TargetPageGroupCaption = null;
+            // 
+            // barLinkContainerItem1
+            // 
+            this.barLinkContainerItem1.Caption = "test";
+            this.barLinkContainerItem1.Id = 14;
+            this.barLinkContainerItem1.Name = "barLinkContainerItem1";
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "97world";
+            this.barStaticItem2.Id = 15;
+            this.barStaticItem2.Name = "barStaticItem2";
+            this.barStaticItem2.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // splitContainerControl1
             // 
+            this.splitContainerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainerControl1.Location = new System.Drawing.Point(2, 28);
             this.splitContainerControl1.Name = "splitContainerControl1";
             this.splitContainerControl1.Panel1.Controls.Add(this.GroupControlLocal);
@@ -208,90 +318,86 @@
             this.GroupControlLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.GroupControlLocal.Controls.Add(this.listView1);
+            this.GroupControlLocal.Controls.Add(this.ListViewLocal);
             this.GroupControlLocal.Controls.Add(this.UrlBarLocal);
-            this.GroupControlLocal.Controls.Add(this.localToolsBar1);
+            this.GroupControlLocal.Controls.Add(this.LocalToolsBarMain);
             this.GroupControlLocal.Location = new System.Drawing.Point(4, 3);
             this.GroupControlLocal.Name = "GroupControlLocal";
             this.GroupControlLocal.Size = new System.Drawing.Size(377, 494);
             this.GroupControlLocal.TabIndex = 0;
             this.GroupControlLocal.Text = "本地浏览器";
             // 
-            // listView1
+            // ListViewLocal
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ListViewLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Location = new System.Drawing.Point(5, 94);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(366, 395);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.ListViewLocal.Location = new System.Drawing.Point(5, 94);
+            this.ListViewLocal.Name = "ListViewLocal";
+            this.ListViewLocal.Size = new System.Drawing.Size(366, 395);
+            this.ListViewLocal.TabIndex = 3;
+            this.ListViewLocal.UseCompatibleStateImageBehavior = false;
             // 
             // UrlBarLocal
             // 
-            this.UrlBarLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.UrlBarLocal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UrlBarLocal.Location = new System.Drawing.Point(3, 67);
             this.UrlBarLocal.Name = "UrlBarLocal";
             this.UrlBarLocal.Size = new System.Drawing.Size(369, 26);
             this.UrlBarLocal.TabIndex = 2;
             // 
-            // localToolsBar1
+            // LocalToolsBarMain
             // 
-            this.localToolsBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.LocalToolsBarMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.localToolsBar1.Location = new System.Drawing.Point(1, 21);
-            this.localToolsBar1.Name = "localToolsBar1";
-            this.localToolsBar1.Size = new System.Drawing.Size(314, 46);
-            this.localToolsBar1.TabIndex = 1;
+            this.LocalToolsBarMain.Location = new System.Drawing.Point(1, 21);
+            this.LocalToolsBarMain.Name = "LocalToolsBarMain";
+            this.LocalToolsBarMain.Size = new System.Drawing.Size(314, 46);
+            this.LocalToolsBarMain.TabIndex = 1;
             // 
             // GroupControlWeb
             // 
             this.GroupControlWeb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.GroupControlWeb.Controls.Add(this.listView2);
+            this.GroupControlWeb.Controls.Add(this.ListViewWeb);
             this.GroupControlWeb.Controls.Add(this.UrlBarWeb);
-            this.GroupControlWeb.Controls.Add(this.webToolsBar1);
+            this.GroupControlWeb.Controls.Add(this.WebToolsBarMain);
             this.GroupControlWeb.Location = new System.Drawing.Point(2, 3);
             this.GroupControlWeb.Name = "GroupControlWeb";
             this.GroupControlWeb.Size = new System.Drawing.Size(375, 494);
             this.GroupControlWeb.TabIndex = 0;
             this.GroupControlWeb.Text = "远程浏览器";
             // 
-            // listView2
+            // ListViewWeb
             // 
-            this.listView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ListViewWeb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView2.Location = new System.Drawing.Point(5, 94);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(365, 395);
-            this.listView2.TabIndex = 4;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.ListViewWeb.Location = new System.Drawing.Point(5, 94);
+            this.ListViewWeb.Name = "ListViewWeb";
+            this.ListViewWeb.Size = new System.Drawing.Size(365, 395);
+            this.ListViewWeb.TabIndex = 4;
+            this.ListViewWeb.UseCompatibleStateImageBehavior = false;
             // 
             // UrlBarWeb
             // 
-            this.UrlBarWeb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.UrlBarWeb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UrlBarWeb.Location = new System.Drawing.Point(3, 67);
             this.UrlBarWeb.Name = "UrlBarWeb";
             this.UrlBarWeb.Size = new System.Drawing.Size(365, 26);
             this.UrlBarWeb.TabIndex = 3;
             // 
-            // webToolsBar1
+            // WebToolsBarMain
             // 
-            this.webToolsBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.WebToolsBarMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webToolsBar1.Location = new System.Drawing.Point(1, 21);
-            this.webToolsBar1.Name = "webToolsBar1";
-            this.webToolsBar1.Size = new System.Drawing.Size(345, 46);
-            this.webToolsBar1.TabIndex = 1;
+            this.WebToolsBarMain.Location = new System.Drawing.Point(1, 21);
+            this.WebToolsBarMain.Name = "WebToolsBarMain";
+            this.WebToolsBarMain.Size = new System.Drawing.Size(345, 46);
+            this.WebToolsBarMain.TabIndex = 1;
             // 
             // ImageListToolIcon
             // 
@@ -348,18 +454,29 @@
         private DevExpress.XtraBars.BarSubItem SubItemOperator;
         private DevExpress.XtraBars.BarSubItem SubItemInternet;
         private DevExpress.XtraBars.BarSubItem SubItemHelp;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.BarButtonItem BarButtonItemLogin;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemLogout;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemMyblog;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemAbout;
         private DevExpress.XtraEditors.GroupControl GroupControlLocal;
-        private Controls.LocalToolsBar localToolsBar1;
+        private Controls.LocalToolsBar LocalToolsBarMain;
         private Controls.UrlBar UrlBarLocal;
         private DevExpress.XtraEditors.GroupControl GroupControlWeb;
         private Controls.UrlBar UrlBarWeb;
-        private Controls.WebToolsBar webToolsBar1;
+        private Controls.WebToolsBar WebToolsBarMain;
+        private System.Windows.Forms.ListView ListViewLocal;
+        private System.Windows.Forms.ListView ListViewWeb;
+        private DevExpress.XtraBars.BarCheckItem barCheckItem4;
+        private DevExpress.XtraBars.BarCheckItem BarCheckItemTelecom;
+        private DevExpress.XtraBars.BarCheckItem BarCheckItemUnicom;
+        private DevExpress.XtraBars.BarCheckItem BarCheckItemMobile;
+        private DevExpress.XtraBars.BarCheckItem BarCheckItemAutoLine;
+        private DevExpress.ExpressApp.Win.Templates.ActionContainers.ActionContainerBarItem actionContainerBarItem1;
+        private DevExpress.XtraBars.BarStaticItem BarStaticItemOperator;
+        private DevExpress.XtraBars.BarStaticItem BarStaticItemUseSpace;
+        private DevExpress.XtraBars.BarLinkContainerItem barLinkContainerItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private DevExpress.XtraBars.BarStaticItem BarStaticItemStatus;
         private System.Windows.Forms.ImageList ImageListToolIcon;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ListView listView2;
     }
 }

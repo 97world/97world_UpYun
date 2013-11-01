@@ -92,6 +92,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemTrans),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemDel),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemNewFloder, true)});
+            this.bar1.OptionsBar.DrawDragBorder = false;
             this.bar1.Text = "Tools";
             // 
             // BtnItemMyPC

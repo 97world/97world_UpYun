@@ -82,6 +82,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemDel),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemNewFolder, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemLink)});
+            this.bar1.OptionsBar.DrawDragBorder = false;
             this.bar1.Text = "Tools";
             // 
             // BtnItemOperator
@@ -152,14 +153,14 @@
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 1);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 0);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(393, 0);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 1);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 0);
             // 
             // ImageListToolIcon
             // 
