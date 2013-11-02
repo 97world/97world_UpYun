@@ -27,8 +27,9 @@ namespace UpYun_97world
             DRInternet["Name"] = "AutoInternet";
             DRInternet["Text"] = "自动识别";
             DataTableInternet.Rows.Add(DRInternet);
-            
             //dropDownButton1.DataBindings.Add();
+            UpYunLibrary.FolderItem testlib = new UpYunLibrary.FolderItem("s","s",6,6);
+            label1.Text = testlib.size.ToString();
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

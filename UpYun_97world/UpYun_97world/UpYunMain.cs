@@ -20,5 +20,11 @@ namespace UpYun_97world
         {
             
         }
+
+        private void BarButtonItemLogin_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            UpYunLogin upYunLogin = new UpYunLogin();
+            upYunLogin.ShowDialog();
+        }
     }
 }

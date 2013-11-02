@@ -34,7 +34,7 @@
             this.MenuBar = new DevExpress.ExpressApp.Win.Templates.Controls.XafBar();
             this.SubItemOperator = new DevExpress.XtraBars.BarSubItem();
             this.BarButtonItemLogin = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemLogout = new DevExpress.XtraBars.BarButtonItem();
+            this.BarButtonItemLogout = new DevExpress.XtraBars.BarButtonItem();
             this.SubItemInternet = new DevExpress.XtraBars.BarSubItem();
             this.BarCheckItemAutoLine = new DevExpress.XtraBars.BarCheckItem();
             this.BarCheckItemTelecom = new DevExpress.XtraBars.BarCheckItem();
@@ -89,7 +89,7 @@
             this.SubItemInternet,
             this.SubItemHelp,
             this.BarButtonItemLogin,
-            this.barButtonItemLogout,
+            this.BarButtonItemLogout,
             this.barButtonItemMyblog,
             this.barButtonItemAbout,
             this.BarCheckItemTelecom,
@@ -130,7 +130,7 @@
             this.SubItemOperator.Id = 0;
             this.SubItemOperator.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.BarButtonItemLogin),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLogout)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarButtonItemLogout)});
             this.SubItemOperator.Name = "SubItemOperator";
             // 
             // BarButtonItemLogin
@@ -138,12 +138,13 @@
             this.BarButtonItemLogin.Caption = "登录(&L)";
             this.BarButtonItemLogin.Id = 3;
             this.BarButtonItemLogin.Name = "BarButtonItemLogin";
+            this.BarButtonItemLogin.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItemLogin_ItemClick);
             // 
-            // barButtonItemLogout
+            // BarButtonItemLogout
             // 
-            this.barButtonItemLogout.Caption = "注销(&C)";
-            this.barButtonItemLogout.Id = 4;
-            this.barButtonItemLogout.Name = "barButtonItemLogout";
+            this.BarButtonItemLogout.Caption = "注销(&C)";
+            this.BarButtonItemLogout.Id = 4;
+            this.BarButtonItemLogout.Name = "BarButtonItemLogout";
             // 
             // SubItemInternet
             // 
@@ -455,7 +456,7 @@
         private DevExpress.XtraBars.BarSubItem SubItemInternet;
         private DevExpress.XtraBars.BarSubItem SubItemHelp;
         private DevExpress.XtraBars.BarButtonItem BarButtonItemLogin;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemLogout;
+        private DevExpress.XtraBars.BarButtonItem BarButtonItemLogout;
         private DevExpress.XtraBars.BarButtonItem barButtonItemMyblog;
         private DevExpress.XtraBars.BarButtonItem barButtonItemAbout;
         private DevExpress.XtraEditors.GroupControl GroupControlLocal;

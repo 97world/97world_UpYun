@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpYun_97world", "UpYun_97wo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{662B0E52-2B4A-4489-9348-3A6C2C9BAEE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpYunLibrary", "UpYunLibrary\UpYunLibrary.csproj", "{4900E634-60D9-42B3-90D2-FD803296FFDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsLibrary", "ToolsLibrary\ToolsLibrary.csproj", "{F29496E2-E5FB-4189-B48F-E0BBBA87EE70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{662B0E52-2B4A-4489-9348-3A6C2C9BAEE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{662B0E52-2B4A-4489-9348-3A6C2C9BAEE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{662B0E52-2B4A-4489-9348-3A6C2C9BAEE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4900E634-60D9-42B3-90D2-FD803296FFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4900E634-60D9-42B3-90D2-FD803296FFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4900E634-60D9-42B3-90D2-FD803296FFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4900E634-60D9-42B3-90D2-FD803296FFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29496E2-E5FB-4189-B48F-E0BBBA87EE70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29496E2-E5FB-4189-B48F-E0BBBA87EE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29496E2-E5FB-4189-B48F-E0BBBA87EE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29496E2-E5FB-4189-B48F-E0BBBA87EE70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

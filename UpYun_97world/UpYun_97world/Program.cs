@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DevExpress.LookAndFeel;
+using System.Runtime.InteropServices;
 
 namespace UpYun_97world
 {
@@ -9,7 +11,7 @@ namespace UpYun_97world
     {
         /// <summary>
         /// The main entry point for the application.
-        /// </summary>
+        /// </summary>       
         [STAThread]
         static void Main()
         {
@@ -20,7 +22,7 @@ namespace UpYun_97world
             DevExpress.UserSkins.BonusSkins.Register();
             UserLookAndFeel.Default.SetSkinStyle("Office 2010 Silver");
 
-            Application.Run(new UpYunLogin());
+            Application.Run(new UpYunMain());
         }
     }
 }
