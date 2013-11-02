@@ -15,5 +15,46 @@ namespace UpYun_97world
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// 关闭窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ButtonClean_Click(object sender, EventArgs e)
+        {
+            TextEditBucket.Text = "";
+            TextEditOperator.Text = "";
+            TextEditPwd.Text = "";
+            TextEditUrl.Text = "";
+            DropDownButtonInternet.Text = "自动识别网络";
+            CheEditAutoLogin.Checked = false;
+            CheEditRemember.Checked = false;
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DropDownButtonInternet.Text = "自动识别网络";
+        }
+
+        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DropDownButtonInternet.Text = "中国电信网络";
+        }
+
+        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DropDownButtonInternet.Text = "中国联通网络";
+        }
+
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DropDownButtonInternet.Text = "中国移动网络";
+        }
     }
 }

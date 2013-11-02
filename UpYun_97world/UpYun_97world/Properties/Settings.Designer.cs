@@ -22,5 +22,29 @@ namespace UpYun_97world.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Auto")]
+        public string 自动识别 {
+            get {
+                return ((string)(this["自动识别"]));
+            }
+            set {
+                this["自动识别"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("自动识别")]
+        public string Auto {
+            get {
+                return ((string)(this["Auto"]));
+            }
+            set {
+                this["Auto"] = value;
+            }
+        }
     }
 }
