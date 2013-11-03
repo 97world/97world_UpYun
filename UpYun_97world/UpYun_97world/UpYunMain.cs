@@ -9,7 +9,7 @@ using DevExpress.XtraEditors;
 
 namespace UpYun_97world
 {
-    public partial class UpYunMain : DevExpress.XtraEditors.XtraForm
+    public partial class UpYunMain : UpYunBase
     {
         public UpYunMain()
         {

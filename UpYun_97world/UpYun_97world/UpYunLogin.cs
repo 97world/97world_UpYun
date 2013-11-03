@@ -9,15 +9,17 @@ using DevExpress.XtraEditors;
 
 namespace UpYun_97world
 {
-    public partial class UpYunLogin : DevExpress.XtraEditors.XtraForm
+    public partial class UpYunLogin : UpYunBase
     {
         public UpYunLogin()
         {
             InitializeComponent();
         }
 
+        #region 按钮事件
+
         /// <summary>
-        /// 关闭窗口
+        /// 关闭按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -26,6 +28,11 @@ namespace UpYun_97world
             this.Close();
         }
 
+        /// <summary>
+        /// 默认按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClean_Click(object sender, EventArgs e)
         {
             TextEditBucket.Text = "";
@@ -56,5 +63,6 @@ namespace UpYun_97world
         {
             DropDownButtonInternet.Text = "中国移动网络";
         }
+        #endregion
     }
 }
