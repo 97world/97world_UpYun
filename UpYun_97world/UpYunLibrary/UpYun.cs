@@ -34,11 +34,12 @@ namespace UpYunLibrary
         * @param $password 密码
         * return UpYun object
         */
-        public UpYun(string bucketname, string username, string password)
+        public UpYun(string bucketname, string username, string password, string api_domain)
         {
             this.bucketname = bucketname;
             this.username = username;
             this.password = password;
+            this.api_domain = api_domain;
         }
 
         /**

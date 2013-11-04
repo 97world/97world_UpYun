@@ -43,6 +43,7 @@
             this.SubItemHelp = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItemMyblog = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemAbout = new DevExpress.XtraBars.BarButtonItem();
+            this.BarButtonItemSuper = new DevExpress.XtraBars.BarButtonItem();
             this.BottomBar = new DevExpress.ExpressApp.Win.Templates.Controls.XafBar();
             this.BarStaticItemOperator = new DevExpress.XtraBars.BarStaticItem();
             this.BarStaticItemUseSpace = new DevExpress.XtraBars.BarStaticItem();
@@ -58,10 +59,16 @@
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.GroupControlLocal = new DevExpress.XtraEditors.GroupControl();
             this.ListViewLocal = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.UrlBarLocal = new UpYun_97world.Controls.UrlBar();
             this.LocalToolsBarMain = new UpYun_97world.Controls.LocalToolsBar();
             this.GroupControlWeb = new DevExpress.XtraEditors.GroupControl();
             this.ListViewWeb = new System.Windows.Forms.ListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.UrlBarWeb = new UpYun_97world.Controls.UrlBar();
             this.WebToolsBarMain = new UpYun_97world.Controls.WebToolsBar();
             this.ImageListToolIcon = new System.Windows.Forms.ImageList(this.components);
@@ -102,9 +109,10 @@
             this.barLinkContainerItem1,
             this.barStaticItem2,
             this.BarStaticItemUseSpace,
-            this.BarStaticItemStatus});
+            this.BarStaticItemStatus,
+            this.BarButtonItemSuper});
             this.xafBarManagerMain.MainMenu = this.MenuBar;
-            this.xafBarManagerMain.MaxItemId = 21;
+            this.xafBarManagerMain.MaxItemId = 22;
             this.xafBarManagerMain.StatusBar = this.BottomBar;
             // 
             // MenuBar
@@ -116,7 +124,8 @@
             this.MenuBar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemOperator),
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemInternet),
-            new DevExpress.XtraBars.LinkPersistInfo(this.SubItemHelp)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.SubItemHelp),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarButtonItemSuper)});
             this.MenuBar.OptionsBar.AllowQuickCustomization = false;
             this.MenuBar.OptionsBar.DrawDragBorder = false;
             this.MenuBar.OptionsBar.MultiLine = true;
@@ -202,6 +211,13 @@
             this.barButtonItemAbout.Id = 6;
             this.barButtonItemAbout.Name = "barButtonItemAbout";
             // 
+            // BarButtonItemSuper
+            // 
+            this.BarButtonItemSuper.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.BarButtonItemSuper.Caption = "点击有惊喜";
+            this.BarButtonItemSuper.Id = 21;
+            this.BarButtonItemSuper.Name = "BarButtonItemSuper";
+            // 
             // BottomBar
             // 
             this.BottomBar.BarName = "StatusBar";
@@ -221,7 +237,7 @@
             // 
             // BarStaticItemOperator
             // 
-            this.BarStaticItemOperator.Caption = "操作员：97world";
+            this.BarStaticItemOperator.Caption = "操作员：未登录";
             this.BarStaticItemOperator.Id = 13;
             this.BarStaticItemOperator.Name = "BarStaticItemOperator";
             this.BarStaticItemOperator.TextAlignment = System.Drawing.StringAlignment.Near;
@@ -229,7 +245,7 @@
             // BarStaticItemUseSpace
             // 
             this.BarStaticItemUseSpace.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.BarStaticItemUseSpace.Caption = "空间已使用：40.4M";
+            this.BarStaticItemUseSpace.Caption = "空间已使用：未登录";
             this.BarStaticItemUseSpace.Id = 16;
             this.BarStaticItemUseSpace.Name = "BarStaticItemUseSpace";
             this.BarStaticItemUseSpace.TextAlignment = System.Drawing.StringAlignment.Near;
@@ -238,7 +254,7 @@
             // 
             this.BarStaticItemStatus.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
             this.BarStaticItemStatus.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.BarStaticItemStatus.Caption = "登录成功！";
+            this.BarStaticItemStatus.Caption = "未登录";
             this.BarStaticItemStatus.Id = 18;
             this.BarStaticItemStatus.Name = "BarStaticItemStatus";
             this.BarStaticItemStatus.TextAlignment = System.Drawing.StringAlignment.Near;
@@ -333,11 +349,31 @@
             this.ListViewLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewLocal.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
             this.ListViewLocal.Location = new System.Drawing.Point(5, 94);
             this.ListViewLocal.Name = "ListViewLocal";
             this.ListViewLocal.Size = new System.Drawing.Size(366, 395);
             this.ListViewLocal.TabIndex = 3;
             this.ListViewLocal.UseCompatibleStateImageBehavior = false;
+            this.ListViewLocal.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "名称";
+            this.columnHeader1.Width = 160;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "大小";
+            this.columnHeader2.Width = 100;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "修改时间";
+            this.columnHeader3.Width = 100;
             // 
             // UrlBarLocal
             // 
@@ -345,7 +381,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UrlBarLocal.Location = new System.Drawing.Point(3, 67);
             this.UrlBarLocal.Name = "UrlBarLocal";
-            this.UrlBarLocal.Size = new System.Drawing.Size(369, 26);
+            this.UrlBarLocal.Size = new System.Drawing.Size(328, 26);
             this.UrlBarLocal.TabIndex = 2;
             // 
             // LocalToolsBarMain
@@ -376,11 +412,31 @@
             this.ListViewWeb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListViewWeb.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
             this.ListViewWeb.Location = new System.Drawing.Point(5, 94);
             this.ListViewWeb.Name = "ListViewWeb";
             this.ListViewWeb.Size = new System.Drawing.Size(365, 395);
             this.ListViewWeb.TabIndex = 4;
             this.ListViewWeb.UseCompatibleStateImageBehavior = false;
+            this.ListViewWeb.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "名称";
+            this.columnHeader4.Width = 160;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "大小";
+            this.columnHeader5.Width = 100;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "修改时间";
+            this.columnHeader6.Width = 100;
             // 
             // UrlBarWeb
             // 
@@ -388,7 +444,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UrlBarWeb.Location = new System.Drawing.Point(3, 67);
             this.UrlBarWeb.Name = "UrlBarWeb";
-            this.UrlBarWeb.Size = new System.Drawing.Size(365, 26);
+            this.UrlBarWeb.Size = new System.Drawing.Size(307, 26);
             this.UrlBarWeb.TabIndex = 3;
             // 
             // WebToolsBarMain
@@ -479,5 +535,12 @@
         private DevExpress.XtraBars.BarStaticItem barStaticItem2;
         private DevExpress.XtraBars.BarStaticItem BarStaticItemStatus;
         private System.Windows.Forms.ImageList ImageListToolIcon;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private DevExpress.XtraBars.BarButtonItem BarButtonItemSuper;
     }
 }

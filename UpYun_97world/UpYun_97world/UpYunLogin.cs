@@ -44,6 +44,36 @@ namespace UpYun_97world
             CheEditRemember.Checked = false;
         }
 
+        /// <summary>
+        /// 登录按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonLogin_Click(object sender, EventArgs e)
+        {
+            //检查必要信息是否输入，验证操作员密码是否正确
+            UpYun_Controller.Login CtrLogin = new UpYun_Controller.Login();
+            userInformation = CtrLogin.checkBeforeLogin(
+                    TextEditBucket,
+                    TextEditOperator,
+                    TextEditPwd,
+                    TextEditUrl,
+                    DropDownButtonInternet,
+                    CheEditRemember,
+                    CheEditAutoLogin                               
+                );
+            if (userInformation.upYun != null)
+            {
+                UpYunMain upYunMain = (UpYunMain) this.Owner;
+                upYunMain.IfLogin = true;
+                upYunMain.userInformation = userInformation;
+                upYunMain.refreshUpYunMain();
+                this.Close();
+            }
+            else
+                return;          
+        }
+
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             DropDownButtonInternet.Text = "自动识别网络";
@@ -64,5 +94,7 @@ namespace UpYun_97world
             DropDownButtonInternet.Text = "中国移动网络";
         }
         #endregion
+
+
     }
 }

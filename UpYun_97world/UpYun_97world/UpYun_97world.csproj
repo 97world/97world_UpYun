@@ -202,6 +202,14 @@
       <Project>{4900e634-60d9-42b3-90d2-fd803296ffdf}</Project>
       <Name>UpYunLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UpYun_Controller\UpYun_Controller.csproj">
+      <Project>{75a13859-941c-4ab2-ba59-cb4f7ba4223e}</Project>
+      <Name>UpYun_Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UpYun_Model\UpYun_Model.csproj">
+      <Project>{662b0e52-2b4a-4489-9348-3a6c2c9baee2}</Project>
+      <Name>UpYun_Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

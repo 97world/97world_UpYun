@@ -13,7 +13,7 @@ namespace ToolsLibrary
         /// </summary>
         /// <param name="bytes">字节</param>
         /// <returns></returns>
-        public static string getCommonSize(long bytes)
+        public static string getCommonSize(double bytes)
         {
             int unit = 1024;
             if (bytes < unit) return bytes + " B";

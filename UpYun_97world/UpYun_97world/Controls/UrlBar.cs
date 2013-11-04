@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace UpYun_97world.Controls
 {
@@ -16,6 +17,10 @@ namespace UpYun_97world.Controls
             InitializeComponent();
         }
 
+        public SimpleButton UpButton
+        {
+            get { return CbbUrl; }
+        }
 
     }
 }

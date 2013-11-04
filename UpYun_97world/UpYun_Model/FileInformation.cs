@@ -4,7 +4,7 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
-namespace Model
+namespace UpYun_Model
 {
     public class FileInformation
     {
