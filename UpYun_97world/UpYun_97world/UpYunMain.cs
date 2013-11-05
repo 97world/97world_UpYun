@@ -16,11 +16,24 @@ namespace UpYun_97world
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 窗体载入事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpYunMain_Load(object sender, EventArgs e)
         {
-            refreshUpYunMain();
+            refreshLocalMain();
+            refreshWebMain();
         }
 
+        #region 按钮事件
+
+        /// <summary>
+        /// 操作员登录按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BarButtonItemLogin_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             UpYunLogin upYunLogin = new UpYunLogin();
@@ -28,12 +41,16 @@ namespace UpYun_97world
             upYunLogin.ShowDialog();
         }
 
+
+
+        #endregion
+
         #region 辅助方法
 
         /// <summary>
-        /// 为主界面各控件填充数据
+        /// 登录成功后刷新主界面Web相关数据
         /// </summary>
-        public void refreshUpYunMain()
+        public void refreshWebMain()
         {
             if (IfLogin == true)
             {
@@ -41,6 +58,16 @@ namespace UpYun_97world
                 BarStaticItemUseSpace.Caption = "空间已使用：" + ToolsLibrary.Tools.getCommonSize( userInformation.UseSpace);
                 BarStaticItemStatus.Caption = "登录成功！";
             }
+        }
+
+        /// <summary>
+        /// 刷新主界面Local相关数据
+        /// </summary>
+        public void refreshLocalMain()
+        {
+            UrlBarLocal.CBEUrl.Properties.Items.Add("test1");
+            UrlBarLocal.CBEUrl.Properties.Items.Add("test1");
+            UrlBarLocal.CBEUrl.Properties.Items.Add("test1");
         }
 
         #endregion

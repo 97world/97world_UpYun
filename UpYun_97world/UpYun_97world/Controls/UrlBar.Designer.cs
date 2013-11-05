@@ -46,14 +46,15 @@
             // 
             // CbbUrl
             // 
-            this.CbbUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.CbbUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CbbUrl.EditValue = "";
             this.CbbUrl.Location = new System.Drawing.Point(24, 3);
             this.CbbUrl.Name = "CbbUrl";
             this.CbbUrl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.CbbUrl.Size = new System.Drawing.Size(156, 20);
+            this.CbbUrl.Size = new System.Drawing.Size(210, 20);
             this.CbbUrl.TabIndex = 4;
             // 
             // UrlBar
@@ -63,7 +64,7 @@
             this.Controls.Add(this.BtnUpFolder);
             this.Controls.Add(this.CbbUrl);
             this.Name = "UrlBar";
-            this.Size = new System.Drawing.Size(183, 26);
+            this.Size = new System.Drawing.Size(287, 26);
             ((System.ComponentModel.ISupportInitialize)(this.CbbUrl.Properties)).EndInit();
             this.ResumeLayout(false);
 

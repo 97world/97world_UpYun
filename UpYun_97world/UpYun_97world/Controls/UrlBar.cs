@@ -17,10 +17,20 @@ namespace UpYun_97world.Controls
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 获取按钮对象
+        /// </summary>
         public SimpleButton UpButton
+        {
+            get { return BtnUpFolder; }
+        }
+
+        /// <summary>
+        /// 获取地址栏对象
+        /// </summary>
+        public ComboBoxEdit CBEUrl
         {
             get { return CbbUrl; }
         }
-
     }
 }

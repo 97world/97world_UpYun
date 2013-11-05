@@ -68,6 +68,7 @@
             // 
             // TextEditBucket
             // 
+            this.TextEditBucket.EditValue = "";
             this.TextEditBucket.Location = new System.Drawing.Point(146, 28);
             this.TextEditBucket.Name = "TextEditBucket";
             this.TextEditBucket.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -237,6 +238,7 @@
             this.CheEditRemember.Properties.Caption = "记住密码";
             this.CheEditRemember.Size = new System.Drawing.Size(75, 22);
             this.CheEditRemember.TabIndex = 26;
+            this.CheEditRemember.CheckedChanged += new System.EventHandler(this.CheEditRemember_CheckedChanged);
             // 
             // CheEditAutoLogin
             // 
@@ -249,6 +251,7 @@
             this.CheEditAutoLogin.Properties.Caption = "自动登录";
             this.CheEditAutoLogin.Size = new System.Drawing.Size(75, 22);
             this.CheEditAutoLogin.TabIndex = 27;
+            this.CheEditAutoLogin.CheckedChanged += new System.EventHandler(this.CheEditAutoLogin_CheckedChanged);
             // 
             // DropDownButtonInternet
             // 
@@ -372,6 +375,7 @@
             this.Name = "UpYunLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "操作员登录";
+            this.Load += new System.EventHandler(this.UpYunLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TextEditBucket.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextEditOperator.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextEditPwd.Properties)).EndInit();

@@ -12,67 +12,6 @@ namespace UpYun_Model
     /// </summary>
     public class UserInformation
     {
-        /// <summary>
-        /// 检查必要信息是否输入，验证操作员密码是否正确，验证通过实例化一个UserInformation的对象
-        /// </summary>
-        /// <param name="bucket"></param>
-        /// <param name="operatorname"></param>
-        /// <param name="pwd"></param>
-        /// <param name="url"></param>
-        /// <param name="internet"></param>
-        /// <param name="ifremember"></param>
-        /// <param name="ifauto"></param>
-        public UserInformation(string bucket, string operatorname, string pwd, string url, string internet, bool ifremember, bool ifauto)
-        {
-            if (bucket == "")
-            {
-                XtraMessageBox.Show("空间名称不能为空！");
-                upYun = null;
-            }
-            else if (operatorname == "")
-            {
-                XtraMessageBox.Show("操作员用户名不能为空！");
-                upYun = null;
-            }
-            else if (pwd == "")
-            {
-                XtraMessageBox.Show("操作员密码不能为空！");
-                upYun = null;
-            }
-            else
-            {
-                switch (internet)
-                {
-                    case "中国电信网络": internet = "v1.api.upyun.com";
-                        break;
-                    case "中国联通网络": internet = "v2.api.upyun.com";
-                        break;
-                    case "中国移动网络": internet = "v3.api.upyun.com";
-                        break;
-                    default: internet = "v0.api.upyun.com";
-                        break;
-                }
-                BucketName = bucket;
-                OperatorName = operatorname;
-                OperatorPwd = pwd;
-                Url = url;
-                IfAutoLogin = ifauto;
-                IfRemember = ifremember;
-                Internet = internet;
-                upYun = new UpYunLibrary.UpYun(BucketName, OperatorName, OperatorPwd, Internet);
-                try
-                {
-                    UseSpace = getUseSpace();
-                }
-                catch(Exception ex)
-                {
-                    XtraMessageBox.Show(ex.Message);
-                    upYun = null;
-                }
-            }
-
-        }
-
         #region UserInformation
         private string _operatorname;
         private string _operatorpwd;
@@ -161,11 +100,129 @@ namespace UpYun_Model
         public UpYunLibrary.UpYun upYun { get; set; }
         #endregion
 
-        #region 辅助方法（信息的导入）
+        /// <summary>
+        /// 检查必要信息是否输入，验证操作员密码是否正确，验证通过实例化一个UserInformation的对象
+        /// </summary>
+        /// <param name="bucket"></param>
+        /// <param name="operatorname"></param>
+        /// <param name="pwd"></param>
+        /// <param name="url"></param>
+        /// <param name="internet"></param>
+        /// <param name="ifremember"></param>
+        /// <param name="ifauto"></param>
+        public UserInformation(string bucket, string operatorname, string pwd, string url, string internet, bool ifremember, bool ifauto)
+        {
+            if (bucket == "")
+            {
+                XtraMessageBox.Show("空间名称不能为空！");
+                upYun = null;
+            }
+            else if (operatorname == "")
+            {
+                XtraMessageBox.Show("操作员用户名不能为空！");
+                upYun = null;
+            }
+            else if (pwd == "")
+            {
+                XtraMessageBox.Show("操作员密码不能为空！");
+                upYun = null;
+            }
+            else
+            {
+                BucketName = bucket;
+                OperatorName = operatorname;
+                OperatorPwd = pwd;
+                Url = url;
+                IfAutoLogin = ifauto;
+                IfRemember = ifremember;
+                Internet = internet;
+                writeConfig();
+                switch (Internet)
+                {
+                    case "中国电信网络": Internet = "v1.api.upyun.com";
+                        break;
+                    case "中国联通网络": Internet = "v2.api.upyun.com";
+                        break;
+                    case "中国移动网络": Internet = "v3.api.upyun.com";
+                        break;
+                    default: Internet = "v0.api.upyun.com";
+                        break;
+                }
+                upYun = new UpYunLibrary.UpYun(BucketName, OperatorName, OperatorPwd, Internet);
+                try
+                {
+                    UseSpace = getUseSpace();
+                }
+                catch(Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                    upYun = null;
+                }
+            }
 
+        }
+
+        /// <summary>
+        /// 默认通过配置文件获取信息实例化UserInformation
+        /// </summary>
+        public UserInformation()
+        {
+            ToolsLibrary.IniFile ini = new ToolsLibrary.IniFile();
+            if (ini.IniReadValue("ifconfig","remember")!="" && Convert.ToBoolean(string.Compare(ini.IniReadValue("ifconfig", "remember"), "true", false)))
+            {
+                BucketName = ini.IniReadValue("operatorinformation","bucket");
+                OperatorName = ini.IniReadValue("operatorinformation", "operatorname");
+                OperatorPwd = ini.IniReadValue("operatorinformation", "operatorpwd");
+                Url = ini.IniReadValue("operatorinformation", "url");
+                Internet = ini.IniReadValue("operatorinformation", "internet");
+                IfRemember = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifremember"));
+                IfAutoLogin = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifauto"));
+                upYun = new UpYunLibrary.UpYun(BucketName, OperatorName, OperatorPwd, Internet);
+            }
+        }
+
+
+        #region 辅助方法（信息的获取）
+
+        /// <summary>
+        /// 使用upYun接口获取操作员的空间占用信息
+        /// </summary>
+        /// <returns></returns>
         public double getUseSpace()
         {
             return upYun.getBucketUsage();
+        }
+
+        /// <summary>
+        /// 将操作员信息写入INI配置文件
+        /// </summary>
+        public void writeConfig()
+        {
+            ToolsLibrary.IniFile ini = new ToolsLibrary.IniFile();
+            if (IfRemember || IfAutoLogin)
+            {
+                ini.IniWriteValue("operatorinformation", "bucket", BucketName);
+                ini.IniWriteValue("operatorinformation", "operatorname", OperatorName);
+                ini.IniWriteValue("operatorinformation", "operatorpwd", OperatorPwd);
+                ini.IniWriteValue("operatorinformation", "url", Url);
+                ini.IniWriteValue("operatorinformation", "internet", Internet);
+                ini.IniWriteValue("operatorinformation", "ifremember", IfRemember.ToString());
+                ini.IniWriteValue("operatorinformation", "ifauto", IfAutoLogin.ToString());
+                ini.IniWriteValue("ifconfig", "remember", IfRemember.ToString());
+                ini.IniWriteValue("ifconfig", "auto", IfAutoLogin.ToString());
+            }
+            else
+            {
+                ini.IniWriteValue("operatorinformation", "bucket", "");
+                ini.IniWriteValue("operatorinformation", "operatorname", "");
+                ini.IniWriteValue("operatorinformation", "operatorpwd", "");
+                ini.IniWriteValue("operatorinformation", "url", "");
+                ini.IniWriteValue("operatorinformation", "internet", "自动识别网络");
+                ini.IniWriteValue("operatorinformation", "ifremember", "false");
+                ini.IniWriteValue("operatorinformation", "ifauto", "false");
+                ini.IniWriteValue("ifconfig", "remember", "false");
+                ini.IniWriteValue("ifconfig", "auto", "false");
+            }
         }
 
         #endregion

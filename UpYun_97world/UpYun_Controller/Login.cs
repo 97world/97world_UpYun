@@ -26,5 +26,14 @@ namespace UpYun_Controller
             UpYun_Model.UserInformation userinformaiton = new UpYun_Model.UserInformation(bucket.Text,operatoer.Text,pwd.Text,url.Text,ddbinternet.Text,ifremember.Checked,ifauto.Checked);
             return userinformaiton;
         }
+
+        /// <summary>
+        /// 通过配置文件获取用户信息
+        /// </summary>
+        /// <returns></returns>
+        public UpYun_Model.UserInformation getUserInformationByIni()
+        {
+            return new UpYun_Model.UserInformation();
+        }
     }
 }

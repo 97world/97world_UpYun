@@ -16,6 +16,34 @@ namespace UpYun_97world
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 窗体载入事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpYunLogin_Load(object sender, EventArgs e)
+        {
+            UpYun_Controller.Login CtrGetUserIfm = new UpYun_Controller.Login();
+            userInformation = CtrGetUserIfm.getUserInformationByIni();
+            setControl();
+        }
+
+        /// <summary>
+        /// 自动登录必须记住密码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheEditAutoLogin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheEditAutoLogin.Checked == true)
+                CheEditRemember.Checked = true;
+        }
+        private void CheEditRemember_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheEditRemember.Checked == false)
+                CheEditAutoLogin.Checked = false;
+        }
+
         #region 按钮事件
 
         /// <summary>
@@ -67,7 +95,7 @@ namespace UpYun_97world
                 UpYunMain upYunMain = (UpYunMain) this.Owner;
                 upYunMain.IfLogin = true;
                 upYunMain.userInformation = userInformation;
-                upYunMain.refreshUpYunMain();
+                upYunMain.refreshWebMain();
                 this.Close();
             }
             else
@@ -93,6 +121,29 @@ namespace UpYun_97world
         {
             DropDownButtonInternet.Text = "中国移动网络";
         }
+        #endregion
+
+        #region 辅助方法
+
+        /// <summary>
+        /// 根据窗体的userInformation对象设置各个控件的信息
+        /// </summary>
+        public void setControl()
+        {
+            if (userInformation.IfRemember)
+            {
+                TextEditBucket.Text = userInformation.BucketName;
+                TextEditOperator.Text = userInformation.OperatorName;
+                TextEditPwd.Text = userInformation.OperatorPwd;
+                TextEditUrl.Text = userInformation.Url;
+                DropDownButtonInternet.Text = userInformation.Internet;
+                CheEditRemember.Checked = Convert.ToBoolean(userInformation.IfRemember);
+                CheEditAutoLogin.Checked = Convert.ToBoolean(userInformation.IfAutoLogin);
+            }
+        }
+
+
+
         #endregion
 
 

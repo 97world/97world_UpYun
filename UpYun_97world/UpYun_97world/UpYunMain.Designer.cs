@@ -381,7 +381,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UrlBarLocal.Location = new System.Drawing.Point(3, 67);
             this.UrlBarLocal.Name = "UrlBarLocal";
-            this.UrlBarLocal.Size = new System.Drawing.Size(328, 26);
+            this.UrlBarLocal.Size = new System.Drawing.Size(368, 26);
             this.UrlBarLocal.TabIndex = 2;
             // 
             // LocalToolsBarMain
@@ -444,7 +444,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UrlBarWeb.Location = new System.Drawing.Point(3, 67);
             this.UrlBarWeb.Name = "UrlBarWeb";
-            this.UrlBarWeb.Size = new System.Drawing.Size(307, 26);
+            this.UrlBarWeb.Size = new System.Drawing.Size(367, 26);
             this.UrlBarWeb.TabIndex = 3;
             // 
             // WebToolsBarMain
