@@ -126,14 +126,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(383, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(801, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 262);
-            this.barDockControlBottom.Size = new System.Drawing.Size(383, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(801, 0);
             // 
             // barDockControlLeft
             // 
@@ -146,7 +146,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(383, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(801, 0);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 262);
             // 
             // barLargeButtonItem1
@@ -260,7 +260,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 262);
+            this.ClientSize = new System.Drawing.Size(801, 262);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textEdit4);

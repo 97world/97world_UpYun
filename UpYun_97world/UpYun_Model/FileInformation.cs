@@ -4,6 +4,7 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
+
 namespace UpYun_Model
 {
     public class FileInformation
@@ -13,6 +14,12 @@ namespace UpYun_Model
         /// </summary>
         public FileInformation()
         { }
+
+        public FileInformation(string path)
+        {
+            
+        }
+
         #region FileInformation
         private string _filename;
         private string _filetype;

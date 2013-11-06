@@ -28,21 +28,6 @@ namespace UpYun_97world
             setControl();
         }
 
-        /// <summary>
-        /// 自动登录必须记住密码
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CheEditAutoLogin_CheckedChanged(object sender, EventArgs e)
-        {
-            if (CheEditAutoLogin.Checked == true)
-                CheEditRemember.Checked = true;
-        }
-        private void CheEditRemember_CheckedChanged(object sender, EventArgs e)
-        {
-            if (CheEditRemember.Checked == false)
-                CheEditAutoLogin.Checked = false;
-        }
 
         #region 按钮事件
 
@@ -142,10 +127,11 @@ namespace UpYun_97world
             }
         }
 
-
-
-        #endregion
-
+        /// <summary>
+        /// 为部分控件设置快捷键
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpYunLogin_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.B && e.Modifiers == Keys.Alt)
@@ -159,6 +145,30 @@ namespace UpYun_97world
             if (e.KeyCode == Keys.I && e.Modifiers == Keys.Alt)
                 DropDownButtonInternet.Focus();
         }
+
+        /// <summary>
+        /// 自动登录必须记住密码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheEditAutoLogin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheEditAutoLogin.Checked == true)
+                CheEditRemember.Checked = true;
+        }
+
+        /// <summary>
+        /// 取消记住密码则不可设置自动登录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheEditRemember_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CheEditRemember.Checked == false)
+                CheEditAutoLogin.Checked = false;
+        }
+
+        #endregion
 
 
     }

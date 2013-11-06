@@ -20,21 +20,7 @@ namespace UpYun_97world
 
         private void test_Load(object sender, EventArgs e)
         {
-            DataTable DataTableInternet = new DataTable();
-            DataColumn DCName = new DataColumn("Name",typeof(string));
-            DataColumn DCText = new DataColumn("Text",typeof(string));
-            DataTableInternet.Columns.Add(DCName);
-            DataTableInternet.Columns.Add(DCText);
-            DataRow DRInternet = DataTableInternet.NewRow();
-            DRInternet["Name"] = "AutoInternet";
-            DRInternet["Text"] = "自动识别";
-            DataTableInternet.Rows.Add(DRInternet);
-            //dropDownButton1.DataBindings.Add();
-            //UpYunLibrary.FolderItem testlib = new UpYunLibrary.FolderItem("s","s",6,6);
-            //label1.Text = testlib.size.ToString();
-            comboBoxEdit1.Properties.Items.Add("test");
-            comboBoxEdit1.Properties.Items.Add("test");
-            comboBoxEdit1.Properties.Items.Add("test");
+            
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

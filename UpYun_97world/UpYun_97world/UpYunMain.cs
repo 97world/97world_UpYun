@@ -41,7 +41,25 @@ namespace UpYun_97world
             upYunLogin.ShowDialog();
         }
 
+        private void BarCheckItemAuto_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            singleCheck(e.Item);
+        }
 
+        private void BarCheckItemTelecom_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            singleCheck(e.Item);
+        }
+
+        private void BarCheckItemUnicom_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            singleCheck(e.Item);
+        }
+
+        private void BarCheckItemMobile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            singleCheck(e.Item);
+        }
 
         #endregion
 
@@ -65,9 +83,7 @@ namespace UpYun_97world
         /// </summary>
         public void refreshLocalMain()
         {
-            UrlBarLocal.CBEUrl.Properties.Items.Add("test1");
-            UrlBarLocal.CBEUrl.Properties.Items.Add("test1");
-            UrlBarLocal.CBEUrl.Properties.Items.Add("test1");
+            
         }
 
         /// <summary>
@@ -76,6 +92,7 @@ namespace UpYun_97world
         /// <param name="sender"></param>
         private void singleCheck(object sender)
         {
+            userInformation = new UpYun_Model.UserInformation();
             BarCheckItemAuto.Checked = false;
             BarCheckItemTelecom.Checked = false;
             BarCheckItemUnicom.Checked = false;
@@ -101,24 +118,5 @@ namespace UpYun_97world
 
         #endregion
 
-        private void BarCheckItemAuto_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            singleCheck(e.Item);
-        }
-
-        private void BarCheckItemTelecom_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            singleCheck(e.Item);
-        }
-
-        private void BarCheckItemUnicom_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            singleCheck(e.Item);
-        }
-
-        private void BarCheckItemMobile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            singleCheck(e.Item);
-        }
     }
 }

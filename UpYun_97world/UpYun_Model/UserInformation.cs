@@ -100,6 +100,8 @@ namespace UpYun_Model
         public UpYunLibrary.UpYun upYun { get; set; }
         #endregion
 
+
+        #region 构造方法
         /// <summary>
         /// 检查必要信息是否输入，验证操作员密码是否正确，验证通过实例化一个UserInformation的对象
         /// </summary>
@@ -181,6 +183,7 @@ namespace UpYun_Model
             }
         }
 
+        #endregion
 
         #region 辅助方法（信息的获取）
 
