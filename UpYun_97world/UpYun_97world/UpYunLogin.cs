@@ -146,6 +146,20 @@ namespace UpYun_97world
 
         #endregion
 
+        private void UpYunLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.B && e.Modifiers == Keys.Alt)
+                TextEditBucket.Focus();
+            if (e.KeyCode == Keys.U && e.Modifiers == Keys.Alt)
+                TextEditOperator.Focus();
+            if (e.KeyCode == Keys.W && e.Modifiers == Keys.Alt)
+                TextEditPwd.Focus();
+            if (e.KeyCode == Keys.L && e.Modifiers == Keys.Alt)
+                TextEditUrl.Focus();
+            if (e.KeyCode == Keys.I && e.Modifiers == Keys.Alt)
+                DropDownButtonInternet.Focus();
+        }
+
 
     }
 }

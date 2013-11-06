@@ -100,7 +100,7 @@
             this.LableUrl.Name = "LableUrl";
             this.LableUrl.Size = new System.Drawing.Size(74, 17);
             this.LableUrl.TabIndex = 18;
-            this.LableUrl.Text = "绑定域名(&L)：";
+            this.LableUrl.Text = "绑定域名(L)：";
             // 
             // LablePasswd
             // 
@@ -110,7 +110,7 @@
             this.LablePasswd.Name = "LablePasswd";
             this.LablePasswd.Size = new System.Drawing.Size(92, 17);
             this.LablePasswd.TabIndex = 17;
-            this.LablePasswd.Text = "操作员密码(&W)：";
+            this.LablePasswd.Text = "操作员密码(W)：";
             // 
             // LableOperator
             // 
@@ -120,7 +120,7 @@
             this.LableOperator.Name = "LableOperator";
             this.LableOperator.Size = new System.Drawing.Size(101, 17);
             this.LableOperator.TabIndex = 16;
-            this.LableOperator.Text = "操作员用户名(&U)：";
+            this.LableOperator.Text = "操作员用户名(U)：";
             // 
             // LabelBucketName
             // 
@@ -130,7 +130,7 @@
             this.LabelBucketName.Name = "LabelBucketName";
             this.LabelBucketName.Size = new System.Drawing.Size(76, 17);
             this.LabelBucketName.TabIndex = 15;
-            this.LabelBucketName.Text = "空间名称(&B)：";
+            this.LabelBucketName.Text = "空间名称(B)：";
             // 
             // ButtonLogin
             // 
@@ -150,6 +150,7 @@
             // 
             this.ButtonClose.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ButtonClose.Appearance.Options.UseFont = true;
+            this.ButtonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.ButtonClose.Location = new System.Drawing.Point(266, 234);
             this.ButtonClose.Name = "ButtonClose";
             this.ButtonClose.Size = new System.Drawing.Size(75, 23);
@@ -194,7 +195,7 @@
             this.LableInternet.Name = "LableInternet";
             this.LableInternet.Size = new System.Drawing.Size(72, 17);
             this.LableInternet.TabIndex = 21;
-            this.LableInternet.Text = "网络选择(&I)：";
+            this.LableInternet.Text = "网络选择(I)：";
             // 
             // TextEditOperator
             // 
@@ -346,8 +347,10 @@
             // 
             // UpYunLogin
             // 
+            this.AcceptButton = this.ButtonLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.ButtonClose;
             this.ClientSize = new System.Drawing.Size(353, 267);
             this.Controls.Add(this.CheEditAutoLogin);
             this.Controls.Add(this.CheEditRemember);
@@ -371,11 +374,13 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "UpYunLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "操作员登录";
             this.Load += new System.EventHandler(this.UpYunLogin_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UpYunLogin_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.TextEditBucket.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextEditOperator.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextEditPwd.Properties)).EndInit();

@@ -36,7 +36,7 @@
             this.BarButtonItemLogin = new DevExpress.XtraBars.BarButtonItem();
             this.BarButtonItemLogout = new DevExpress.XtraBars.BarButtonItem();
             this.SubItemInternet = new DevExpress.XtraBars.BarSubItem();
-            this.BarCheckItemAutoLine = new DevExpress.XtraBars.BarCheckItem();
+            this.BarCheckItemAuto = new DevExpress.XtraBars.BarCheckItem();
             this.BarCheckItemTelecom = new DevExpress.XtraBars.BarCheckItem();
             this.BarCheckItemUnicom = new DevExpress.XtraBars.BarCheckItem();
             this.BarCheckItemMobile = new DevExpress.XtraBars.BarCheckItem();
@@ -52,7 +52,6 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.barCheckItem4 = new DevExpress.XtraBars.BarCheckItem();
             this.actionContainerBarItem1 = new DevExpress.ExpressApp.Win.Templates.ActionContainers.ActionContainerBarItem();
             this.barLinkContainerItem1 = new DevExpress.XtraBars.BarLinkContainerItem();
             this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
@@ -99,20 +98,19 @@
             this.BarButtonItemLogout,
             this.barButtonItemMyblog,
             this.barButtonItemAbout,
-            this.BarCheckItemTelecom,
-            this.BarCheckItemUnicom,
-            this.BarCheckItemMobile,
-            this.barCheckItem4,
-            this.BarCheckItemAutoLine,
             this.actionContainerBarItem1,
             this.BarStaticItemOperator,
             this.barLinkContainerItem1,
             this.barStaticItem2,
             this.BarStaticItemUseSpace,
             this.BarStaticItemStatus,
-            this.BarButtonItemSuper});
+            this.BarButtonItemSuper,
+            this.BarCheckItemAuto,
+            this.BarCheckItemTelecom,
+            this.BarCheckItemUnicom,
+            this.BarCheckItemMobile});
             this.xafBarManagerMain.MainMenu = this.MenuBar;
-            this.xafBarManagerMain.MaxItemId = 22;
+            this.xafBarManagerMain.MaxItemId = 26;
             this.xafBarManagerMain.StatusBar = this.BottomBar;
             // 
             // MenuBar
@@ -144,14 +142,14 @@
             // 
             // BarButtonItemLogin
             // 
-            this.BarButtonItemLogin.Caption = "登录(&L)";
+            this.BarButtonItemLogin.Caption = "操作员登录(&L)";
             this.BarButtonItemLogin.Id = 3;
             this.BarButtonItemLogin.Name = "BarButtonItemLogin";
             this.BarButtonItemLogin.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItemLogin_ItemClick);
             // 
             // BarButtonItemLogout
             // 
-            this.BarButtonItemLogout.Caption = "注销(&C)";
+            this.BarButtonItemLogout.Caption = "操作员注销(&C)";
             this.BarButtonItemLogout.Id = 4;
             this.BarButtonItemLogout.Name = "BarButtonItemLogout";
             // 
@@ -160,35 +158,39 @@
             this.SubItemInternet.Caption = "网络选择(&I)";
             this.SubItemInternet.Id = 1;
             this.SubItemInternet.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemAutoLine),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemAuto),
             new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemTelecom),
             new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemUnicom),
             new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemMobile)});
             this.SubItemInternet.Name = "SubItemInternet";
             // 
-            // BarCheckItemAutoLine
+            // BarCheckItemAuto
             // 
-            this.BarCheckItemAutoLine.Caption = "自动识别(&A)";
-            this.BarCheckItemAutoLine.Id = 11;
-            this.BarCheckItemAutoLine.Name = "BarCheckItemAutoLine";
+            this.BarCheckItemAuto.Caption = "自动识别网络(&A)";
+            this.BarCheckItemAuto.Id = 22;
+            this.BarCheckItemAuto.Name = "BarCheckItemAuto";
+            this.BarCheckItemAuto.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarCheckItemAuto_ItemClick);
             // 
             // BarCheckItemTelecom
             // 
-            this.BarCheckItemTelecom.Caption = "电信网络(&D)";
-            this.BarCheckItemTelecom.Id = 7;
+            this.BarCheckItemTelecom.Caption = "中国电信网络(&D)";
+            this.BarCheckItemTelecom.Id = 23;
             this.BarCheckItemTelecom.Name = "BarCheckItemTelecom";
+            this.BarCheckItemTelecom.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarCheckItemTelecom_ItemClick);
             // 
             // BarCheckItemUnicom
             // 
-            this.BarCheckItemUnicom.Caption = "联通网络(&L)";
-            this.BarCheckItemUnicom.Id = 8;
+            this.BarCheckItemUnicom.Caption = "中国联通网络(&L)";
+            this.BarCheckItemUnicom.Id = 24;
             this.BarCheckItemUnicom.Name = "BarCheckItemUnicom";
+            this.BarCheckItemUnicom.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarCheckItemUnicom_ItemClick);
             // 
             // BarCheckItemMobile
             // 
-            this.BarCheckItemMobile.Caption = "移动网络(&Y)";
-            this.BarCheckItemMobile.Id = 9;
+            this.BarCheckItemMobile.Caption = "中国移动网络(&Y)";
+            this.BarCheckItemMobile.Id = 25;
             this.BarCheckItemMobile.Name = "BarCheckItemMobile";
+            this.BarCheckItemMobile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarCheckItemMobile_ItemClick);
             // 
             // SubItemHelp
             // 
@@ -286,12 +288,6 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(774, 24);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 508);
-            // 
-            // barCheckItem4
-            // 
-            this.barCheckItem4.Caption = "自动识别(&A)";
-            this.barCheckItem4.Id = 10;
-            this.barCheckItem4.Name = "barCheckItem4";
             // 
             // actionContainerBarItem1
             // 
@@ -523,11 +519,6 @@
         private Controls.WebToolsBar WebToolsBarMain;
         private System.Windows.Forms.ListView ListViewLocal;
         private System.Windows.Forms.ListView ListViewWeb;
-        private DevExpress.XtraBars.BarCheckItem barCheckItem4;
-        private DevExpress.XtraBars.BarCheckItem BarCheckItemTelecom;
-        private DevExpress.XtraBars.BarCheckItem BarCheckItemUnicom;
-        private DevExpress.XtraBars.BarCheckItem BarCheckItemMobile;
-        private DevExpress.XtraBars.BarCheckItem BarCheckItemAutoLine;
         private DevExpress.ExpressApp.Win.Templates.ActionContainers.ActionContainerBarItem actionContainerBarItem1;
         private DevExpress.XtraBars.BarStaticItem BarStaticItemOperator;
         private DevExpress.XtraBars.BarStaticItem BarStaticItemUseSpace;
@@ -542,5 +533,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private DevExpress.XtraBars.BarButtonItem BarButtonItemSuper;
+        private DevExpress.XtraBars.BarCheckItem BarCheckItemAuto;
+        private DevExpress.XtraBars.BarCheckItem BarCheckItemTelecom;
+        private DevExpress.XtraBars.BarCheckItem BarCheckItemUnicom;
+        private DevExpress.XtraBars.BarCheckItem BarCheckItemMobile;
     }
 }

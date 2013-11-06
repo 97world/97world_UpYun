@@ -70,6 +70,55 @@ namespace UpYun_97world
             UrlBarLocal.CBEUrl.Properties.Items.Add("test1");
         }
 
+        /// <summary>
+        /// 网络选择菜单单选效果
+        /// </summary>
+        /// <param name="sender"></param>
+        private void singleCheck(object sender)
+        {
+            BarCheckItemAuto.Checked = false;
+            BarCheckItemTelecom.Checked = false;
+            BarCheckItemUnicom.Checked = false;
+            BarCheckItemMobile.Checked = false;
+            ((DevExpress.XtraBars.BarCheckItem)sender).Checked = true;
+            if (BarCheckItemTelecom.Checked == true)
+            {
+                userInformation.Internet = "v1.api.upyun.com";
+            }
+            else if (BarCheckItemUnicom.Checked == true)
+            {
+                userInformation.Internet = "v2.api.upyun.com";
+            }
+            else if (BarCheckItemMobile.Checked == true)
+            {
+                userInformation.Internet = "v3.api.upyun.com";
+            }
+            else
+            {
+                userInformation.Internet = "v0.api.upyun.com";
+            }
+        }
+
         #endregion
+
+        private void BarCheckItemAuto_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            singleCheck(e.Item);
+        }
+
+        private void BarCheckItemTelecom_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            singleCheck(e.Item);
+        }
+
+        private void BarCheckItemUnicom_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            singleCheck(e.Item);
+        }
+
+        private void BarCheckItemMobile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            singleCheck(e.Item);
+        }
     }
 }
