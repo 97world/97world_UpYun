@@ -14,6 +14,8 @@ namespace UpYun_97world
         public UpYunMain()
         {
             InitializeComponent();
+
+            this.UrlBarLocal.CBEUrl.TextChanged += new EventHandler(UrlTextChanged);
         }
 
         /// <summary>
@@ -82,8 +84,27 @@ namespace UpYun_97world
         /// 刷新主界面Local相关数据
         /// </summary>
         public void refreshLocalMain()
+        {         
+            UrlBarLocal.CBEUrl.Text = LocalPath;
+            //fileInformationForListView = main.getFileInformation(path);
+            //foreach (ListViewItem item in fileInformationForListView.FileInformaiton.Items)
+            //    ListViewLocal.Items.Add((ListViewItem)item.Clone());
+            //foreach (string key in fileInformationForListView.FileIconList.Images.Keys)
+            //    ImageListLocalIcon.Images.Add(key, (Image)fileInformationForListView.FileIconList.Images[key].Clone());
+            //for (int count = 0; count < ImageListLocalIcon.Images.Count; count++)
+            //    ListViewLocal.Items[count].ImageKey = fileInformationForListView.FileInformaiton.Items[count].ImageKey;
+        }
+
+        /// <summary>
+        /// 地址栏文本改变刷新ListViewLocal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void UrlTextChanged(object sender, EventArgs e)
         {
-            
+            LocalPath = UrlBarLocal.CBEUrl.Text;
+            UpYun_Controller.Main main = new UpYun_Controller.Main();
+            main.getFileInformation(ListViewLocal, ImageListLocalIcon, LocalPath);
         }
 
         /// <summary>

@@ -21,6 +21,28 @@ namespace UpYun_97world
         private void test_Load(object sender, EventArgs e)
         {
             
+            //string path = @"D:\android";
+            //UpYun_Controller.Main main = new UpYun_Controller.Main();
+            //UpYun_Model.FileInformationForListView fileInformationForListView = main.getFileInformation(path);
+            //ListView listviewtest = new ListView();
+            //listviewtest.View = View.Details;
+            //string[] info = new string[3];
+            //info[0] = "test";
+            //info[1] = "test";
+            //info[2] = "test";
+            //ListViewItem lvi = new ListViewItem(info,"test");
+            //listviewtest.Items.Add(lvi);
+            ////listView1.Items.Add(lvi);
+            //System.Windows.Forms.ListView.ListViewItemCollection coll = new System.Windows.Forms.ListView.ListViewItemCollection(listviewtest);
+            //listView1.Items.AddRange(coll);
+            ////listviewtest.Columns.Add("test", 100);
+            ////listviewtest.Columns.Add("test", 100);
+            ////listviewtest.Columns.Add("test", 100);
+            ////listView1 = listviewtest;
+            ////listView1 = fileInformationForListView.FileInformaiton;
+            ////ImageListLocalIcon = fileInformationForListView.FileIconList;
+            
+            ////ListViewLocal.SmallImageList = ImageListLocalIcon;
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

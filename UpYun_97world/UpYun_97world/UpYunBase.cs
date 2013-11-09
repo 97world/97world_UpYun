@@ -33,6 +33,25 @@ namespace UpYun_97world
         /// </summary>
         public UpYun_Model.UserInformation userInformation { get; set; }
 
+        /// <summary>
+        /// 文件信息
+        /// </summary>
+        public UpYun_Model.FileInformationForListView fileInformationForListView { get; set; }
+
+
+        private string _localpath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"\";
+        public string LocalPath
+        {
+            get { return _localpath; }
+            set { _localpath=value; }
+        }
+
+        private string _webpath = @"/";
+        public string WebPath
+        {
+            get { return _webpath; }
+            set { _webpath = value; }
+        }
         #endregion
     }
 }

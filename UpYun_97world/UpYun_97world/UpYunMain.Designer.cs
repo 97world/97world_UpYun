@@ -61,13 +61,11 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ImageListLocalIcon = new System.Windows.Forms.ImageList(this.components);
             this.UrlBarLocal = new UpYun_97world.Controls.UrlBar();
             this.LocalToolsBarMain = new UpYun_97world.Controls.LocalToolsBar();
             this.GroupControlWeb = new DevExpress.XtraEditors.GroupControl();
             this.ListViewWeb = new System.Windows.Forms.ListView();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.UrlBarWeb = new UpYun_97world.Controls.UrlBar();
             this.WebToolsBarMain = new UpYun_97world.Controls.WebToolsBar();
             this.ImageListToolIcon = new System.Windows.Forms.ImageList(this.components);
@@ -349,9 +347,12 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.ListViewLocal.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ListViewLocal.FullRowSelect = true;
             this.ListViewLocal.Location = new System.Drawing.Point(5, 94);
             this.ListViewLocal.Name = "ListViewLocal";
             this.ListViewLocal.Size = new System.Drawing.Size(366, 395);
+            this.ListViewLocal.SmallImageList = this.ImageListLocalIcon;
             this.ListViewLocal.TabIndex = 3;
             this.ListViewLocal.UseCompatibleStateImageBehavior = false;
             this.ListViewLocal.View = System.Windows.Forms.View.Details;
@@ -359,17 +360,23 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "名称";
-            this.columnHeader1.Width = 160;
+            this.columnHeader1.Width = 155;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "大小";
-            this.columnHeader2.Width = 100;
+            this.columnHeader2.Width = 55;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "修改时间";
-            this.columnHeader3.Width = 100;
+            this.columnHeader3.Text = "修改日期";
+            this.columnHeader3.Width = 135;
+            // 
+            // ImageListLocalIcon
+            // 
+            this.ImageListLocalIcon.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.ImageListLocalIcon.ImageSize = new System.Drawing.Size(16, 16);
+            this.ImageListLocalIcon.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // UrlBarLocal
             // 
@@ -408,31 +415,13 @@
             this.ListViewWeb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListViewWeb.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
+            this.ListViewWeb.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListViewWeb.Location = new System.Drawing.Point(5, 94);
             this.ListViewWeb.Name = "ListViewWeb";
             this.ListViewWeb.Size = new System.Drawing.Size(365, 395);
             this.ListViewWeb.TabIndex = 4;
             this.ListViewWeb.UseCompatibleStateImageBehavior = false;
             this.ListViewWeb.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "名称";
-            this.columnHeader4.Width = 160;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "大小";
-            this.columnHeader5.Width = 100;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "修改时间";
-            this.columnHeader6.Width = 100;
             // 
             // UrlBarWeb
             // 
@@ -526,16 +515,14 @@
         private DevExpress.XtraBars.BarStaticItem barStaticItem2;
         private DevExpress.XtraBars.BarStaticItem BarStaticItemStatus;
         private System.Windows.Forms.ImageList ImageListToolIcon;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
         private DevExpress.XtraBars.BarButtonItem BarButtonItemSuper;
         private DevExpress.XtraBars.BarCheckItem BarCheckItemAuto;
         private DevExpress.XtraBars.BarCheckItem BarCheckItemTelecom;
         private DevExpress.XtraBars.BarCheckItem BarCheckItemUnicom;
         private DevExpress.XtraBars.BarCheckItem BarCheckItemMobile;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        public System.Windows.Forms.ImageList ImageListLocalIcon;
     }
 }
