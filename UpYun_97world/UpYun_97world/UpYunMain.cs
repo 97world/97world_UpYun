@@ -16,6 +16,14 @@ namespace UpYun_97world
             InitializeComponent();
 
             this.UrlBarLocal.CBEUrl.TextChanged += new EventHandler(UrlTextChanged);
+
+
+            this.LocalToolsBarMain.BtnMyPc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnMyPc_click);
+            this.LocalToolsBarMain.BtnDesktop.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDesktop_click);
+            this.LocalToolsBarMain.BtnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnRefresh_click);
+            this.LocalToolsBarMain.BtnTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnTrans_click);
+            this.LocalToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDel_click);
+            this.LocalToolsBarMain.BtnNewFloder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolder_click);
         }
 
         /// <summary>
@@ -96,18 +104,6 @@ namespace UpYun_97world
         }
 
         /// <summary>
-        /// 地址栏文本改变刷新ListViewLocal
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void UrlTextChanged(object sender, EventArgs e)
-        {
-            LocalPath = UrlBarLocal.CBEUrl.Text;
-            UpYun_Controller.Main main = new UpYun_Controller.Main();
-            main.getFileInformation(ListViewLocal, ImageListLocalIcon, LocalPath);
-        }
-
-        /// <summary>
         /// 网络选择菜单单选效果
         /// </summary>
         /// <param name="sender"></param>
@@ -138,6 +134,127 @@ namespace UpYun_97world
         }
 
         #endregion
+
+        #region 用户控件方法
+
+        /// <summary>
+        /// 地址栏文本改变刷新ListViewLocal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void UrlTextChanged(object sender, EventArgs e)
+        {
+            LocalPath = UrlBarLocal.CBEUrl.Text;
+            UpYun_Controller.Main main = new UpYun_Controller.Main();
+            if (LocalPath == Environment.SpecialFolder.MyComputer.ToString())
+                main.getFileInformationMyPc(ListViewLocal, ImageListLocalIcon, LocalPath);
+            else
+                main.getFileInformation(ListViewLocal, ImageListLocalIcon, LocalPath);
+        }
+
+        /// <summary>
+        /// 工具栏按钮“我的电脑”
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnMyPc_click(object sender, EventArgs e)
+        {
+            UrlBarLocal.CBEUrl.Text = Environment.SpecialFolder.MyComputer.ToString();
+        }
+
+        /// <summary>
+        /// 工具栏按钮“桌面”
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnDesktop_click(object sender, EventArgs e)
+        {
+            UrlBarLocal.CBEUrl.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+@"\";
+        }
+
+        /// <summary>
+        /// 工具栏按钮“刷新”
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnRefresh_click(object sender, EventArgs e)
+        {
+            UrlTextChanged(this,e);
+        }
+
+        /// <summary>
+        /// 工具栏按钮“传输”
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnTrans_click(object sender, EventArgs e)
+        { 
+            
+        }
+
+        /// <summary>
+        /// 工具栏按钮“删除”
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public void BtnDel_click(object sender, EventArgs e)
+        {
+            UpYun_Controller.Main main = new UpYun_Controller.Main();
+            main.delFileByListView(ListViewLocal,LocalPath);
+            BarStaticItemStatus.Caption = "删除成功！";
+            UrlTextChanged(this, e);
+        }
+
+        /// <summary>
+        /// 工具栏按钮“新建文件夹”
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnNewFolder_click(object sender, EventArgs e)
+        {
+            UpYunNewFolder newfolder = new UpYunNewFolder();
+            newfolder.Owner = this;
+            newfolder.Path = LocalPath;
+            newfolder.ShowDialog();
+            UrlTextChanged(this, e);
+        }
+
+        #endregion
+
+        private void ListViewLocal_DoubleClick(object sender, EventArgs e)
+        {
+            if(ListViewLocal.SelectedItems[0].Text=="上级目录")
+            {
+                if (UrlBarLocal.CBEUrl.Text.Length==3)
+                    UrlBarLocal.CBEUrl.Text = Environment.SpecialFolder.MyComputer.ToString();
+                LocalPath = UrlBarLocal.CBEUrl.Text;
+                LocalPath = LocalPath.Substring(0, LocalPath.Length - 1);
+                LocalPath = LocalPath.Substring(0, LocalPath.LastIndexOf(@"\") + 1);
+                UrlBarLocal.CBEUrl.Text = LocalPath;
+            }
+            else if (ListViewLocal.SelectedItems[0].SubItems[1].Text == "      ")
+            {
+                UrlBarLocal.CBEUrl.Text = LocalPath + ListViewLocal.SelectedItems[0].Text + @"\";
+            }
+            else if (ListViewLocal.SelectedItems[0].SubItems[2].Text == "本地磁盘")
+            {
+                UrlBarLocal.CBEUrl.Text = ListViewLocal.SelectedItems[0].ImageKey.ToString();
+            }
+            else
+            {
+                if (ListViewLocal.SelectedItems[0].Text.Substring(ListViewLocal.SelectedItems[0].Text.LastIndexOf(".")).ToLower()==".lnk")
+                {
+                    string target = ToolsLibrary.GetTargetByShortCuts.getTarget(LocalPath + ListViewLocal.SelectedItems[0].Text);
+                    if (System.IO.File.Exists(target) == false)
+                        UrlBarLocal.CBEUrl.Text = target+@"\";
+                    else
+                        System.Diagnostics.Process.Start(target);
+                }
+                else
+                    System.Diagnostics.Process.Start(LocalPath + ListViewLocal.SelectedItems[0].Text);
+            }
+        }
 
     }
 }

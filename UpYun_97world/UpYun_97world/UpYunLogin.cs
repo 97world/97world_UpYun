@@ -64,7 +64,6 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
-            //检查必要信息是否输入，验证操作员密码是否正确
             UpYun_Controller.Login CtrLogin = new UpYun_Controller.Login();
             userInformation = CtrLogin.checkBeforeLogin(
                     TextEditBucket,

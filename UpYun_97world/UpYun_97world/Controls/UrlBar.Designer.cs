@@ -30,8 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UrlBar));
             this.BtnUpFolder = new DevExpress.XtraEditors.SimpleButton();
-            this.CbbUrl = new DevExpress.XtraEditors.ComboBoxEdit();
-            ((System.ComponentModel.ISupportInitialize)(this.CbbUrl.Properties)).BeginInit();
+            this.CbbUrl = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // BtnUpFolder
@@ -49,23 +48,20 @@
             this.CbbUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CbbUrl.EditValue = "";
-            this.CbbUrl.Location = new System.Drawing.Point(24, 3);
+            this.CbbUrl.FormattingEnabled = true;
+            this.CbbUrl.Location = new System.Drawing.Point(21, 2);
             this.CbbUrl.Name = "CbbUrl";
-            this.CbbUrl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.CbbUrl.Size = new System.Drawing.Size(210, 20);
+            this.CbbUrl.Size = new System.Drawing.Size(214, 20);
             this.CbbUrl.TabIndex = 4;
             // 
             // UrlBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BtnUpFolder);
             this.Controls.Add(this.CbbUrl);
+            this.Controls.Add(this.BtnUpFolder);
             this.Name = "UrlBar";
             this.Size = new System.Drawing.Size(287, 26);
-            ((System.ComponentModel.ISupportInitialize)(this.CbbUrl.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -73,7 +69,7 @@
         #endregion
 
         private DevExpress.XtraEditors.SimpleButton BtnUpFolder;
-        private DevExpress.XtraEditors.ComboBoxEdit CbbUrl;
+        private System.Windows.Forms.ComboBox CbbUrl;
 
 
 

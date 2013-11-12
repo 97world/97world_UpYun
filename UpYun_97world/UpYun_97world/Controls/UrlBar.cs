@@ -28,7 +28,7 @@ namespace UpYun_97world.Controls
         /// <summary>
         /// 获取地址栏对象
         /// </summary>
-        public ComboBoxEdit CBEUrl
+        public System.Windows.Forms.ComboBox CBEUrl
         {
             get { return CbbUrl; }
         }

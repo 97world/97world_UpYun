@@ -48,7 +48,7 @@ namespace ToolsLibrary
         }
 
         /// <summary>
-        /// 根据文件扩展名得到系统扩展名的图标
+        /// 根据文件扩展名得到图标
         /// </summary>
         /// <param name="fileName">文件名(如：win.rar;setup.exe;temp.txt)</param>
         /// <param name="largeIcon">图标的大小</param>

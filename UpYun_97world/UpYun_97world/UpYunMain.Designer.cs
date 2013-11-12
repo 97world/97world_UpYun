@@ -356,6 +356,7 @@
             this.ListViewLocal.TabIndex = 3;
             this.ListViewLocal.UseCompatibleStateImageBehavior = false;
             this.ListViewLocal.View = System.Windows.Forms.View.Details;
+            this.ListViewLocal.DoubleClick += new System.EventHandler(this.ListViewLocal_DoubleClick);
             // 
             // columnHeader1
             // 
@@ -365,12 +366,11 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "大小";
-            this.columnHeader2.Width = 55;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "修改日期";
-            this.columnHeader3.Width = 135;
+            this.columnHeader3.Width = 130;
             // 
             // ImageListLocalIcon
             // 
