@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace ToolsLibrary
 {
@@ -19,6 +20,8 @@ namespace ToolsLibrary
             SHGFI uFlags
         );
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public extern static bool DestroyIcon(IntPtr handle);  
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SHFILEINFO
@@ -53,7 +56,7 @@ namespace ToolsLibrary
         /// <param name="fileName">文件名(如：win.rar;setup.exe;temp.txt)</param>
         /// <param name="largeIcon">图标的大小</param>
         /// <returns></returns>
-        public static Icon GetFileIcon(string fileName, bool largeIcon)
+        public static Image GetFileIcon(string fileName, bool largeIcon)
         {
             SHFILEINFO info = new SHFILEINFO(true);
             int cbFileInfo = Marshal.SizeOf(info);
@@ -63,16 +66,21 @@ namespace ToolsLibrary
             else
                 flags = SHGFI.Icon | SHGFI.SmallIcon | SHGFI.UseFileAttributes;
             IntPtr IconIntPtr = SHGetFileInfo(fileName, 256, out info, (uint)cbFileInfo, flags);
-            if (IconIntPtr.Equals(IntPtr.Zero))
+            if (IconIntPtr == IntPtr.Zero)
                 return null;
-            return Icon.FromHandle(info.hIcon);
+            Icon _Icon = Icon.FromHandle(info.hIcon);
+            ImageList imagelist = new ImageList();
+            imagelist.ColorDepth = ColorDepth.Depth32Bit;
+            imagelist.Images.Add(_Icon);
+            DestroyIcon(info.hIcon);
+            return imagelist.Images[0];
         }
 
         /// <summary>  
         /// 获取文件夹图标
         /// </summary>  
         /// <returns>图标</returns>  
-        public static Icon GetDirectoryIcon(string foldername)
+        public static Image GetDirectoryIcon(string foldername)
         {
             SHFILEINFO _SHFILEINFO = new SHFILEINFO();
             int cbFileInfo = Marshal.SizeOf(_SHFILEINFO);
@@ -83,10 +91,14 @@ namespace ToolsLibrary
             //    flags = SHGFI.Icon | SHGFI.SmallIcon;
             flags = SHGFI.Icon | SHGFI.SmallIcon;
             IntPtr IconIntPtr = SHGetFileInfo(foldername, 0, out _SHFILEINFO, (uint)cbFileInfo, flags);
-            if (IconIntPtr.Equals(IntPtr.Zero))
+            if (IconIntPtr ==IntPtr.Zero)
                 return null;
             Icon _Icon = Icon.FromHandle(_SHFILEINFO.hIcon);
-            return _Icon;
+            ImageList imagelist = new ImageList();
+            imagelist.ColorDepth = ColorDepth.Depth32Bit;
+            imagelist.Images.Add(_Icon);
+            DestroyIcon(_SHFILEINFO.hIcon);
+            return imagelist.Images[0];
         }
 
     }
