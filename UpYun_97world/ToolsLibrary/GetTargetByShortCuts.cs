@@ -18,7 +18,5 @@ namespace ToolsLibrary
             return _shortcut.TargetPath;
         }
 
-        
-
     }
 }

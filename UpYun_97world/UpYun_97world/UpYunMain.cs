@@ -48,6 +48,7 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void UpYunMain_Load(object sender, EventArgs e)
         {
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             refreshLocalMain();
             refreshWebMain();
         }
@@ -120,7 +121,7 @@ namespace UpYun_97world
         /// <param name="sender"></param>
         private void singleCheck(object sender)
         {
-            userInformation = new UpYun_Model.UserInformation();
+            //userInformation = new UpYun_Model.UserInformation();
             BarCheckItemAuto.Checked = false;
             BarCheckItemTelecom.Checked = false;
             BarCheckItemUnicom.Checked = false;
@@ -128,19 +129,19 @@ namespace UpYun_97world
             ((DevExpress.XtraBars.BarCheckItem)sender).Checked = true;
             if (BarCheckItemTelecom.Checked == true)
             {
-                userInformation.Internet = "v1.api.upyun.com";
+                userInformation.upYun.setApiDomain("v1.api.upyun.com");
             }
             else if (BarCheckItemUnicom.Checked == true)
             {
-                userInformation.Internet = "v2.api.upyun.com";
+                userInformation.upYun.setApiDomain("v2.api.upyun.com");
             }
             else if (BarCheckItemMobile.Checked == true)
             {
-                userInformation.Internet = "v3.api.upyun.com";
+                userInformation.upYun.setApiDomain("v3.api.upyun.com");
             }
             else
             {
-                userInformation.Internet = "v0.api.upyun.com";
+                userInformation.upYun.setApiDomain("v0.api.upyun.com");
             }
         }
 
@@ -286,8 +287,10 @@ namespace UpYun_97world
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void BtnTransLocal_click(object sender, EventArgs e)
-        { 
-            
+        {
+            UpYun_Controller.Main main = new UpYun_Controller.Main();
+            main.upFile(WebPath,LocalPath,ListViewLocal,userInformation);
+            WebUrlTextChanged();
         }
 
         /// <summary>
@@ -369,6 +372,11 @@ namespace UpYun_97world
             WebUrlTextChanged();
         }
 
+        /// <summary>
+        /// WEB地址栏上级目录按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void BtnUpWeb(object sender, EventArgs e)
         { 
             if(WebPath.Equals("/"))
@@ -425,7 +433,12 @@ namespace UpYun_97world
         /// <param name="e"></param>
         public void BtnDelWeb_click(object sender, EventArgs e)
         {
-
+            if (XtraMessageBox.Show("确定删除选中文件(文件夹)？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+            {
+                UpYun_Controller.Main main = new UpYun_Controller.Main();
+                main.rmFileForWeb(WebPath, userInformation,ListViewWeb);
+                WebUrlTextChanged();
+            }
         }
 
         /// <summary>
@@ -435,7 +448,12 @@ namespace UpYun_97world
         /// <param name="e"></param>
         public void BtnNewFolderWeb_click(object sender, EventArgs e)
         {
-
+            UpYunNewFolder newfolder = new UpYunNewFolder();
+            newfolder.Owner = this;
+            newfolder.Path = WebPath;
+            newfolder.userinformation = userInformation;
+            newfolder.ShowDialog();
+            WebUrlTextChanged();
         }
 
         /// <summary>
@@ -447,7 +465,11 @@ namespace UpYun_97world
         {
             if (ListViewWeb.SelectedItems[0].Text.Contains(".") && ListViewWeb.SelectedItems[0].Text.Substring(ListViewWeb.SelectedItems[0].Text.LastIndexOf(".")).Length == 4)
             {
-                string CopyLink = userInformation.Url + WebPath.Substring(1) + ListViewWeb.SelectedItems[0].Text;
+                string CopyLink = "";
+                if (userInformation.Url.Substring(userInformation.Url.Length - 1).Equals("/"))
+                    CopyLink = userInformation.Url + WebPath.Substring(1) + ListViewWeb.SelectedItems[0].Text;
+                else
+                    CopyLink = userInformation.Url + "/" + WebPath.Substring(1) + ListViewWeb.SelectedItems[0].Text;
                 Clipboard.SetDataObject(CopyLink);
             }
         }

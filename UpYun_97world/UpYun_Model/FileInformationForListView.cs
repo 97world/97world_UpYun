@@ -1,8 +1,6 @@
 ﻿using System;
-//using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-//using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using DevExpress.XtraEditors;
@@ -16,7 +14,12 @@ namespace UpYun_Model
         public FileInformationForListView()
         { }
 
-
+        /// <summary>
+        ///  本地浏览器ListView填充数据
+        /// </summary>
+        /// <param name="listview"></param>
+        /// <param name="imagelist"></param>
+        /// <param name="path"></param>
         public void getFileInformationForListView(ListView listview,ImageList imagelist,string path)
         {
             listview.SmallImageList = imagelist;
@@ -35,6 +38,7 @@ namespace UpYun_Model
             imagelist.Images.Clear();
             listview.Items.Add("上级目录");
             int index = 0;
+            listview.BeginUpdate();
             for (int i = 0; i < dirs.Length; i++)//遍历子文件夹
             {
                 string[] info = new string[3];//定义一个数组
@@ -50,6 +54,8 @@ namespace UpYun_Model
                     index++;
                 }
             }
+            listview.EndUpdate();
+            listview.BeginUpdate();
             for (int i = 0; i < files.Length; i++)//遍历文件
             {
                 string[] info = new string[3];//定义一个数组
@@ -68,8 +74,15 @@ namespace UpYun_Model
                     index++;
                 }
             }
+            listview.EndUpdate();
         }
 
+        /// <summary>
+        /// 本地浏览器ListView填充数据（我的电脑）
+        /// </summary>
+        /// <param name="listview"></param>
+        /// <param name="imagelist"></param>
+        /// <param name="path"></param>
         public void getFileInformationForListViewMyPc(ListView listview, ImageList imagelist, string path)
         {
             listview.Items.Clear();
@@ -93,6 +106,11 @@ namespace UpYun_Model
             catch { }
         }
 
+        /// <summary>
+        /// 选中文件批量删除
+        /// </summary>
+        /// <param name="listview"></param>
+        /// <param name="path"></param>
         public void delFileByListView(ListView listview,string path)
         {
             if (XtraMessageBox.Show("确定删除选中文件(文件夹)？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
@@ -105,30 +123,63 @@ namespace UpYun_Model
                         di.Delete(true);
                     }
                     else
-                    {
-                        System.IO.File.Delete(path + listview.SelectedItems[i].Text);
-                    }
+                        File.Delete(path + listview.SelectedItems[i].Text);
                 }
             }
         }
 
+        /// <summary>
+        /// Local新建文件夹
+        /// </summary>
+        /// <param name="foldername"></param>
+        /// <param name="path"></param>
         public void newFolderForLocal(string foldername,string path)
         {
             string fullfoldername = path + foldername;
             System.IO.Directory.CreateDirectory(fullfoldername);
         }
 
+        /// <summary>
+        /// Web新建文件夹
+        /// </summary>
+        /// <param name="foldername"></param>
+        /// <param name="path"></param>
+        /// <param name="userinformation"></param>
+        public void newFolderForWeb(string foldername,string path,UserInformation userinformation)
+        {
+            string fullfoldername = path + foldername;
+            userinformation.upYun.mkDir(fullfoldername,true);
+        }
+
+        /// <summary>
+        /// Web删除文件
+        /// </summary>
+        /// <param name="fullfoldername"></param>
+        /// <param name="userinformation"></param>
+        public void rmFile(string webpath, UserInformation userinformation,ListView listview)
+        {
+            for (int i = 0; i < listview.SelectedItems.Count;i++ )
+            {
+                userinformation.upYun.deleteFile(webpath+listview.SelectedItems[i].Text);
+            }
+        }
+
+        /// <summary>
+        /// 远程浏览器ListView填充数据
+        /// </summary>
+        /// <param name="listview"></param>
+        /// <param name="imagelist"></param>
+        /// <param name="path"></param>
+        /// <param name="userInformation"></param>
         public void getFileInformationForListViewWeb(ListView listview, ImageList imagelist, string path, UserInformation userInformation)
         {
-            ArrayList str;          
+            ArrayList str = new ArrayList();
             try
             {
                 str = userInformation.upYun.readDir(path);
-            }
-            catch { return; }
+            }catch{ }
             listview.Items.Clear();
             imagelist.Images.Clear();
-
             if (path != @"/")
                 listview.Items.Add("上级目录");
             ListViewItem lvi = new ListViewItem();
@@ -155,5 +206,25 @@ namespace UpYun_Model
             }
         }
 
+        public void upFile(string webpath, string localpath, ListView locallistview,UserInformation userinformation)
+        {
+            int SelectNum = locallistview.SelectedItems.Count;
+            try
+            {
+                for (int i = 0; i < SelectNum; i++)
+                {
+                    string localpath_up = localpath + locallistview.SelectedItems[i].Text;
+                    FileStream fs = new FileStream(localpath_up, FileMode.Open, FileAccess.Read);
+                    BinaryReader r = new BinaryReader(fs);
+                    byte[] postArray = r.ReadBytes((int)fs.Length);
+                    string webpath_up = webpath + locallistview.SelectedItems[i].Text;
+                    userinformation.upYun.writeFile(webpath_up, postArray, true);
+                }
+            }
+            catch
+            {
+                XtraMessageBox.Show("上传出错：文件只能是图像文件！");
+            }
+        }
     }
 }

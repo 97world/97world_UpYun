@@ -146,7 +146,9 @@ namespace UpYun_Model
                         break;
                     case "中国移动网络": Internet = "v3.api.upyun.com";
                         break;
-                    default: Internet = "v0.api.upyun.com";
+                    case "自动识别网络": Internet = "v0.api.upyun.com";
+                        break;
+                    default: 
                         break;
                 }
                 upYun = new UpYunLibrary.UpYun(BucketName, OperatorName, OperatorPwd, Internet);
