@@ -26,7 +26,11 @@ namespace UpYun_Model
                 dirs = Directory.GetDirectories(path);//获取指定目录中子目录的名称
                 files = Directory.GetFiles(path);//获取目录中文件的名称
             }
-            catch{ return;}
+            catch
+            {
+                XtraMessageBox.Show("不存在该目录或文件！");
+                return;
+            }
             listview.Items.Clear();
             imagelist.Images.Clear();
             listview.Items.Add("上级目录");
@@ -125,7 +129,7 @@ namespace UpYun_Model
             listview.Items.Clear();
             imagelist.Images.Clear();
 
-            if (path != @"\")
+            if (path != @"/")
                 listview.Items.Add("上级目录");
             ListViewItem lvi = new ListViewItem();
             int index = 1;

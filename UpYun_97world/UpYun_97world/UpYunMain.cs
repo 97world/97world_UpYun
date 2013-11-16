@@ -17,21 +17,28 @@ namespace UpYun_97world
 
             //本地浏览器地址栏相关控件事件的绑定和实现
             this.UrlBarLocal.CBEUrl.KeyDown += new KeyEventHandler(LocalUrlEnter);
-            this.UrlBarLocal.UpButton.Click += new EventHandler(BtnUp);
+            this.UrlBarLocal.UpButton.Click += new EventHandler(BtnUpLocal);
 
             //本地浏览器工具栏相关控件事件的绑定和实现
-            this.LocalToolsBarMain.BtnMyPc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnMyPc_click);
-            this.LocalToolsBarMain.BtnDesktop.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDesktop_click);
-            this.LocalToolsBarMain.BtnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnRefresh_click);
-            this.LocalToolsBarMain.BtnTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnTrans_click);
-            this.LocalToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDel_click);
-            this.LocalToolsBarMain.BtnNewFloder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolder_click);
+            this.LocalToolsBarMain.BtnMyPc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnMyPcLocal_click);
+            this.LocalToolsBarMain.BtnDesktop.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDesktopLocal_click);
+            this.LocalToolsBarMain.BtnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnRefreshLocal_click);
+            this.LocalToolsBarMain.BtnTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnTransLocal_click);
+            this.LocalToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDelLocal_click);
+            this.LocalToolsBarMain.BtnNewFloder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolderLocal_click);
 
             //远程浏览器地址栏相关控件事件的绑定和实现
-            this.UrlBarWeb.CBEUrl.KeyDown += new KeyEventHandler(WebUrlTextChanged);
+            this.UrlBarWeb.CBEUrl.KeyDown += new KeyEventHandler(WebUrlEnter);
+            this.UrlBarWeb.UpButton.Click += new EventHandler(BtnUpWeb);
 
             //远程浏览器工具栏相关控件时间的绑定和实现
-
+            this.WebToolsBarMain.BtnOperator.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnOperatorWeb_click);
+            this.WebToolsBarMain.BtnHome.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnHomeWeb_click);
+            this.WebToolsBarMain.BtnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnRefreshWeb_click);
+            this.WebToolsBarMain.BtnTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnTransWeb_click);
+            this.WebToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDelWeb_click);
+            this.WebToolsBarMain.BtnNewFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolderWeb_click);
+            this.WebToolsBarMain.BtnLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnLinkWeb_click);
         }
 
         /// <summary>
@@ -41,7 +48,6 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void UpYunMain_Load(object sender, EventArgs e)
         {
-            UrlBarLocal.CBEUrl.Text = LocalPath;
             refreshLocalMain();
             refreshWebMain();
         }
@@ -49,7 +55,7 @@ namespace UpYun_97world
         #region 控件事件
 
         /// <summary>
-        /// 操作员登录按钮事件
+        /// 菜单操作员登录按钮事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -95,6 +101,7 @@ namespace UpYun_97world
                 BarStaticItemUseSpace.Caption = "空间已使用：" + ToolsLibrary.Tools.getCommonSize( userInformation.UseSpace);
                 BarStaticItemStatus.Caption = "登录成功！";
                 UrlBarWeb.CBEUrl.Text = WebPath;
+                WebUrlTextChanged();
             }
         }
 
@@ -103,6 +110,7 @@ namespace UpYun_97world
         /// </summary>
         public void refreshLocalMain()
         {
+            UrlBarLocal.CBEUrl.Text = LocalPath;
             LocalUrlTextChanged();
         }
 
@@ -151,21 +159,21 @@ namespace UpYun_97world
             {
                 if (UrlBarLocal.CBEUrl.Text.Length == 3)
                 {
-                    UrlBarLocal.CBEUrl.Text = Environment.SpecialFolder.MyComputer.ToString();
+                    LocalPath = Environment.SpecialFolder.MyComputer.ToString();
                 }
                 else
                 {
-                    UrlBarLocal.CBEUrl.Text = UrlBarLocal.CBEUrl.Text.Trim().Substring(0, UrlBarLocal.CBEUrl.Text.Length-1);
-                    UrlBarLocal.CBEUrl.Text = UrlBarLocal.CBEUrl.Text.Trim().Substring(0, UrlBarLocal.CBEUrl.Text.LastIndexOf(@"\")+1);
+                    LocalPath = LocalPath.Substring(0, LocalPath.Length - 1);
+                    LocalPath = LocalPath.Substring(0, LocalPath.LastIndexOf(@"\") + 1);
                 }
             }
             else if (ListViewLocal.SelectedItems[0].SubItems[1].Text == "      ")
             {
-                UrlBarLocal.CBEUrl.Text = LocalPath + ListViewLocal.SelectedItems[0].Text + @"\";
+                LocalPath = LocalPath + ListViewLocal.SelectedItems[0].Text + @"\";
             }
             else if (ListViewLocal.SelectedItems[0].SubItems[2].Text == "本地磁盘")
             {
-                UrlBarLocal.CBEUrl.Text = ListViewLocal.SelectedItems[0].ImageKey.ToString();
+                LocalPath = ListViewLocal.SelectedItems[0].ImageKey.ToString();
             }
             else
             {
@@ -173,7 +181,7 @@ namespace UpYun_97world
                 {
                     string target = ToolsLibrary.GetTargetByShortCuts.getTarget(LocalPath + ListViewLocal.SelectedItems[0].Text);
                     if (System.IO.File.Exists(target) == false)
-                        UrlBarLocal.CBEUrl.Text = target + @"\";
+                        LocalPath = target + @"\";
                     else
                     {
                         System.Diagnostics.Process.Start(target);
@@ -200,14 +208,19 @@ namespace UpYun_97world
             {
                 //验证路径是否以“\”结尾，如果不是添加字符“\”
                 if (UrlBarLocal.CBEUrl.Text.Trim() != Environment.SpecialFolder.MyComputer.ToString() && !UrlBarLocal.CBEUrl.Text.Substring(UrlBarLocal.CBEUrl.Text.Length - 1, 1).Equals(@"\"))
-                    UrlBarLocal.CBEUrl.Text = UrlBarLocal.CBEUrl.Text.Trim() + @"\";
+                    LocalPath = UrlBarLocal.CBEUrl.Text.Trim() + @"\";
+                else
+                    LocalPath = UrlBarLocal.CBEUrl.Text.Trim();
                 LocalUrlTextChanged();
             }
         }
 
+        /// <summary>
+        /// 地址栏文本改变
+        /// </summary>
         public void LocalUrlTextChanged()
         {
-            LocalPath = UrlBarLocal.CBEUrl.Text.Trim();
+            UrlBarLocal.CBEUrl.Text = LocalPath;
             UpYun_Controller.Main main = new UpYun_Controller.Main();
             if (LocalPath == Environment.SpecialFolder.MyComputer.ToString())
                 main.getFileInformationMyPc(ListViewLocal, ImageListLocalIcon, LocalPath);
@@ -220,70 +233,70 @@ namespace UpYun_97world
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void BtnUp(object sender, EventArgs e)
+        public void BtnUpLocal(object sender, EventArgs e)
         {
             if (UrlBarLocal.CBEUrl.Text == Environment.SpecialFolder.MyComputer.ToString())
                 return;
             else if (UrlBarLocal.CBEUrl.Text.Length == 3)
-                UrlBarLocal.CBEUrl.Text = Environment.SpecialFolder.MyComputer.ToString();
+                LocalPath = Environment.SpecialFolder.MyComputer.ToString();
             else
             {
-                UrlBarLocal.CBEUrl.Text = UrlBarLocal.CBEUrl.Text.Trim().Substring(0, UrlBarLocal.CBEUrl.Text.Length - 1);
-                UrlBarLocal.CBEUrl.Text = UrlBarLocal.CBEUrl.Text.Trim().Substring(0, UrlBarLocal.CBEUrl.Text.LastIndexOf(@"\") + 1);
+                LocalPath = LocalPath.Substring(0, UrlBarLocal.CBEUrl.Text.Length - 1);
+                LocalPath = LocalPath.Substring(0, UrlBarLocal.CBEUrl.Text.LastIndexOf(@"\") + 1);
             }
             LocalUrlTextChanged();
 
         }
 
         /// <summary>
-        /// 工具栏按钮“我的电脑”
+        /// LOCAL工具栏按钮“我的电脑”
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void BtnMyPc_click(object sender, EventArgs e)
+        public void BtnMyPcLocal_click(object sender, EventArgs e)
         {
-            UrlBarLocal.CBEUrl.Text = Environment.SpecialFolder.MyComputer.ToString();
+            LocalPath = Environment.SpecialFolder.MyComputer.ToString();
             LocalUrlTextChanged();
         }
 
         /// <summary>
-        /// 工具栏按钮“桌面”
+        /// LOCAL工具栏按钮“桌面”
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void BtnDesktop_click(object sender, EventArgs e)
+        public void BtnDesktopLocal_click(object sender, EventArgs e)
         {
-            UrlBarLocal.CBEUrl.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+@"\";
+            LocalPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
             LocalUrlTextChanged();
         }
 
         /// <summary>
-        /// 工具栏按钮“刷新”
+        /// LOCAL工具栏按钮“刷新”
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void BtnRefresh_click(object sender, EventArgs e)
+        public void BtnRefreshLocal_click(object sender, EventArgs e)
         {
             LocalUrlTextChanged();
         }
 
         /// <summary>
-        /// 工具栏按钮“传输”
+        /// LOCAL工具栏按钮“传输”
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void BtnTrans_click(object sender, EventArgs e)
+        public void BtnTransLocal_click(object sender, EventArgs e)
         { 
             
         }
 
         /// <summary>
-        /// 工具栏按钮“删除”
+        /// LOCAL工具栏按钮“删除”
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        public void BtnDel_click(object sender, EventArgs e)
+        public void BtnDelLocal_click(object sender, EventArgs e)
         {
             UpYun_Controller.Main main = new UpYun_Controller.Main();
             main.delFileByListView(ListViewLocal,LocalPath);
@@ -292,11 +305,11 @@ namespace UpYun_97world
         }
 
         /// <summary>
-        /// 工具栏按钮“新建文件夹”
+        /// LOCAL工具栏按钮“新建文件夹”
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void BtnNewFolder_click(object sender, EventArgs e)
+        public void BtnNewFolderLocal_click(object sender, EventArgs e)
         {
             UpYunNewFolder newfolder = new UpYunNewFolder();
             newfolder.Owner = this;
@@ -310,15 +323,33 @@ namespace UpYun_97world
         #region 远程浏览器控件方法
 
         /// <summary>
+        /// WEB地址栏回车键事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void WebUrlEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //验证路径是否以“/”结尾，如果不是添加字符“/”               
+                if (!UrlBarWeb.CBEUrl.Text.Substring(UrlBarWeb.CBEUrl.Text.Length - 1, 1).Equals(@"/"))
+                    WebPath = UrlBarWeb.CBEUrl.Text.Trim() + @"/";
+                else
+                    WebPath = UrlBarWeb.CBEUrl.Text.Trim();
+                WebUrlTextChanged();
+            }
+        }
+
+        /// <summary>
         /// 远程浏览器地址栏文本改变刷新listview
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void WebUrlTextChanged(object sender, KeyEventArgs e)
+        public void WebUrlTextChanged()
         {
             if(userInformation!=null)
             {
-                WebPath = UrlBarWeb.CBEUrl.Text.Trim();
+                UrlBarWeb.CBEUrl.Text = WebPath;
                 UpYun_Controller.Main main = new UpYun_Controller.Main();
                 main.getFileInformationWeb(ListViewWeb, ImageListWebIcon, WebPath, userInformation);
             }
@@ -329,8 +360,95 @@ namespace UpYun_97world
             if(ListViewWeb.SelectedItems[0].Text=="上级目录")
             {
                 WebPath = WebPath.Substring(0, WebPath.Length - 1);
-                WebPath = WebPath.Substring(0, WebPath.LastIndexOf(@"\") + 1);
-                UrlBarWeb.CBEUrl.Text = WebPath;
+                WebPath = WebPath.Substring(0, WebPath.LastIndexOf(@"/") + 1);
+            }
+            else if (!(ListViewWeb.SelectedItems[0].Text.Contains(".") && ListViewWeb.SelectedItems[0].Text.Substring(ListViewWeb.SelectedItems[0].Text.LastIndexOf(".")).Length==4))
+            {
+                WebPath = WebPath + ListViewWeb.SelectedItems[0].Text + "/";
+            }
+            WebUrlTextChanged();
+        }
+
+        public void BtnUpWeb(object sender, EventArgs e)
+        { 
+            if(WebPath.Equals("/"))
+                return;
+            WebPath = WebPath.Substring(0, WebPath.Length - 1);
+            WebPath = WebPath.Substring(0, WebPath.LastIndexOf(@"/") + 1);
+            WebUrlTextChanged();
+        }
+
+        /// <summary>
+        /// WEB工具栏按钮：操作员登录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnOperatorWeb_click(object sender, EventArgs e)
+        {
+            UpYunLogin upYunLogin = new UpYunLogin();
+            upYunLogin.Owner = this;
+            upYunLogin.ShowDialog();
+        }
+        /// <summary>
+        /// WEB工具栏按钮：返回主目录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnHomeWeb_click(object sender, EventArgs e)
+        {
+            WebPath = "/";
+            WebUrlTextChanged();
+        }
+
+        /// <summary>
+        /// WEB工具栏按钮：刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnRefreshWeb_click(object sender, EventArgs e)
+        {
+            WebUrlTextChanged();
+        }
+        /// <summary>
+        /// WEB工具栏按钮：传输
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnTransWeb_click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// WEB工具栏按钮：删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnDelWeb_click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// WEB工具栏按钮：新建文件夹
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnNewFolderWeb_click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// WEB工具栏按钮：一键复制外链
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnLinkWeb_click(object sender, EventArgs e)
+        {
+            if (ListViewWeb.SelectedItems[0].Text.Contains(".") && ListViewWeb.SelectedItems[0].Text.Substring(ListViewWeb.SelectedItems[0].Text.LastIndexOf(".")).Length == 4)
+            {
+                string CopyLink = userInformation.Url + WebPath.Substring(1) + ListViewWeb.SelectedItems[0].Text;
+                Clipboard.SetDataObject(CopyLink);
             }
         }
 
