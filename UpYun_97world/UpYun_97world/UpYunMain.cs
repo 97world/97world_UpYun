@@ -41,6 +41,8 @@ namespace UpYun_97world
             this.WebToolsBarMain.BtnLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnLinkWeb_click);
         }
 
+        public delegate void setUrlBar(string webpath);
+
         /// <summary>
         /// 窗体载入事件
         /// </summary>
@@ -48,7 +50,7 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void UpYunMain_Load(object sender, EventArgs e)
         {
-            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+            //System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
             refreshLocalMain();
             refreshWebMain();
         }
@@ -289,8 +291,9 @@ namespace UpYun_97world
         public void BtnTransLocal_click(object sender, EventArgs e)
         {
             UpYun_Controller.Main main = new UpYun_Controller.Main();
-            main.upFile(WebPath,LocalPath,ListViewLocal,userInformation);
-            WebUrlTextChanged();
+            //main.upFile(WebPath,LocalPath,ListViewLocal,userInformation);
+            //WebUrlTextChanged();
+            main.upFile(WebPath, LocalPath, ListViewLocal, userInformation, WebUrlTextChanged);
         }
 
         /// <summary>
@@ -352,7 +355,18 @@ namespace UpYun_97world
         {
             if(userInformation!=null)
             {
-                UrlBarWeb.CBEUrl.Text = WebPath;
+                if (UrlBarWeb.CBEUrl.InvokeRequired)
+                {
+                    setUrlBar sub = new setUrlBar(delegate(string webpath)
+                        {
+                            UrlBarWeb.CBEUrl.Text = webpath;
+                        });
+                    UrlBarWeb.CBEUrl.Invoke(sub, WebPath);
+                }
+                else
+                {
+                    UrlBarWeb.CBEUrl.Text = WebPath;
+                }
                 UpYun_Controller.Main main = new UpYun_Controller.Main();
                 main.getFileInformationWeb(ListViewWeb, ImageListWebIcon, WebPath, userInformation);
             }

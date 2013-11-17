@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.IO;
 using DevExpress.XtraEditors;
 using System.Collections;
+using System.Threading;
 
 namespace UpYun_Model
 {
@@ -14,6 +15,9 @@ namespace UpYun_Model
         public FileInformationForListView()
         { }
 
+        public delegate void RefreshListViewWeb(ListView dglistview, ImageList dgimagelist, string dgpath);
+        public delegate void RefreshListView();
+
         /// <summary>
         ///  本地浏览器ListView填充数据
         /// </summary>
@@ -22,6 +26,7 @@ namespace UpYun_Model
         /// <param name="path"></param>
         public void getFileInformationForListView(ListView listview,ImageList imagelist,string path)
         {
+            Cursor.Current = Cursors.WaitCursor;
             listview.SmallImageList = imagelist;
             string[] dirs, files;
             try
@@ -61,7 +66,7 @@ namespace UpYun_Model
                 string[] info = new string[3];//定义一个数组
                 FileInfo fi = new FileInfo(files[i]);//根据文件的路径实例化FileInfo类
                 string Filetype = "unknown";
-                if(fi.Name.Contains("."))
+                if (fi.Name.Contains("."))
                     Filetype = fi.Name.Substring(fi.Name.LastIndexOf(".")).ToLower();//获取文件的类型              
                 if (!(Filetype == "sys" || Filetype == "ini" || Filetype == "bin" || Filetype == "log" || Filetype == "com" || Filetype == "bat" || Filetype == "db") && (fi.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
                 {
@@ -75,6 +80,7 @@ namespace UpYun_Model
                 }
             }
             listview.EndUpdate();
+            Cursor.Current = Cursors.Default;
         }
 
         /// <summary>
@@ -100,7 +106,6 @@ namespace UpYun_Model
                     item.SubItems.Add(ToolsLibrary.Tools.getCommonSize(sd.TotalFreeSpace));
                     item.SubItems.Add("本地磁盘");
                     listview.Items.Add(item);
-                    //LocalPath = LocalPath + @"\";
                 }
             }
             catch { }
@@ -178,35 +183,41 @@ namespace UpYun_Model
             {
                 str = userInformation.upYun.readDir(path);
             }catch{ }
-            listview.Items.Clear();
-            imagelist.Images.Clear();
-            if (path != @"/")
-                listview.Items.Add("上级目录");
-            ListViewItem lvi = new ListViewItem();
-            int index = 1;
-            string filetypename = "unknown";
-            imagelist.Images.Add("folder", ToolsLibrary.GetIcon.GetDirectoryIcon(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles) + @"\"));
-            foreach (var item in str)
-            {
-                UpYunLibrary.FolderItem a = (UpYunLibrary.FolderItem)item;
-                lvi = new ListViewItem(a.filename);
-                if (a.filetype == "F")
-                    lvi.ImageIndex = 0;
-                else if (a.filetype == "N")
+
+            RefreshListViewWeb rlv = new RefreshListViewWeb(delegate(ListView dglistview, ImageList dgimagelist, string dgpath)
                 {
-                    lvi.ImageIndex = index;
-                    if (a.filename.Contains("."))
-                        filetypename = a.filename.Substring(a.filename.LastIndexOf(".")).ToLower();//获取文件的类型
-                    imagelist.Images.Add(a.filename, ToolsLibrary.GetIcon.GetFileIcon(filetypename, false));
-                    index++;
-                }
-                lvi.SubItems.Add(ToolsLibrary.Tools.getCommonSize(a.size));
-                lvi.SubItems.Add(ToolsLibrary.Tools.getCommonTime(Convert.ToDouble(a.number)).ToString());
-                listview.Items.Add(lvi);               
-            }
+                    dglistview.Items.Clear();
+                    dgimagelist.Images.Clear();
+                    if (dgpath != @"/")
+                        dglistview.Items.Add("上级目录");
+                    ListViewItem lvi = new ListViewItem();
+                    int index = 1;
+                    string filetypename = "unknown";
+                    dgimagelist.Images.Add("folder", ToolsLibrary.GetIcon.GetDirectoryIcon(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles) + @"\"));
+                    foreach (var item in str)
+                    {
+                        UpYunLibrary.FolderItem a = (UpYunLibrary.FolderItem)item;
+                        lvi = new ListViewItem(a.filename);
+                        if (a.filetype == "F")
+                            lvi.ImageIndex = 0;
+                        else if (a.filetype == "N")
+                        {
+                            lvi.ImageIndex = index;
+                            if (a.filename.Contains("."))
+                                filetypename = a.filename.Substring(a.filename.LastIndexOf(".")).ToLower();//获取文件的类型
+                            dgimagelist.Images.Add(a.filename, ToolsLibrary.GetIcon.GetFileIcon(filetypename, false));
+                            index++;
+                        }
+                        lvi.SubItems.Add(ToolsLibrary.Tools.getCommonSize(a.size));
+                        lvi.SubItems.Add(ToolsLibrary.Tools.getCommonTime(Convert.ToDouble(a.number)).ToString());
+                        dglistview.Items.Add(lvi);
+                    }
+                });
+            listview.Invoke(rlv,listview,imagelist,path);
+            
         }
 
-        public void upFile(string webpath, string localpath, ListView locallistview,UserInformation userinformation)
+        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation,RefreshListView refresh)
         {
             int SelectNum = locallistview.SelectedItems.Count;
             try
@@ -218,13 +229,20 @@ namespace UpYun_Model
                     BinaryReader r = new BinaryReader(fs);
                     byte[] postArray = r.ReadBytes((int)fs.Length);
                     string webpath_up = webpath + locallistview.SelectedItems[i].Text;
-                    userinformation.upYun.writeFile(webpath_up, postArray, true);
+                    Thread thread = new Thread(() => upFileByUpYun(webpath_up, postArray, userinformation, refresh));
+                    thread.Start();
                 }
             }
             catch
             {
                 XtraMessageBox.Show("上传出错：文件只能是图像文件！");
             }
+        }
+
+        public void upFileByUpYun(string webpath_up,byte[] postarray,UserInformation userinformation,RefreshListView refresh)
+        {
+            userinformation.upYun.writeFile(webpath_up, postarray, true);
+            refresh();
         }
     }
 }

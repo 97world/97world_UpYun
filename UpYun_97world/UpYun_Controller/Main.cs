@@ -15,6 +15,7 @@ namespace UpYun_Controller
         { }
 
         FileInformationForListView fileinformationforlistview = new FileInformationForListView();
+        
 
         /// <summary>
         /// 数据填充本地浏览器ListView
@@ -24,10 +25,7 @@ namespace UpYun_Controller
         /// <param name="path"></param>
         public void getFileInformation(ListView listview,ImageList imagelist,string path)
         {
-            //FileInformationForListView fileinformationforlistview = new FileInformationForListView();
-            Thread thread = new Thread(() => fileinformationforlistview.getFileInformationForListView(listview, imagelist, path));
-            thread.Start();
-            //fileinformationforlistview.getFileInformationForListView(listview,imagelist,path);
+            fileinformationforlistview.getFileInformationForListView(listview,imagelist,path);
         }
 
         /// <summary>
@@ -38,49 +36,37 @@ namespace UpYun_Controller
         /// <param name="path"></param>
         public void getFileInformationMyPc(ListView listview, ImageList imagelist, string path)
         {
-            //FileInformationForListView fileinformationforlistview = new FileInformationForListView();
             fileinformationforlistview.getFileInformationForListViewMyPc(listview, imagelist, path);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="listview"></param>
-        /// <param name="path"></param>
         public void delFileByListView(ListView listview,string path)
         {
-            //FileInformationForListView fileinformationforlistview = new FileInformationForListView();
             fileinformationforlistview.delFileByListView(listview,path);
         }
 
         public void newFolder(string foldername, string path, UserInformation userInformation)
         {
-            //FileInformationForListView fileinformationforlistview = new FileInformationForListView();
             fileinformationforlistview.newFolderForWeb(foldername, path, userInformation);
         }
 
         public void newFolder(string foldername, string path)
         {
-            //FileInformationForListView fileinformationforlistview = new FileInformationForListView();
             fileinformationforlistview.newFolderForLocal(foldername, path);
         }
 
         public void rmFileForWeb(string webpath, UserInformation userinformation,ListView listview)
         {
-            //FileInformationForListView fileinformationforlistview = new FileInformationForListView();
             fileinformationforlistview.rmFile(webpath, userinformation,listview);
         }
 
         public void getFileInformationWeb(ListView listview, ImageList imagelist, string path, UserInformation userInformation)
         {
-            //FileInformationForListView fileinformationforlistview = new FileInformationForListView();
             fileinformationforlistview.getFileInformationForListViewWeb(listview, imagelist, path, userInformation);
         }
 
-        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation)
+        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation,FileInformationForListView.RefreshListView refresh)
         {
-            //FileInformationForListView fileinformationforlistview = new FileInformationForListView();
-            fileinformationforlistview.upFile(webpath,localpath,locallistview,userinformation);
+            fileinformationforlistview.upFile(webpath, localpath, locallistview, userinformation, refresh);
         }
 
     }
