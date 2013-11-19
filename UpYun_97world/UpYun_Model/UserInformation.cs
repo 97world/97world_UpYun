@@ -137,21 +137,9 @@ namespace UpYun_Model
                 IfAutoLogin = ifauto;
                 IfRemember = ifremember;
                 Internet = internet;
+                upYun = new UpYunLibrary.UpYun(BucketName, OperatorName, OperatorPwd);
+                setNetWork();
                 writeConfig();
-                switch (Internet)
-                {
-                    case "中国电信网络": Internet = "v1.api.upyun.com";
-                        break;
-                    case "中国联通网络": Internet = "v2.api.upyun.com";
-                        break;
-                    case "中国移动网络": Internet = "v3.api.upyun.com";
-                        break;
-                    case "自动识别网络": Internet = "v0.api.upyun.com";
-                        break;
-                    default: 
-                        break;
-                }
-                upYun = new UpYunLibrary.UpYun(BucketName, OperatorName, OperatorPwd, Internet);
                 try
                 {
                     UseSpace = getUseSpace();
@@ -180,7 +168,8 @@ namespace UpYun_Model
                 Internet = ini.IniReadValue("operatorinformation", "internet");
                 IfRemember = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifremember"));
                 IfAutoLogin = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifauto"));
-                upYun = new UpYunLibrary.UpYun(BucketName, OperatorName, OperatorPwd, Internet);
+                upYun = new UpYunLibrary.UpYun(BucketName, OperatorName, OperatorPwd);
+                setNetWork();
             }
         }
 
@@ -195,6 +184,27 @@ namespace UpYun_Model
         public double getUseSpace()
         {
             return upYun.getBucketUsage();
+        }
+
+        /// <summary>
+        /// 设置网络线路
+        /// </summary>
+        /// <param name="network"></param>
+        public void setNetWork()
+        {
+            switch (Internet)
+            {
+                case "中国电信网络": upYun.setApiDomain("v1.api.upyun.com");
+                    break;
+                case "中国联通网络": upYun.setApiDomain("v2.api.upyun.com");
+                    break;
+                case "中国移动网络": upYun.setApiDomain("v3.api.upyun.com");
+                    break;
+                case "自动识别网络": upYun.setApiDomain("v0.api.upyun.com");
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>

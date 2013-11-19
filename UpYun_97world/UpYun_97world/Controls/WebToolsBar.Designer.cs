@@ -95,6 +95,7 @@
             // BtnItemHome
             // 
             this.BtnItemHome.Caption = "返回主目录";
+            this.BtnItemHome.Enabled = false;
             this.BtnItemHome.Id = 1;
             this.BtnItemHome.ImageIndex = 11;
             this.BtnItemHome.Name = "BtnItemHome";
@@ -102,6 +103,7 @@
             // BtnItemRefresh
             // 
             this.BtnItemRefresh.Caption = "重新载入";
+            this.BtnItemRefresh.Enabled = false;
             this.BtnItemRefresh.Id = 2;
             this.BtnItemRefresh.ImageIndex = 9;
             this.BtnItemRefresh.Name = "BtnItemRefresh";
@@ -109,6 +111,7 @@
             // BtnItemTrans
             // 
             this.BtnItemTrans.Caption = "开始传输";
+            this.BtnItemTrans.Enabled = false;
             this.BtnItemTrans.Id = 3;
             this.BtnItemTrans.ImageIndex = 0;
             this.BtnItemTrans.Name = "BtnItemTrans";
@@ -116,6 +119,7 @@
             // BtnItemDel
             // 
             this.BtnItemDel.Caption = "删除";
+            this.BtnItemDel.Enabled = false;
             this.BtnItemDel.Id = 9;
             this.BtnItemDel.ImageIndex = 8;
             this.BtnItemDel.Name = "BtnItemDel";
@@ -123,6 +127,7 @@
             // BtnItemNewFolder
             // 
             this.BtnItemNewFolder.Caption = "新建文件夹";
+            this.BtnItemNewFolder.Enabled = false;
             this.BtnItemNewFolder.Id = 4;
             this.BtnItemNewFolder.ImageIndex = 4;
             this.BtnItemNewFolder.Name = "BtnItemNewFolder";
@@ -130,6 +135,7 @@
             // BtnItemLink
             // 
             this.BtnItemLink.Caption = "一键获取链接";
+            this.BtnItemLink.Enabled = false;
             this.BtnItemLink.Id = 8;
             this.BtnItemLink.ImageIndex = 5;
             this.BtnItemLink.Name = "BtnItemLink";

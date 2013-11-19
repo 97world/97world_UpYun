@@ -50,7 +50,13 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void UpYunMain_Load(object sender, EventArgs e)
         {
-            //System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+            ToolsLibrary.IniFile iniFile=new ToolsLibrary.IniFile();
+            if (String.Compare(iniFile.IniReadValue("ifconfig", "auto"), "true", true) == 0)
+            {
+                IfLogin = true;
+                UpYun_Controller.Login CtrGetUserIfm = new UpYun_Controller.Login();
+                userInformation = CtrGetUserIfm.getUserInformationByIni();
+            }
             refreshLocalMain();
             refreshWebMain();
         }
@@ -67,6 +73,17 @@ namespace UpYun_97world
             UpYunLogin upYunLogin = new UpYunLogin();
             upYunLogin.Owner = this;
             upYunLogin.ShowDialog();
+        }
+
+
+        /// <summary>
+        /// 菜单操作员注销事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BarButtonItemLogout_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            setControlsWhenLogout();
         }
 
         private void BarCheckItemAuto_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -103,6 +120,7 @@ namespace UpYun_97world
                 BarStaticItemOperator.Caption = "操作员：" + userInformation.OperatorName;
                 BarStaticItemUseSpace.Caption = "空间已使用：" + ToolsLibrary.Tools.getCommonSize( userInformation.UseSpace);
                 BarStaticItemStatus.Caption = "登录成功！";
+                setControlsWhenLoginSuccess();
                 UrlBarWeb.CBEUrl.Text = WebPath;
                 WebUrlTextChanged();
             }
@@ -123,28 +141,60 @@ namespace UpYun_97world
         /// <param name="sender"></param>
         private void singleCheck(object sender)
         {
-            //userInformation = new UpYun_Model.UserInformation();
             BarCheckItemAuto.Checked = false;
             BarCheckItemTelecom.Checked = false;
             BarCheckItemUnicom.Checked = false;
             BarCheckItemMobile.Checked = false;
             ((DevExpress.XtraBars.BarCheckItem)sender).Checked = true;
-            if (BarCheckItemTelecom.Checked == true)
+            if (BarCheckItemTelecom.Checked == true && userInformation!=null)
             {
                 userInformation.upYun.setApiDomain("v1.api.upyun.com");
             }
-            else if (BarCheckItemUnicom.Checked == true)
+            else if (BarCheckItemUnicom.Checked == true && userInformation != null)
             {
                 userInformation.upYun.setApiDomain("v2.api.upyun.com");
             }
-            else if (BarCheckItemMobile.Checked == true)
+            else if (BarCheckItemMobile.Checked == true && userInformation != null)
             {
                 userInformation.upYun.setApiDomain("v3.api.upyun.com");
             }
-            else
+            else if (BarCheckItemAuto.Checked==true&&userInformation!=null)
             {
                 userInformation.upYun.setApiDomain("v0.api.upyun.com");
             }
+        }
+
+        /// <summary>
+        /// 操作员登录成功后设置控件状态
+        /// </summary>
+        public void setControlsWhenLoginSuccess()
+        {
+            WebToolsBarMain.BtnHome.Enabled = true;
+            WebToolsBarMain.BtnRefresh.Enabled = true;
+            WebToolsBarMain.BtnTrans.Enabled = true;
+            WebToolsBarMain.BtnNewFolder.Enabled = true;
+            WebToolsBarMain.BtnDel.Enabled = true;
+            WebToolsBarMain.BtnLink.Enabled = true;
+            BarButtonItemLogout.Enabled = true;
+            UrlBarWeb.Enabled = true;
+        }
+
+        /// <summary>
+        /// 操作员登出后设置控件状态
+        /// </summary>
+        public void setControlsWhenLogout()
+        {
+            WebToolsBarMain.BtnHome.Enabled = false;;
+            WebToolsBarMain.BtnRefresh.Enabled = false;
+            WebToolsBarMain.BtnTrans.Enabled = false;
+            WebToolsBarMain.BtnNewFolder.Enabled = false;
+            WebToolsBarMain.BtnDel.Enabled = false;
+            WebToolsBarMain.BtnLink.Enabled = false;
+            BarButtonItemLogout.Enabled = false;
+            ListViewWeb.Items.Clear();
+            UrlBarWeb.CBEUrl.Text = "/";
+            WebPath = "/";
+            UrlBarWeb.Enabled = false;
         }
 
         #endregion

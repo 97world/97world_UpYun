@@ -23,11 +23,6 @@ namespace UpYun_97world
         /// </summary>
         public bool IfLogin { get; set; }
 
-        ///// <summary>
-        ///// UpYun接口
-        ///// </summary>
-        //public UpYunLibrary.UpYun upYun { get; set; }
-
         /// <summary>
         /// 用户信息
         /// </summary>

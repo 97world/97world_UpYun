@@ -152,8 +152,10 @@
             // BarButtonItemLogout
             // 
             this.BarButtonItemLogout.Caption = "操作员注销(&C)";
+            this.BarButtonItemLogout.Enabled = false;
             this.BarButtonItemLogout.Id = 4;
             this.BarButtonItemLogout.Name = "BarButtonItemLogout";
+            this.BarButtonItemLogout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItemLogout_ItemClick);
             // 
             // SubItemInternet
             // 
@@ -458,6 +460,7 @@
             // 
             this.UrlBarWeb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.UrlBarWeb.Enabled = false;
             this.UrlBarWeb.Location = new System.Drawing.Point(3, 67);
             this.UrlBarWeb.Name = "UrlBarWeb";
             this.UrlBarWeb.Size = new System.Drawing.Size(367, 26);
