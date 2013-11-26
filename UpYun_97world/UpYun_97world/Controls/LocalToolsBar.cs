@@ -27,6 +27,11 @@ namespace UpYun_97world.Controls
         public DevExpress.XtraBars.BarButtonItem BtnDesktop { get { return BtnItemDesktop; } }
 
         /// <summary>
+        /// 按钮：我的文档
+        /// </summary>
+        public DevExpress.XtraBars.BarButtonItem BtnMyFolder { get { return BtnItemMyFolder; } }
+
+        /// <summary>
         /// 按钮：刷新
         /// </summary>
         public DevExpress.XtraBars.BarButtonItem BtnRefresh { get { return BtnItemRefresh; } }

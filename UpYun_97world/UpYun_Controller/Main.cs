@@ -64,7 +64,7 @@ namespace UpYun_Controller
             fileinformationforlistview.getFileInformationForListViewWeb(listview, imagelist, path, userInformation);
         }
 
-        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation,FileInformationForListView.RefreshListView refresh)
+        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh)
         {
             fileinformationforlistview.upFile(webpath, localpath, locallistview, userinformation, refresh);
         }

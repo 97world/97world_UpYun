@@ -48,6 +48,7 @@
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemMemoExEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.BtnItemMyFolder = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.BarManagerLocal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoExEdit1)).BeginInit();
@@ -72,8 +73,9 @@
             this.BtnItemNewFloder,
             this.BtnItemDel,
             this.barButtonItem7,
-            this.BtnItemDesktop});
-            this.BarManagerLocal.MaxItemId = 17;
+            this.BtnItemDesktop,
+            this.BtnItemMyFolder});
+            this.BarManagerLocal.MaxItemId = 19;
             this.BarManagerLocal.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1,
             this.repositoryItemMemoExEdit1,
@@ -88,6 +90,7 @@
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemMyPC),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemDesktop),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemMyFolder),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemRefresh, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemTrans),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemDel),
@@ -181,6 +184,7 @@
             this.ImageListToolIcon.Images.SetKeyName(9, "Repeat.png");
             this.ImageListToolIcon.Images.SetKeyName(10, "User.png");
             this.ImageListToolIcon.Images.SetKeyName(11, "Up.png");
+            this.ImageListToolIcon.Images.SetKeyName(12, "MyFolder.png");
             // 
             // barButtonItem2
             // 
@@ -210,6 +214,13 @@
             // 
             this.repositoryItemTextEdit1.AutoHeight = false;
             this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
+            // 
+            // BtnItemMyFolder
+            // 
+            this.BtnItemMyFolder.Caption = "我的文档";
+            this.BtnItemMyFolder.Id = 18;
+            this.BtnItemMyFolder.ImageIndex = 12;
+            this.BtnItemMyFolder.Name = "BtnItemMyFolder";
             // 
             // LocalToolsBar
             // 
@@ -249,6 +260,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit repositoryItemMemoExEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraBars.BarButtonItem BtnItemMyFolder;
 
     }
 }

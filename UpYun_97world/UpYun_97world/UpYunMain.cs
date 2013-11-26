@@ -16,29 +16,30 @@ namespace UpYun_97world
             InitializeComponent();
 
             //本地浏览器地址栏相关控件事件的绑定和实现
-            this.UrlBarLocal.CBEUrl.KeyDown += new KeyEventHandler(LocalUrlEnter);
-            this.UrlBarLocal.UpButton.Click += new EventHandler(BtnUpLocal);
+            UrlBarLocal.CBEUrl.KeyDown += new KeyEventHandler(LocalUrlEnter);
+            UrlBarLocal.UpButton.Click += new EventHandler(BtnUpLocal);
 
             //本地浏览器工具栏相关控件事件的绑定和实现
-            this.LocalToolsBarMain.BtnMyPc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnMyPcLocal_click);
-            this.LocalToolsBarMain.BtnDesktop.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDesktopLocal_click);
-            this.LocalToolsBarMain.BtnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnRefreshLocal_click);
-            this.LocalToolsBarMain.BtnTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnTransLocal_click);
-            this.LocalToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDelLocal_click);
-            this.LocalToolsBarMain.BtnNewFloder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolderLocal_click);
+            LocalToolsBarMain.BtnMyPc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnMyPcLocal_click);
+            LocalToolsBarMain.BtnDesktop.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDesktopLocal_click);
+            LocalToolsBarMain.BtnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnRefreshLocal_click);
+            LocalToolsBarMain.BtnTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnTransLocal_click);
+            LocalToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDelLocal_click);
+            LocalToolsBarMain.BtnNewFloder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolderLocal_click);
+            LocalToolsBarMain.BtnMyFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnMyFolderLocal_click);
 
             //远程浏览器地址栏相关控件事件的绑定和实现
-            this.UrlBarWeb.CBEUrl.KeyDown += new KeyEventHandler(WebUrlEnter);
-            this.UrlBarWeb.UpButton.Click += new EventHandler(BtnUpWeb);
+            UrlBarWeb.CBEUrl.KeyDown += new KeyEventHandler(WebUrlEnter);
+            UrlBarWeb.UpButton.Click += new EventHandler(BtnUpWeb);
 
             //远程浏览器工具栏相关控件时间的绑定和实现
-            this.WebToolsBarMain.BtnOperator.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnOperatorWeb_click);
-            this.WebToolsBarMain.BtnHome.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnHomeWeb_click);
-            this.WebToolsBarMain.BtnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnRefreshWeb_click);
-            this.WebToolsBarMain.BtnTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnTransWeb_click);
-            this.WebToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDelWeb_click);
-            this.WebToolsBarMain.BtnNewFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolderWeb_click);
-            this.WebToolsBarMain.BtnLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnLinkWeb_click);
+            WebToolsBarMain.BtnOperator.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnOperatorWeb_click);
+            WebToolsBarMain.BtnHome.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnHomeWeb_click);
+            WebToolsBarMain.BtnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnRefreshWeb_click);
+            WebToolsBarMain.BtnTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnTransWeb_click);
+            WebToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDelWeb_click);
+            WebToolsBarMain.BtnNewFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolderWeb_click);
+            WebToolsBarMain.BtnLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnLinkWeb_click);
         }
 
         public delegate void setUrlBar(string webpath);
@@ -324,6 +325,17 @@ namespace UpYun_97world
         }
 
         /// <summary>
+        /// LOCAL工具栏按钮“我的文档”
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnMyFolderLocal_click(object sender, EventArgs e)
+        {
+            LocalPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\";
+            LocalUrlTextChanged();
+        }
+
+        /// <summary>
         /// LOCAL工具栏按钮“刷新”
         /// </summary>
         /// <param name="sender"></param>
@@ -341,8 +353,6 @@ namespace UpYun_97world
         public void BtnTransLocal_click(object sender, EventArgs e)
         {
             UpYun_Controller.Main main = new UpYun_Controller.Main();
-            //main.upFile(WebPath,LocalPath,ListViewLocal,userInformation);
-            //WebUrlTextChanged();
             main.upFile(WebPath, LocalPath, ListViewLocal, userInformation, WebUrlTextChanged);
         }
 
@@ -420,6 +430,15 @@ namespace UpYun_97world
                 UpYun_Controller.Main main = new UpYun_Controller.Main();
                 main.getFileInformationWeb(ListViewWeb, ImageListWebIcon, WebPath, userInformation);
             }
+        }
+
+        public void WebUrlTextChanged(bool isuploadsuccess)
+        {
+            WebUrlTextChanged();
+            if (isuploadsuccess==true)
+                BarStaticItemStatus.Caption = "上传成功！";
+            else
+                BarStaticItemStatus.Caption = "上传失败！";
         }
 
         private void ListViewWeb_DoubleClick(object sender, EventArgs e)

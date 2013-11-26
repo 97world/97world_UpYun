@@ -16,7 +16,7 @@ namespace UpYun_Model
         { }
 
         public delegate void RefreshListViewWeb(ListView dglistview, ImageList dgimagelist, string dgpath);
-        public delegate void RefreshListView();
+        public delegate void RefreshListViewSuccess(bool isuploadsuccess);
 
         /// <summary>
         ///  本地浏览器ListView填充数据
@@ -183,7 +183,7 @@ namespace UpYun_Model
             {
                 str = userInformation.upYun.readDir(path);
             }catch{ }
-
+            Cursor.Current = Cursors.WaitCursor;
             RefreshListViewWeb rlv = new RefreshListViewWeb(delegate(ListView dglistview, ImageList dgimagelist, string dgpath)
                 {
                     dglistview.Items.Clear();
@@ -214,35 +214,42 @@ namespace UpYun_Model
                     }
                 });
             listview.Invoke(rlv,listview,imagelist,path);
-            
+            Cursor.Current = Cursors.Default;
         }
 
-        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation,RefreshListView refresh)
+        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation, RefreshListViewSuccess refresh)
         {
-            int SelectNum = locallistview.SelectedItems.Count;
+            string[] SelectText = new string[locallistview.SelectedItems.Count];
+            for (int i = 0; i < SelectText.Length; i++)
+            {
+                SelectText[i] = locallistview.SelectedItems[i].Text;
+            }
+            Thread thread = new Thread(() => upFileByUpYun(localpath, webpath, SelectText, userinformation, refresh));
+            thread.Start();
+        }
+
+        public void upFileByUpYun(string localpath, string webpath, string[] selectedtext, UserInformation userinformation, RefreshListViewSuccess refresh)
+        {
+            int SelectNum = selectedtext.Length;
             try
             {
                 for (int i = 0; i < SelectNum; i++)
                 {
-                    string localpath_up = localpath + locallistview.SelectedItems[i].Text;
+                    string localpath_up = localpath + selectedtext[i];
                     FileStream fs = new FileStream(localpath_up, FileMode.Open, FileAccess.Read);
                     BinaryReader r = new BinaryReader(fs);
                     byte[] postArray = r.ReadBytes((int)fs.Length);
-                    string webpath_up = webpath + locallistview.SelectedItems[i].Text;
-                    Thread thread = new Thread(() => upFileByUpYun(webpath_up, postArray, userinformation, refresh));
-                    thread.Start();
+                    string webpath_up = webpath + selectedtext[i];
+                    userinformation.upYun.writeFile(webpath_up, postArray, true);
                 }
             }
             catch
             {
                 XtraMessageBox.Show("上传出错：文件只能是图像文件！");
+                refresh(false);
+                return;
             }
-        }
-
-        public void upFileByUpYun(string webpath_up,byte[] postarray,UserInformation userinformation,RefreshListView refresh)
-        {
-            userinformation.upYun.writeFile(webpath_up, postarray, true);
-            refresh();
+            refresh(true);
         }
     }
 }
