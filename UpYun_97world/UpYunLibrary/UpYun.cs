@@ -238,7 +238,7 @@ namespace UpYunLibrary
             Hashtable headers = new Hashtable();
             headers.Add("folder", "create");
             HttpWebResponse resp;
-            byte[] a = new byte[0];
+            byte[] a = null;
             resp = newWorker("POST", DL + this.bucketname + path, a, headers, null);
             if ((int)resp.StatusCode == 200)
             {

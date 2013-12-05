@@ -451,6 +451,15 @@ namespace UpYun_97world
             LocalUrlTextChanged();
         }
 
+        private void ListViewLocal_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (ListViewLocal.SelectedItems.Count != 0 && e.Button == MouseButtons.Right)
+            {
+                Point p = new Point(Cursor.Position.X, Cursor.Position.Y);
+                PopupMenuLocal.ShowPopup(p);
+            }
+        }
+
         #endregion
 
         #region 远程浏览器控件方法
@@ -628,7 +637,128 @@ namespace UpYun_97world
             }
         }
 
+        private void ListViewWeb_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (ListViewWeb.SelectedItems.Count != 0 && e.Button == MouseButtons.Right)
+            {
+                Point p = new Point(Cursor.Position.X, Cursor.Position.Y);
+                PopupMenuWeb.ShowPopup(p);
+            }
+        }
+
         #endregion
 
+        #region 本地浏览器右键菜单事件
+
+        private void LocalPopupMenuTrans_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BtnRefreshLocal_click(sender, new EventArgs());
+        }
+
+        private void LocalPopupMenuOpen_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ListViewLocal_DoubleClick(sender, new EventArgs());
+        }
+
+        private void LocalPopupMenuDefault_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            
+        }
+
+        private void LocalPopupMenuCopy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void LocalPopupMenuStick_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void LocalPopupMenuDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BtnDelLocal_click(sender, new EventArgs());
+        }
+
+        private void LocalPopupMenuRename_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void LocalPopupMenuProperty_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void LocalPopupMenuNewFloder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BtnNewFolderLocal_click(sender, new EventArgs());
+        }
+
+        private void LocalPopupMenuNewFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void LocalPopupMenuRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LocalUrlTextChanged();
+        }
+
+        #endregion
+
+        #region 远程浏览器右键菜单事件
+
+        private void WebPoPupMenuTrans_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BtnTransWeb_click(sender, new EventArgs());
+        }
+
+        private void WebPoPupMenuOpen_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ListViewWeb_DoubleClick(sender, new EventArgs());
+        }
+
+        private void WebPoPupMenuCopy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void WebPopupMenuStick_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void WebPopupMenuDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BtnDelWeb_click(sender, new EventArgs());
+        }
+
+        private void WebPopupMenuRename_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void WebPopupMenuProperty_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void WebPopupMenuNewFolder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            BtnNewFolderWeb_click(sender, new EventArgs());
+        }
+
+        private void WebPopupMenuNewFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void WebPopupMenuRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            WebUrlTextChanged();
+        }
+
+        #endregion
     }
 }

@@ -76,6 +76,39 @@
             this.UrlBarWeb = new UpYun_97world.Controls.UrlBar();
             this.WebToolsBarMain = new UpYun_97world.Controls.WebToolsBar();
             this.ImageListToolIcon = new System.Windows.Forms.ImageList(this.components);
+            this.barManagerBlank = new DevExpress.XtraBars.BarManager(this.components);
+            this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl4 = new DevExpress.XtraBars.BarDockControl();
+            this.LocalPopupMenuOpen = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuTrans = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuCopy = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuStick = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuDel = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuProperty = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuNewFloder = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuNewFile = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuDefault = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuRename = new DevExpress.XtraBars.BarButtonItem();
+            this.LocalPopupMenuRefresh = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPoPupMenuTrans = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPoPupMenuOpen = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPoPupMenuCopy = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPopupMenuStick = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPopupMenuDel = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPopupMenuRename = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPopupMenuProperty = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPopupMenuNewFolder = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPopupMenuNewFile = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPopupMenuRefresh = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.PopupMenuLocal = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.PopupMenuWeb = new DevExpress.XtraBars.PopupMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xafBarManagerMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FileUploadProgressBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
@@ -84,6 +117,9 @@
             this.GroupControlLocal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GroupControlWeb)).BeginInit();
             this.GroupControlWeb.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.barManagerBlank)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PopupMenuLocal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PopupMenuWeb)).BeginInit();
             this.SuspendLayout();
             // 
             // xafBarManagerMain
@@ -394,6 +430,7 @@
             this.ListViewLocal.UseCompatibleStateImageBehavior = false;
             this.ListViewLocal.View = System.Windows.Forms.View.Details;
             this.ListViewLocal.DoubleClick += new System.EventHandler(this.ListViewLocal_DoubleClick);
+            this.ListViewLocal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ListViewLocal_MouseUp);
             // 
             // columnHeader1
             // 
@@ -467,6 +504,7 @@
             this.ListViewWeb.UseCompatibleStateImageBehavior = false;
             this.ListViewWeb.View = System.Windows.Forms.View.Details;
             this.ListViewWeb.DoubleClick += new System.EventHandler(this.ListViewWeb_DoubleClick);
+            this.ListViewWeb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ListViewWeb_MouseUp);
             // 
             // columnHeader4
             // 
@@ -525,6 +563,294 @@
             this.ImageListToolIcon.Images.SetKeyName(10, "User.png");
             this.ImageListToolIcon.Images.SetKeyName(11, "Home.png");
             // 
+            // barManagerBlank
+            // 
+            this.barManagerBlank.DockControls.Add(this.barDockControl1);
+            this.barManagerBlank.DockControls.Add(this.barDockControl2);
+            this.barManagerBlank.DockControls.Add(this.barDockControl3);
+            this.barManagerBlank.DockControls.Add(this.barDockControl4);
+            this.barManagerBlank.Form = this;
+            this.barManagerBlank.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.LocalPopupMenuOpen,
+            this.LocalPopupMenuTrans,
+            this.LocalPopupMenuCopy,
+            this.LocalPopupMenuStick,
+            this.LocalPopupMenuDel,
+            this.LocalPopupMenuProperty,
+            this.LocalPopupMenuNewFloder,
+            this.LocalPopupMenuNewFile,
+            this.LocalPopupMenuDefault,
+            this.LocalPopupMenuRename,
+            this.LocalPopupMenuRefresh,
+            this.WebPoPupMenuTrans,
+            this.WebPoPupMenuOpen,
+            this.barButtonItem7,
+            this.WebPoPupMenuCopy,
+            this.WebPopupMenuStick,
+            this.WebPopupMenuDel,
+            this.WebPopupMenuRename,
+            this.WebPopupMenuProperty,
+            this.WebPopupMenuNewFolder,
+            this.WebPopupMenuNewFile,
+            this.WebPopupMenuRefresh});
+            this.barManagerBlank.MaxItemId = 26;
+            // 
+            // barDockControl1
+            // 
+            this.barDockControl1.CausesValidation = false;
+            this.barDockControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControl1.Location = new System.Drawing.Point(0, 0);
+            this.barDockControl1.Size = new System.Drawing.Size(774, 0);
+            // 
+            // barDockControl2
+            // 
+            this.barDockControl2.CausesValidation = false;
+            this.barDockControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControl2.Location = new System.Drawing.Point(0, 559);
+            this.barDockControl2.Size = new System.Drawing.Size(774, 0);
+            // 
+            // barDockControl3
+            // 
+            this.barDockControl3.CausesValidation = false;
+            this.barDockControl3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControl3.Location = new System.Drawing.Point(0, 0);
+            this.barDockControl3.Size = new System.Drawing.Size(0, 559);
+            // 
+            // barDockControl4
+            // 
+            this.barDockControl4.CausesValidation = false;
+            this.barDockControl4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControl4.Location = new System.Drawing.Point(774, 0);
+            this.barDockControl4.Size = new System.Drawing.Size(0, 559);
+            // 
+            // LocalPopupMenuOpen
+            // 
+            this.LocalPopupMenuOpen.Caption = "打开(&O)";
+            this.LocalPopupMenuOpen.Id = 4;
+            this.LocalPopupMenuOpen.Name = "LocalPopupMenuOpen";
+            this.LocalPopupMenuOpen.ShortcutKeyDisplayString = "Ctrl+O";
+            this.LocalPopupMenuOpen.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuOpen_ItemClick);
+            // 
+            // LocalPopupMenuTrans
+            // 
+            this.LocalPopupMenuTrans.Caption = "传输(&T)";
+            this.LocalPopupMenuTrans.Id = 5;
+            this.LocalPopupMenuTrans.Name = "LocalPopupMenuTrans";
+            this.LocalPopupMenuTrans.ShortcutKeyDisplayString = "Ctrl+T";
+            this.LocalPopupMenuTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuTrans_ItemClick);
+            // 
+            // LocalPopupMenuCopy
+            // 
+            this.LocalPopupMenuCopy.Caption = "复制(C)";
+            this.LocalPopupMenuCopy.Id = 6;
+            this.LocalPopupMenuCopy.Name = "LocalPopupMenuCopy";
+            this.LocalPopupMenuCopy.ShortcutKeyDisplayString = "Ctrl+C";
+            this.LocalPopupMenuCopy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuCopy_ItemClick);
+            // 
+            // LocalPopupMenuStick
+            // 
+            this.LocalPopupMenuStick.Caption = "粘贴(&T)";
+            this.LocalPopupMenuStick.Id = 7;
+            this.LocalPopupMenuStick.Name = "LocalPopupMenuStick";
+            this.LocalPopupMenuStick.ShortcutKeyDisplayString = "Ctrl+V";
+            this.LocalPopupMenuStick.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuStick_ItemClick);
+            // 
+            // LocalPopupMenuDel
+            // 
+            this.LocalPopupMenuDel.Caption = "删除(&D)";
+            this.LocalPopupMenuDel.Id = 8;
+            this.LocalPopupMenuDel.Name = "LocalPopupMenuDel";
+            this.LocalPopupMenuDel.ShortcutKeyDisplayString = "Del";
+            this.LocalPopupMenuDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuDel_ItemClick);
+            // 
+            // LocalPopupMenuProperty
+            // 
+            this.LocalPopupMenuProperty.Caption = "属性(&R)";
+            this.LocalPopupMenuProperty.Id = 9;
+            this.LocalPopupMenuProperty.Name = "LocalPopupMenuProperty";
+            this.LocalPopupMenuProperty.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuProperty_ItemClick);
+            // 
+            // LocalPopupMenuNewFloder
+            // 
+            this.LocalPopupMenuNewFloder.Caption = "建立文件夹(&P)";
+            this.LocalPopupMenuNewFloder.Id = 10;
+            this.LocalPopupMenuNewFloder.Name = "LocalPopupMenuNewFloder";
+            this.LocalPopupMenuNewFloder.ShortcutKeyDisplayString = "Ins";
+            this.LocalPopupMenuNewFloder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuNewFloder_ItemClick);
+            // 
+            // LocalPopupMenuNewFile
+            // 
+            this.LocalPopupMenuNewFile.Caption = "新建文件(&Y)";
+            this.LocalPopupMenuNewFile.Id = 11;
+            this.LocalPopupMenuNewFile.Name = "LocalPopupMenuNewFile";
+            this.LocalPopupMenuNewFile.ShortcutKeyDisplayString = "Shift+Ctrl+Ins";
+            this.LocalPopupMenuNewFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuNewFile_ItemClick);
+            // 
+            // LocalPopupMenuDefault
+            // 
+            this.LocalPopupMenuDefault.Caption = "资源管理器菜单(&V)...";
+            this.LocalPopupMenuDefault.Id = 12;
+            this.LocalPopupMenuDefault.Name = "LocalPopupMenuDefault";
+            this.LocalPopupMenuDefault.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuDefault_ItemClick);
+            // 
+            // LocalPopupMenuRename
+            // 
+            this.LocalPopupMenuRename.Caption = "重命名(&R)";
+            this.LocalPopupMenuRename.Id = 13;
+            this.LocalPopupMenuRename.Name = "LocalPopupMenuRename";
+            this.LocalPopupMenuRename.ShortcutKeyDisplayString = "F2";
+            this.LocalPopupMenuRename.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuRename_ItemClick);
+            // 
+            // LocalPopupMenuRefresh
+            // 
+            this.LocalPopupMenuRefresh.Caption = "刷新(&Z)";
+            this.LocalPopupMenuRefresh.Id = 14;
+            this.LocalPopupMenuRefresh.Name = "LocalPopupMenuRefresh";
+            this.LocalPopupMenuRefresh.ShortcutKeyDisplayString = "F5";
+            this.LocalPopupMenuRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.LocalPopupMenuRefresh_ItemClick);
+            // 
+            // WebPoPupMenuTrans
+            // 
+            this.WebPoPupMenuTrans.Caption = "传输(&T)";
+            this.WebPoPupMenuTrans.Id = 15;
+            this.WebPoPupMenuTrans.Name = "WebPoPupMenuTrans";
+            this.WebPoPupMenuTrans.ShortcutKeyDisplayString = "Ctrl+T";
+            this.WebPoPupMenuTrans.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPoPupMenuTrans_ItemClick);
+            // 
+            // WebPoPupMenuOpen
+            // 
+            this.WebPoPupMenuOpen.Caption = "打开(&O)";
+            this.WebPoPupMenuOpen.Id = 16;
+            this.WebPoPupMenuOpen.Name = "WebPoPupMenuOpen";
+            this.WebPoPupMenuOpen.ShortcutKeyDisplayString = "Ctrl+O";
+            this.WebPoPupMenuOpen.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPoPupMenuOpen_ItemClick);
+            // 
+            // barButtonItem7
+            // 
+            this.barButtonItem7.Caption = "资源管理器菜单(&V)...";
+            this.barButtonItem7.Id = 17;
+            this.barButtonItem7.Name = "barButtonItem7";
+            // 
+            // WebPoPupMenuCopy
+            // 
+            this.WebPoPupMenuCopy.Caption = "复制(&C)";
+            this.WebPoPupMenuCopy.Id = 18;
+            this.WebPoPupMenuCopy.Name = "WebPoPupMenuCopy";
+            this.WebPoPupMenuCopy.ShortcutKeyDisplayString = "Ctrl+C";
+            this.WebPoPupMenuCopy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPoPupMenuCopy_ItemClick);
+            // 
+            // WebPopupMenuStick
+            // 
+            this.WebPopupMenuStick.Caption = "粘贴(&T)";
+            this.WebPopupMenuStick.Id = 19;
+            this.WebPopupMenuStick.Name = "WebPopupMenuStick";
+            this.WebPopupMenuStick.ShortcutKeyDisplayString = "Ctrl+V";
+            this.WebPopupMenuStick.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuStick_ItemClick);
+            // 
+            // WebPopupMenuDel
+            // 
+            this.WebPopupMenuDel.Caption = "删除(&D)";
+            this.WebPopupMenuDel.Id = 20;
+            this.WebPopupMenuDel.Name = "WebPopupMenuDel";
+            this.WebPopupMenuDel.ShortcutKeyDisplayString = "Del";
+            this.WebPopupMenuDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuDel_ItemClick);
+            // 
+            // WebPopupMenuRename
+            // 
+            this.WebPopupMenuRename.Caption = "重命名(&R)";
+            this.WebPopupMenuRename.Id = 21;
+            this.WebPopupMenuRename.Name = "WebPopupMenuRename";
+            this.WebPopupMenuRename.ShortcutKeyDisplayString = "F2";
+            this.WebPopupMenuRename.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuRename_ItemClick);
+            // 
+            // WebPopupMenuProperty
+            // 
+            this.WebPopupMenuProperty.Caption = "属性(&R)";
+            this.WebPopupMenuProperty.Id = 22;
+            this.WebPopupMenuProperty.Name = "WebPopupMenuProperty";
+            this.WebPopupMenuProperty.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuProperty_ItemClick);
+            // 
+            // WebPopupMenuNewFolder
+            // 
+            this.WebPopupMenuNewFolder.Caption = "建立文件夹(&P)";
+            this.WebPopupMenuNewFolder.Id = 23;
+            this.WebPopupMenuNewFolder.Name = "WebPopupMenuNewFolder";
+            this.WebPopupMenuNewFolder.ShortcutKeyDisplayString = "Ins";
+            this.WebPopupMenuNewFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuNewFolder_ItemClick);
+            // 
+            // WebPopupMenuNewFile
+            // 
+            this.WebPopupMenuNewFile.Caption = "新建文件(&Y)";
+            this.WebPopupMenuNewFile.Id = 24;
+            this.WebPopupMenuNewFile.Name = "WebPopupMenuNewFile";
+            this.WebPopupMenuNewFile.ShortcutKeyDisplayString = "Shift+Ctrl+Ins";
+            this.WebPopupMenuNewFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuNewFile_ItemClick);
+            // 
+            // WebPopupMenuRefresh
+            // 
+            this.WebPopupMenuRefresh.Caption = "刷新(&Z)";
+            this.WebPopupMenuRefresh.Id = 25;
+            this.WebPopupMenuRefresh.Name = "WebPopupMenuRefresh";
+            this.WebPopupMenuRefresh.ShortcutKeyDisplayString = "F5";
+            this.WebPopupMenuRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuRefresh_ItemClick);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "自动识别网络";
+            this.barButtonItem1.Id = 0;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "中国电信网络";
+            this.barButtonItem2.Id = 1;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "中国联通网络";
+            this.barButtonItem3.Id = 2;
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "中国移动网络";
+            this.barButtonItem4.Id = 3;
+            this.barButtonItem4.Name = "barButtonItem4";
+            // 
+            // PopupMenuLocal
+            // 
+            this.PopupMenuLocal.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuTrans),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuOpen, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuDefault, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuCopy, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuStick),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuDel),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuRename),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuProperty),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuNewFloder, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuNewFile),
+            new DevExpress.XtraBars.LinkPersistInfo(this.LocalPopupMenuRefresh, true)});
+            this.PopupMenuLocal.Manager = this.barManagerBlank;
+            this.PopupMenuLocal.Name = "PopupMenuLocal";
+            // 
+            // PopupMenuWeb
+            // 
+            this.PopupMenuWeb.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPoPupMenuTrans),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPoPupMenuOpen, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPoPupMenuCopy, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuStick),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuDel),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuRename),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuProperty),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuNewFolder, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuNewFile),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuRefresh, true)});
+            this.PopupMenuWeb.Manager = this.barManagerBlank;
+            this.PopupMenuWeb.Name = "PopupMenuWeb";
+            // 
             // UpYunMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -535,6 +861,10 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Controls.Add(this.barDockControl3);
+            this.Controls.Add(this.barDockControl4);
+            this.Controls.Add(this.barDockControl2);
+            this.Controls.Add(this.barDockControl1);
             this.Name = "UpYunMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "又拍云客户端 v1.0";
@@ -547,6 +877,9 @@
             this.GroupControlLocal.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GroupControlWeb)).EndInit();
             this.GroupControlWeb.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.barManagerBlank)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PopupMenuLocal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PopupMenuWeb)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -599,5 +932,38 @@
         private DevExpress.XtraBars.BarEditItem barEditItemUploadBar;
         public DevExpress.XtraEditors.Repository.RepositoryItemProgressBar FileUploadProgressBar;
         private DevExpress.XtraBars.BarSubItem SubItemTheme;
+        private DevExpress.XtraBars.BarDockControl barDockControl3;
+        private DevExpress.XtraBars.BarDockControl barDockControl4;
+        private DevExpress.XtraBars.BarDockControl barDockControl2;
+        private DevExpress.XtraBars.BarDockControl barDockControl1;
+        private DevExpress.XtraBars.BarManager barManagerBlank;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.PopupMenu PopupMenuLocal;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuOpen;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuTrans;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuCopy;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuStick;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuDel;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuProperty;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuNewFloder;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuNewFile;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuDefault;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuRename;
+        private DevExpress.XtraBars.BarButtonItem LocalPopupMenuRefresh;
+        private DevExpress.XtraBars.BarButtonItem WebPoPupMenuTrans;
+        private DevExpress.XtraBars.BarButtonItem WebPoPupMenuOpen;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem7;
+        private DevExpress.XtraBars.BarButtonItem WebPoPupMenuCopy;
+        private DevExpress.XtraBars.BarButtonItem WebPopupMenuStick;
+        private DevExpress.XtraBars.BarButtonItem WebPopupMenuDel;
+        private DevExpress.XtraBars.BarButtonItem WebPopupMenuRename;
+        private DevExpress.XtraBars.BarButtonItem WebPopupMenuProperty;
+        private DevExpress.XtraBars.BarButtonItem WebPopupMenuNewFolder;
+        private DevExpress.XtraBars.BarButtonItem WebPopupMenuNewFile;
+        private DevExpress.XtraBars.BarButtonItem WebPopupMenuRefresh;
+        private DevExpress.XtraBars.PopupMenu PopupMenuWeb;
     }
 }
