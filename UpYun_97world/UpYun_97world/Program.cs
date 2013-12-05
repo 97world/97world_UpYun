@@ -22,7 +22,7 @@ namespace UpYun_97world
             DevExpress.UserSkins.BonusSkins.Register();
             UserLookAndFeel.Default.SetSkinStyle("Office 2010 Silver");
 
-            Application.Run(new  UpYunMain());
+            Application.Run(new UpYunMain());
         }
     }
 }

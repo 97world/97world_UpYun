@@ -6,6 +6,7 @@ using System.IO;
 using DevExpress.XtraEditors;
 using System.Collections;
 using System.Threading;
+using System.Net;
 
 namespace UpYun_Model
 {
@@ -16,7 +17,11 @@ namespace UpYun_Model
         { }
 
         public delegate void RefreshListViewWeb(ListView dglistview, ImageList dgimagelist, string dgpath);
+        public delegate void RefreshListViewLocal(ListView dglistview, ImageList dgimagelist);
         public delegate void RefreshListViewSuccess(bool isuploadsuccess);
+        public double TransSpeed;
+        public int TempDataSize;
+        
 
         /// <summary>
         ///  本地浏览器ListView填充数据
@@ -27,7 +32,6 @@ namespace UpYun_Model
         public void getFileInformationForListView(ListView listview,ImageList imagelist,string path)
         {
             Cursor.Current = Cursors.WaitCursor;
-            listview.SmallImageList = imagelist;
             string[] dirs, files;
             try
             {
@@ -39,47 +43,53 @@ namespace UpYun_Model
                 XtraMessageBox.Show("不存在该目录或文件！");
                 return;
             }
-            listview.Items.Clear();
-            imagelist.Images.Clear();
-            listview.Items.Add("上级目录");
-            int index = 0;
-            listview.BeginUpdate();
-            for (int i = 0; i < dirs.Length; i++)//遍历子文件夹
+
+            RefreshListViewLocal rlv = new RefreshListViewLocal(delegate(ListView dglistview, ImageList dgimagelist)
             {
-                string[] info = new string[3];//定义一个数组
-                DirectoryInfo dir = new DirectoryInfo(dirs[i]);//根据文件夹的路径实例化DirectoryInfo类
-                if (!(dir.Name == "RECYCLER" || dir.Name == "RECYCLED" || dir.Name == "Recycled" || dir.Name == "System Volume Information") && (dir.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
+                dglistview.SmallImageList = dgimagelist;
+                dglistview.Items.Clear();
+                dgimagelist.Images.Clear();
+                dglistview.Items.Add("上级目录");
+                int index = 0;
+                dglistview.BeginUpdate();
+                for (int i = 0; i < dirs.Length; i++)//遍历子文件夹
                 {
-                    info[0] = dir.Name;
-                    info[1] = "      ";
-                    info[2] = dir.LastWriteTime.ToString();
-                    ListViewItem item = new ListViewItem(info, index);//实例化ListViewItem类
-                    listview.Items.Add(item);//添加当前文件夹的基本信息
-                    imagelist.Images.Add(dir.Name, ToolsLibrary.GetIcon.GetDirectoryIcon(dir.FullName));
-                    index++;
+                    string[] info = new string[3];//定义一个数组
+                    DirectoryInfo dir = new DirectoryInfo(dirs[i]);//根据文件夹的路径实例化DirectoryInfo类
+                    if (!(dir.Name == "RECYCLER" || dir.Name == "RECYCLED" || dir.Name == "Recycled" || dir.Name == "System Volume Information") && (dir.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
+                    {
+                        info[0] = dir.Name;
+                        info[1] = "      ";
+                        info[2] = dir.LastWriteTime.ToString();
+                        ListViewItem item = new ListViewItem(info, index);//实例化ListViewItem类
+                        dglistview.Items.Add(item);//添加当前文件夹的基本信息
+                        dgimagelist.Images.Add(dir.Name, ToolsLibrary.GetIcon.GetDirectoryIcon(dir.FullName));
+                        index++;
+                    }
                 }
-            }
-            listview.EndUpdate();
-            listview.BeginUpdate();
-            for (int i = 0; i < files.Length; i++)//遍历文件
-            {
-                string[] info = new string[3];//定义一个数组
-                FileInfo fi = new FileInfo(files[i]);//根据文件的路径实例化FileInfo类
-                string Filetype = "unknown";
-                if (fi.Name.Contains("."))
-                    Filetype = fi.Name.Substring(fi.Name.LastIndexOf(".")).ToLower();//获取文件的类型              
-                if (!(Filetype == "sys" || Filetype == "ini" || Filetype == "bin" || Filetype == "log" || Filetype == "com" || Filetype == "bat" || Filetype == "db") && (fi.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
+                dglistview.EndUpdate();
+                dglistview.BeginUpdate();
+                for (int i = 0; i < files.Length; i++)//遍历文件
                 {
-                    info[0] = fi.Name;
-                    info[1] = ToolsLibrary.Tools.getCommonSize(fi.Length);
-                    info[2] = fi.LastWriteTime.ToString();
-                    ListViewItem item = new ListViewItem(info, index);//实例化ListViewItem类
-                    listview.Items.Add(item);//添加当前文件的基本信息
-                    imagelist.Images.Add(fi.Name, ToolsLibrary.GetIcon.GetFileIcon(Filetype, false));
-                    index++;
+                    string[] info = new string[3];//定义一个数组
+                    FileInfo fi = new FileInfo(files[i]);//根据文件的路径实例化FileInfo类
+                    string Filetype = "unknown";
+                    if (fi.Name.Contains("."))
+                        Filetype = fi.Name.Substring(fi.Name.LastIndexOf(".")).ToLower();//获取文件的类型              
+                    if (!(Filetype == "sys" || Filetype == "ini" || Filetype == "bin" || Filetype == "log" || Filetype == "com" || Filetype == "bat" || Filetype == "db") && (fi.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
+                    {
+                        info[0] = fi.Name;
+                        info[1] = ToolsLibrary.Tools.getCommonSize(fi.Length);
+                        info[2] = fi.LastWriteTime.ToString();
+                        ListViewItem item = new ListViewItem(info, index);//实例化ListViewItem类
+                        dglistview.Items.Add(item);//添加当前文件的基本信息
+                        dgimagelist.Images.Add(fi.Name, ToolsLibrary.GetIcon.GetFileIcon(Filetype, false));
+                        index++;
+                    }
                 }
-            }
-            listview.EndUpdate();
+                dglistview.EndUpdate();
+            });
+            listview.Invoke(rlv, listview, imagelist);
             Cursor.Current = Cursors.Default;
         }
 
@@ -183,7 +193,6 @@ namespace UpYun_Model
             {
                 str = userInformation.upYun.readDir(path);
             }catch{ }
-            Cursor.Current = Cursors.WaitCursor;
             RefreshListViewWeb rlv = new RefreshListViewWeb(delegate(ListView dglistview, ImageList dgimagelist, string dgpath)
                 {
                     dglistview.Items.Clear();
@@ -214,21 +223,20 @@ namespace UpYun_Model
                     }
                 });
             listview.Invoke(rlv,listview,imagelist,path);
-            Cursor.Current = Cursors.Default;
         }
 
-        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation, RefreshListViewSuccess refresh)
+        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation, RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
             string[] SelectText = new string[locallistview.SelectedItems.Count];
             for (int i = 0; i < SelectText.Length; i++)
             {
                 SelectText[i] = locallistview.SelectedItems[i].Text;
             }
-            Thread thread = new Thread(() => upFileByUpYun(localpath, webpath, SelectText, userinformation, refresh));
+            Thread thread = new Thread(() => upFileByUpYun(localpath, webpath, SelectText, userinformation, refresh, setprogressbar));
             thread.Start();
         }
 
-        public void upFileByUpYun(string localpath, string webpath, string[] selectedtext, UserInformation userinformation, RefreshListViewSuccess refresh)
+        public void upFileByUpYun(string localpath, string webpath, string[] selectedtext, UserInformation userinformation, RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
             int SelectNum = selectedtext.Length;
             try
@@ -240,7 +248,7 @@ namespace UpYun_Model
                     BinaryReader r = new BinaryReader(fs);
                     byte[] postArray = r.ReadBytes((int)fs.Length);
                     string webpath_up = webpath + selectedtext[i];
-                    userinformation.upYun.writeFile(webpath_up, postArray, true);
+                    userinformation.upYun.writeFile(webpath_up, postArray, true, setprogressbar);
                 }
             }
             catch
@@ -250,6 +258,52 @@ namespace UpYun_Model
                 return;
             }
             refresh(true);
+        }
+
+        public void downloadFile(string localpath, string webpath, ListView weblistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
+        {
+            string[] SelectText = new string[weblistview.SelectedItems.Count];
+            for (int i = 0; i < SelectText.Length; i++)
+            {
+                SelectText[i] = weblistview.SelectedItems[i].Text;
+            }
+            Thread thread = new Thread(() => downloadFileByUpYun(localpath, webpath, SelectText, userinformation, refresh, setprogressbar));
+            thread.Start();
+        }
+
+        public void downloadFileByUpYun(string localpath, string webpath, string[] selecttext, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
+        {
+            int SelectNum = selecttext.Length, count;
+            FileStream Fs = null;
+            for (int i = 0; i < SelectNum; i++ )
+            {
+                Fs = new FileStream(localpath + selecttext[i], FileMode.Create);
+                //byte[] contents = userinformation.upYun.readFile(webpath + selecttext[i], setprogressbar);
+                string CopyLink = "";
+                if (userinformation.Url.Substring(userinformation.Url.Length - 1).Equals("/"))
+                    CopyLink = userinformation.Url + webpath.Substring(1) + selecttext[i];
+                else
+                    CopyLink = userinformation.Url + "/" + webpath.Substring(1) + selecttext[i];
+                HttpWebRequest Hwr = (HttpWebRequest)WebRequest.Create(CopyLink);
+                HttpWebResponse rps = (HttpWebResponse)Hwr.GetResponse();
+                Stream stream = rps.GetResponseStream();
+                byte[] byts = new byte[rps.ContentLength];
+                System.Threading.Timer FileTm = new System.Threading.Timer(CalculateSpeedTime, null, 0, 1000);
+                while ((count = stream.Read(byts, 0, 5000)) != 0)
+                {
+                    TempDataSize += count;
+                    Fs.Write(byts, 0, count);
+                    setprogressbar(false, selecttext[i], (Fs.Length / Convert.ToDouble(byts.Length))* 100.0, TransSpeed);
+                }
+            }
+            Fs.Close();
+            refresh(true);
+        }
+
+        public void CalculateSpeedTime(object state)
+        {
+            TransSpeed = TempDataSize / 1.0;
+            TempDataSize = 0;
         }
     }
 }

@@ -28,20 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UrlBar));
-            this.BtnUpFolder = new DevExpress.XtraEditors.SimpleButton();
             this.CbbUrl = new System.Windows.Forms.ComboBox();
+            this.BtnUpFolder = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
-            // 
-            // BtnUpFolder
-            // 
-            this.BtnUpFolder.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
-            this.BtnUpFolder.Image = ((System.Drawing.Image)(resources.GetObject("BtnUpFolder.Image")));
-            this.BtnUpFolder.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopLeft;
-            this.BtnUpFolder.Location = new System.Drawing.Point(-1, -1);
-            this.BtnUpFolder.Name = "BtnUpFolder";
-            this.BtnUpFolder.Size = new System.Drawing.Size(24, 24);
-            this.BtnUpFolder.TabIndex = 3;
             // 
             // CbbUrl
             // 
@@ -54,12 +43,24 @@
             this.CbbUrl.Size = new System.Drawing.Size(214, 20);
             this.CbbUrl.TabIndex = 4;
             // 
+            // BtnUpFolder
+            // 
+            this.BtnUpFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnUpFolder.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.BtnUpFolder.Image = global::UpYun_97world.Properties.Resources.Ribbon_Close_16x16;
+            this.BtnUpFolder.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopLeft;
+            this.BtnUpFolder.Location = new System.Drawing.Point(2, 2);
+            this.BtnUpFolder.Name = "BtnUpFolder";
+            this.BtnUpFolder.Size = new System.Drawing.Size(19, 19);
+            this.BtnUpFolder.TabIndex = 43;
+            // 
             // UrlBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.CbbUrl);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Controls.Add(this.BtnUpFolder);
+            this.Controls.Add(this.CbbUrl);
             this.Name = "UrlBar";
             this.Size = new System.Drawing.Size(287, 26);
             this.ResumeLayout(false);
@@ -68,8 +69,8 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.SimpleButton BtnUpFolder;
         private System.Windows.Forms.ComboBox CbbUrl;
+        private DevExpress.XtraEditors.SimpleButton BtnUpFolder;
 
 
 

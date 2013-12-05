@@ -43,6 +43,7 @@ namespace UpYun_97world
         }
 
         public delegate void setUrlBar(string webpath);
+        public delegate void setProgressBarDelegate(double num);
 
         /// <summary>
         /// 窗体载入事件
@@ -60,6 +61,13 @@ namespace UpYun_97world
             }
             refreshLocalMain();
             refreshWebMain();
+            //添加主题样式
+            foreach (DevExpress.Skins.SkinContainer cnt in DevExpress.Skins.SkinManager.Default.Skins)
+            {
+                DevExpress.XtraBars.BarButtonItem subMenu = new DevExpress.XtraBars.BarButtonItem(xafBarManagerMain, cnt.SkinName);
+                subMenu.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(SubItemTheme_ItemClick);
+                SubItemTheme.AddItem(subMenu);
+            }
         }
 
         #region 控件事件
@@ -87,6 +95,16 @@ namespace UpYun_97world
             setControlsWhenLogout();
         }
 
+        /// <summary>
+        /// 菜单点击有惊喜事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BarButtonItemSuper_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
         private void BarCheckItemAuto_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             singleCheck(e.Item);
@@ -105,6 +123,11 @@ namespace UpYun_97world
         private void BarCheckItemMobile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             singleCheck(e.Item);
+        }
+
+        public void SubItemTheme_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = e.Item.Caption;
         }
 
         #endregion
@@ -197,6 +220,29 @@ namespace UpYun_97world
             WebPath = "/";
             UrlBarWeb.Enabled = false;
         }
+        
+        
+        public void setProgressBar(bool isupload, string uploadinformation, double num,double speed)
+        {
+            if (isupload == true)
+                //BarStaticItemStatus.Caption = "正在上传" + uploadinformation + "上传速度：" + ToolsLibrary.Tools.getCommonSize(speed) + "/s";
+                BarStaticItemStatus.Caption = "上传速度：" + ToolsLibrary.Tools.getCommonSize(speed) + "/S";
+            else
+                BarStaticItemStatus.Caption = "下载速度：" + ToolsLibrary.Tools.getCommonSize(speed) + "/S";
+            setProgressBarValue(num);
+        }
+
+        public void setProgressBarValue(double num)
+        {
+            if (InvokeRequired)
+            {
+                setProgressBarDelegate spb = new setProgressBarDelegate(delegate(double numprogressbar)
+                {
+                    barEditItemUploadBar.EditValue = numprogressbar;
+                });
+                Invoke(spb, new object[] { num });
+            }
+        }
 
         #endregion
 
@@ -274,12 +320,33 @@ namespace UpYun_97world
         /// </summary>
         public void LocalUrlTextChanged()
         {
-            UrlBarLocal.CBEUrl.Text = LocalPath;
+            if (UrlBarLocal.CBEUrl.InvokeRequired)
+            {
+                setUrlBar sub = new setUrlBar(delegate(string localpath)
+                {
+                    UrlBarLocal.CBEUrl.Text = localpath;
+                });
+                UrlBarLocal.CBEUrl.Invoke(sub, LocalPath);
+            }
+            else
+            {
+                UrlBarLocal.CBEUrl.Text = LocalPath;
+            }
             UpYun_Controller.Main main = new UpYun_Controller.Main();
             if (LocalPath == Environment.SpecialFolder.MyComputer.ToString())
                 main.getFileInformationMyPc(ListViewLocal, ImageListLocalIcon, LocalPath);
             else
                 main.getFileInformation(ListViewLocal, ImageListLocalIcon, LocalPath);
+        }
+
+        public void LocalUrlTextChanged(bool issuccess)
+        {
+            LocalUrlTextChanged();
+            if (issuccess == true)
+                BarStaticItemStatus.Caption = "下载成功！";
+            else
+                BarStaticItemStatus.Caption = "下载失败！";
+            setProgressBarValue(0);
         }
 
         /// <summary>
@@ -296,7 +363,7 @@ namespace UpYun_97world
             else
             {
                 LocalPath = LocalPath.Substring(0, UrlBarLocal.CBEUrl.Text.Length - 1);
-                LocalPath = LocalPath.Substring(0, UrlBarLocal.CBEUrl.Text.LastIndexOf(@"\") + 1);
+                LocalPath = LocalPath.Substring(0, LocalPath.LastIndexOf(@"\") + 1);
             }
             LocalUrlTextChanged();
 
@@ -353,7 +420,7 @@ namespace UpYun_97world
         public void BtnTransLocal_click(object sender, EventArgs e)
         {
             UpYun_Controller.Main main = new UpYun_Controller.Main();
-            main.upFile(WebPath, LocalPath, ListViewLocal, userInformation, WebUrlTextChanged);
+            main.upFile(WebPath, LocalPath, ListViewLocal, userInformation, WebUrlTextChanged, setProgressBar);
         }
 
         /// <summary>
@@ -439,10 +506,12 @@ namespace UpYun_97world
                 BarStaticItemStatus.Caption = "上传成功！";
             else
                 BarStaticItemStatus.Caption = "上传失败！";
+            setProgressBarValue(0);
         }
 
         private void ListViewWeb_DoubleClick(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             if(ListViewWeb.SelectedItems[0].Text=="上级目录")
             {
                 WebPath = WebPath.Substring(0, WebPath.Length - 1);
@@ -453,6 +522,7 @@ namespace UpYun_97world
                 WebPath = WebPath + ListViewWeb.SelectedItems[0].Text + "/";
             }
             WebUrlTextChanged();
+            Cursor.Current = Cursors.Default;
         }
 
         /// <summary>
@@ -507,7 +577,8 @@ namespace UpYun_97world
         /// <param name="e"></param>
         public void BtnTransWeb_click(object sender, EventArgs e)
         {
-
+            UpYun_Controller.Main main = new UpYun_Controller.Main();
+            main.downloadFile(LocalPath, WebPath, ListViewWeb, userInformation, LocalUrlTextChanged, setProgressBar);
         }
         /// <summary>
         /// WEB工具栏按钮：删除

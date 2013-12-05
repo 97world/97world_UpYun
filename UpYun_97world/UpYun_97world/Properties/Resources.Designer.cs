@@ -59,5 +59,15 @@ namespace UpYun_97world.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Ribbon_Close_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Ribbon_Close_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -7,8 +7,6 @@ using System.Net;
 using System.IO;
 using System.Security.Cryptography;
 using System.Globalization;
-using System.Threading;
-using System.Reflection;
 
 namespace UpYunLibrary
 {
@@ -26,6 +24,11 @@ namespace UpYunLibrary
         private string content_md5;
         private bool auto_mkdir = false;
         public string version() { return "1.0.1"; }
+
+        public double TransSpeed;
+        public int TempDataSize;
+
+        public delegate void SetProgressBar(bool isupload, string uploadinformation, double num, double speed);
 
         /**
         * 初始化 UpYun 存储接口
@@ -88,7 +91,7 @@ namespace UpYunLibrary
         {
             HttpWebResponse resp;
             byte[] a = null;
-            resp = newWorker("DELETE", DL + this.bucketname + path, a, headers);
+            resp = newWorker("DELETE", DL + this.bucketname + path, a, headers, null);
             if ((int)resp.StatusCode == 200)
             {
                 resp.Close();
@@ -100,10 +103,12 @@ namespace UpYunLibrary
                 return false;
             }
         }
-        private HttpWebResponse newWorker(string method, string Url, byte[] postData, Hashtable headers)
+
+        private HttpWebResponse newWorker(string method, string Url, byte[] postData, Hashtable headers, SetProgressBar setprogressbar)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://" + api_domain + Url);
 
+            //request.Timeout = 1800 * 1000;
 
             request.Method = method;
 
@@ -145,8 +150,25 @@ namespace UpYunLibrary
 
             if (postData != null)
             {
+                int UploadNum=0;
                 Stream dataStream = request.GetRequestStream();
-                dataStream.Write(postData, 0, postData.Length);
+                UploadNum = postData.Length / 5000;
+                System.Threading.Timer FileTm = new System.Threading.Timer(CalculateSpeedTime, null, 0, 1000);
+                for (int i = 0; i <= UploadNum; i++)
+                {
+                    if (i == UploadNum)
+                    {
+                        dataStream.Write(postData, i * 5000, postData.Length - i * 5000);
+                        TempDataSize += postData.Length - i * 5000;
+                    }
+                    else
+                    {
+                        dataStream.Write(postData, i * 5000, 5000);
+                        TempDataSize += 5000;
+                    }
+                    setprogressbar(true,Url.Substring(Url.LastIndexOf("/")+1), (i * 5000.0 / postData.Length) * 100.0, TransSpeed);
+                }
+                //dataStream.Write(postData, 0, postData.Length);
                 dataStream.Close();
             }
             HttpWebResponse response;
@@ -181,7 +203,7 @@ namespace UpYunLibrary
             Hashtable headers = new Hashtable();
             int size;
             byte[] a = null;
-            HttpWebResponse resp = newWorker("GET", DL + this.bucketname + url + "?usage", a, headers);
+            HttpWebResponse resp = newWorker("GET", DL + this.bucketname + url + "?usage", a, headers, null);
             try
             {
                 StreamReader sr = new StreamReader(resp.GetResponseStream(), Encoding.UTF8);
@@ -217,7 +239,7 @@ namespace UpYunLibrary
             headers.Add("folder", "create");
             HttpWebResponse resp;
             byte[] a = new byte[0];
-            resp = newWorker("POST", DL + this.bucketname + path, a, headers);
+            resp = newWorker("POST", DL + this.bucketname + path, a, headers, null);
             if ((int)resp.StatusCode == 200)
             {
                 resp.Close();
@@ -250,7 +272,7 @@ namespace UpYunLibrary
         {
             Hashtable headers = new Hashtable();
             byte[] a = null;
-            HttpWebResponse resp = newWorker("GET", DL + this.bucketname + url, a, headers);
+            HttpWebResponse resp = newWorker("GET", DL + this.bucketname + url, a, headers, null);
             StreamReader sr = new StreamReader(resp.GetResponseStream(), Encoding.UTF8);
             string strhtml = sr.ReadToEnd();
             resp.Close();
@@ -275,12 +297,12 @@ namespace UpYunLibrary
         * @param $datas 文件内容 或 文件IO数据流
         * return true or false
         */
-        public bool writeFile(string path, byte[] data, bool auto_mkdir)
+        public bool writeFile(string path, byte[] data, bool auto_mkdir, SetProgressBar setprogressbar)
         {
             Hashtable headers = new Hashtable();
             this.auto_mkdir = auto_mkdir;
             HttpWebResponse resp;
-            resp = newWorker("POST", DL + this.bucketname + path, data, headers);
+            resp = newWorker("POST", DL + this.bucketname + path, data, headers, setprogressbar);
             if ((int)resp.StatusCode == 200)
             {
                 resp.Close();
@@ -309,15 +331,32 @@ namespace UpYunLibrary
         * @param $output_file 可传递文件IO数据流（默认为 null，结果返回文件内容，如设置文件数据流，将返回 true or false）
         * return 文件内容 或 null
         */
-        public byte[] readFile(string path)
+        public byte[] readFile(string path, SetProgressBar setprogressbar)
         {
             Hashtable headers = new Hashtable();
             byte[] a = null;
 
-            HttpWebResponse resp = newWorker("GET", DL + this.bucketname + path, a, headers);
+            HttpWebResponse resp = newWorker("GET", DL + this.bucketname + path, a, headers, null);
             StreamReader sr = new StreamReader(resp.GetResponseStream(), Encoding.UTF8);
             BinaryReader br = new BinaryReader(sr.BaseStream);
-            byte[] by = br.ReadBytes(1024 * 1024 * 100); /// 又拍云存储最大文件限制 100Mb，对于普通用户可以改写该值，以减少内存消耗
+            byte[] by = new byte[1024 * 1024 * 10];
+            //byte[] by = br.ReadBytes(1024 * 1024 * 100); /// 又拍云存储最大文件限制 100Mb，对于普通用户可以改写该值，以减少内存消耗
+            int DownloadNum = by.Length / 5000;
+            System.Threading.Timer FileTm = new System.Threading.Timer(CalculateSpeedTime, null, 0, 1000);
+            for (int i = 0; i <= DownloadNum; i++ )
+            {
+                if (i == DownloadNum)
+                {
+                    by = by.Concat(br.ReadBytes(by.Length - i * 5000)).ToArray();
+                    TempDataSize += by.Length - i * 5000;
+                }
+                else
+                {
+                    by = by.Concat(br.ReadBytes(5000)).ToArray();
+                    TempDataSize += 5000;
+                }
+                setprogressbar(false, path.Substring(path.LastIndexOf("/")+1), ((i*5000)/by.Length)*100.0, TransSpeed);
+            }
             resp.Close();
             return by;
         }
@@ -349,7 +388,7 @@ namespace UpYunLibrary
         {
             Hashtable headers = new Hashtable();
             byte[] a = null;
-            HttpWebResponse resp = newWorker("HEAD", DL + this.bucketname + file, a, headers);
+            HttpWebResponse resp = newWorker("HEAD", DL + this.bucketname + file, a, headers, null);
             resp.Close();
             Hashtable ht;
             try
@@ -401,6 +440,12 @@ namespace UpYunLibrary
             }
 
             return strResult.ToLower();
+        }
+
+        public void CalculateSpeedTime(object state)
+        {
+            TransSpeed = TempDataSize / 1.0;
+            TempDataSize = 0;
         }
     }
 }

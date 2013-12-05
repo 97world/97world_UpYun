@@ -64,6 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UpYunLibrary\UpYunLibrary.csproj">
+      <Project>{4900e634-60d9-42b3-90d2-fd803296ffdf}</Project>
+      <Name>UpYunLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UpYun_Model\UpYun_Model.csproj">
       <Project>{662b0e52-2b4a-4489-9348-3a6c2c9baee2}</Project>
       <Name>UpYun_Model</Name>

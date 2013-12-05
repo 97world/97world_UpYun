@@ -57,6 +57,9 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.progressBarControl1 = new DevExpress.XtraEditors.ProgressBarControl();
+            this.urlBar1 = new UpYun_97world.Controls.UrlBar();
+            this.BtnUpFolder = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPopupContainerEdit1)).BeginInit();
@@ -66,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.progressBarControl1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // dropDownButton1
@@ -203,7 +207,7 @@
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(47, 199);
+            this.simpleButton1.Location = new System.Drawing.Point(59, 153);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(75, 23);
             this.simpleButton1.TabIndex = 15;
@@ -212,7 +216,7 @@
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(178, 199);
+            this.simpleButton2.Location = new System.Drawing.Point(178, 153);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(75, 23);
             this.simpleButton2.TabIndex = 16;
@@ -273,11 +277,42 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
+            // progressBarControl1
+            // 
+            this.progressBarControl1.Location = new System.Drawing.Point(20, 182);
+            this.progressBarControl1.MenuManager = this.barManager1;
+            this.progressBarControl1.Name = "progressBarControl1";
+            this.progressBarControl1.Size = new System.Drawing.Size(308, 18);
+            this.progressBarControl1.TabIndex = 31;
+            // 
+            // urlBar1
+            // 
+            this.urlBar1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.urlBar1.Location = new System.Drawing.Point(36, 224);
+            this.urlBar1.Name = "urlBar1";
+            this.urlBar1.Size = new System.Drawing.Size(233, 26);
+            this.urlBar1.TabIndex = 36;
+            // 
+            // BtnUpFolder
+            // 
+            this.BtnUpFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnUpFolder.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+            this.BtnUpFolder.Image = global::UpYun_97world.Properties.Resources.Ribbon_Close_16x16;
+            this.BtnUpFolder.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopLeft;
+            this.BtnUpFolder.Location = new System.Drawing.Point(355, 138);
+            this.BtnUpFolder.Name = "BtnUpFolder";
+            this.BtnUpFolder.Size = new System.Drawing.Size(23, 23);
+            this.BtnUpFolder.TabIndex = 42;
+            this.BtnUpFolder.Text = "test";
+            // 
             // test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 262);
+            this.Controls.Add(this.BtnUpFolder);
+            this.Controls.Add(this.urlBar1);
+            this.Controls.Add(this.progressBarControl1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -306,6 +341,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.progressBarControl1.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,6 +377,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private DevExpress.XtraEditors.ProgressBarControl progressBarControl1;
+        private Controls.UrlBar urlBar1;
+        private DevExpress.XtraEditors.SimpleButton BtnUpFolder;
 
 
     }

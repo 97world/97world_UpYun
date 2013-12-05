@@ -40,6 +40,7 @@
             this.BarCheckItemTelecom = new DevExpress.XtraBars.BarCheckItem();
             this.BarCheckItemUnicom = new DevExpress.XtraBars.BarCheckItem();
             this.BarCheckItemMobile = new DevExpress.XtraBars.BarCheckItem();
+            this.SubItemTheme = new DevExpress.XtraBars.BarSubItem();
             this.SubItemHelp = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItemMyblog = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemAbout = new DevExpress.XtraBars.BarButtonItem();
@@ -48,8 +49,8 @@
             this.BarStaticItemOperator = new DevExpress.XtraBars.BarStaticItem();
             this.BarStaticItemUseSpace = new DevExpress.XtraBars.BarStaticItem();
             this.BarStaticItemStatus = new DevExpress.XtraBars.BarStaticItem();
-            this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemProgressBar();
+            this.barEditItemUploadBar = new DevExpress.XtraBars.BarEditItem();
+            this.FileUploadProgressBar = new DevExpress.XtraEditors.Repository.RepositoryItemProgressBar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -76,7 +77,7 @@
             this.WebToolsBarMain = new UpYun_97world.Controls.WebToolsBar();
             this.ImageListToolIcon = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xafBarManagerMain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FileUploadProgressBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GroupControlLocal)).BeginInit();
@@ -114,11 +115,12 @@
             this.BarCheckItemTelecom,
             this.BarCheckItemUnicom,
             this.BarCheckItemMobile,
-            this.barEditItem1});
+            this.barEditItemUploadBar,
+            this.SubItemTheme});
             this.xafBarManagerMain.MainMenu = this.MenuBar;
-            this.xafBarManagerMain.MaxItemId = 28;
+            this.xafBarManagerMain.MaxItemId = 30;
             this.xafBarManagerMain.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemProgressBar1});
+            this.FileUploadProgressBar});
             this.xafBarManagerMain.StatusBar = this.BottomBar;
             // 
             // MenuBar
@@ -130,6 +132,7 @@
             this.MenuBar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemOperator),
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemInternet),
+            new DevExpress.XtraBars.LinkPersistInfo(this.SubItemTheme),
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemHelp),
             new DevExpress.XtraBars.LinkPersistInfo(this.BarButtonItemSuper)});
             this.MenuBar.OptionsBar.AllowQuickCustomization = false;
@@ -202,6 +205,12 @@
             this.BarCheckItemMobile.Name = "BarCheckItemMobile";
             this.BarCheckItemMobile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarCheckItemMobile_ItemClick);
             // 
+            // SubItemTheme
+            // 
+            this.SubItemTheme.Caption = "主题(&T)";
+            this.SubItemTheme.Id = 29;
+            this.SubItemTheme.Name = "SubItemTheme";
+            // 
             // SubItemHelp
             // 
             this.SubItemHelp.Caption = "帮助(&H)";
@@ -229,6 +238,7 @@
             this.BarButtonItemSuper.Caption = "点击有惊喜";
             this.BarButtonItemSuper.Id = 21;
             this.BarButtonItemSuper.Name = "BarButtonItemSuper";
+            this.BarButtonItemSuper.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItemSuper_ItemClick);
             // 
             // BottomBar
             // 
@@ -241,7 +251,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.BarStaticItemOperator, DevExpress.XtraBars.BarItemPaintStyle.Standard),
             new DevExpress.XtraBars.LinkPersistInfo(this.BarStaticItemUseSpace),
             new DevExpress.XtraBars.LinkPersistInfo(this.BarStaticItemStatus),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barEditItem1)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barEditItemUploadBar)});
             this.BottomBar.OptionsBar.AllowQuickCustomization = false;
             this.BottomBar.OptionsBar.DrawDragBorder = false;
             this.BottomBar.OptionsBar.UseWholeRow = true;
@@ -272,17 +282,19 @@
             this.BarStaticItemStatus.Name = "BarStaticItemStatus";
             this.BarStaticItemStatus.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
-            // barEditItem1
+            // barEditItemUploadBar
             // 
-            this.barEditItem1.Caption = "barEditItem1";
-            this.barEditItem1.Edit = this.repositoryItemProgressBar1;
-            this.barEditItem1.Id = 27;
-            this.barEditItem1.Name = "barEditItem1";
-            this.barEditItem1.Width = 176;
+            this.barEditItemUploadBar.Caption = "barEditItem1";
+            this.barEditItemUploadBar.Edit = this.FileUploadProgressBar;
+            this.barEditItemUploadBar.Id = 27;
+            this.barEditItemUploadBar.Name = "barEditItemUploadBar";
+            this.barEditItemUploadBar.Width = 175;
             // 
-            // repositoryItemProgressBar1
+            // FileUploadProgressBar
             // 
-            this.repositoryItemProgressBar1.Name = "repositoryItemProgressBar1";
+            this.FileUploadProgressBar.LookAndFeel.SkinName = "VS2010";
+            this.FileUploadProgressBar.Name = "FileUploadProgressBar";
+            this.FileUploadProgressBar.ShowTitle = true;
             // 
             // barDockControlTop
             // 
@@ -407,6 +419,7 @@
             // 
             this.UrlBarLocal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.UrlBarLocal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.UrlBarLocal.Location = new System.Drawing.Point(3, 67);
             this.UrlBarLocal.Name = "UrlBarLocal";
             this.UrlBarLocal.Size = new System.Drawing.Size(368, 26);
@@ -416,9 +429,9 @@
             // 
             this.LocalToolsBarMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LocalToolsBarMain.Location = new System.Drawing.Point(1, 21);
+            this.LocalToolsBarMain.Location = new System.Drawing.Point(5, 21);
             this.LocalToolsBarMain.Name = "LocalToolsBarMain";
-            this.LocalToolsBarMain.Size = new System.Drawing.Size(357, 46);
+            this.LocalToolsBarMain.Size = new System.Drawing.Size(366, 46);
             this.LocalToolsBarMain.TabIndex = 1;
             // 
             // GroupControlWeb
@@ -479,6 +492,7 @@
             // 
             this.UrlBarWeb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.UrlBarWeb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.UrlBarWeb.Enabled = false;
             this.UrlBarWeb.Location = new System.Drawing.Point(3, 67);
             this.UrlBarWeb.Name = "UrlBarWeb";
@@ -489,9 +503,9 @@
             // 
             this.WebToolsBarMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.WebToolsBarMain.Location = new System.Drawing.Point(1, 21);
+            this.WebToolsBarMain.Location = new System.Drawing.Point(5, 21);
             this.WebToolsBarMain.Name = "WebToolsBarMain";
-            this.WebToolsBarMain.Size = new System.Drawing.Size(345, 46);
+            this.WebToolsBarMain.Size = new System.Drawing.Size(365, 46);
             this.WebToolsBarMain.TabIndex = 1;
             // 
             // ImageListToolIcon
@@ -526,7 +540,7 @@
             this.Text = "又拍云客户端 v1.0";
             this.Load += new System.EventHandler(this.UpYunMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xafBarManagerMain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FileUploadProgressBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GroupControlLocal)).EndInit();
@@ -582,7 +596,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         public System.Windows.Forms.ImageList ImageListWebIcon;
-        private DevExpress.XtraBars.BarEditItem barEditItem1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemProgressBar repositoryItemProgressBar1;
+        private DevExpress.XtraBars.BarEditItem barEditItemUploadBar;
+        public DevExpress.XtraEditors.Repository.RepositoryItemProgressBar FileUploadProgressBar;
+        private DevExpress.XtraBars.BarSubItem SubItemTheme;
     }
 }

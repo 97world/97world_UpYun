@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using UpYun_Model;
-using System.Threading;
 
 namespace UpYun_Controller
 {
@@ -56,7 +53,7 @@ namespace UpYun_Controller
 
         public void rmFileForWeb(string webpath, UserInformation userinformation,ListView listview)
         {
-            fileinformationforlistview.rmFile(webpath, userinformation,listview);
+            fileinformationforlistview.rmFile(webpath, userinformation, listview);
         }
 
         public void getFileInformationWeb(ListView listview, ImageList imagelist, string path, UserInformation userInformation)
@@ -64,10 +61,14 @@ namespace UpYun_Controller
             fileinformationforlistview.getFileInformationForListViewWeb(listview, imagelist, path, userInformation);
         }
 
-        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh)
+        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
-            fileinformationforlistview.upFile(webpath, localpath, locallistview, userinformation, refresh);
+            fileinformationforlistview.upFile(webpath, localpath, locallistview, userinformation, refresh, setprogressbar);
         }
 
+        public void downloadFile(string localpath, string webpath, ListView weblistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
+        {
+            fileinformationforlistview.downloadFile(localpath, webpath, weblistview, userinformation, refresh, setprogressbar);
+        }
     }
 }

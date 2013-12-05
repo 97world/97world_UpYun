@@ -169,6 +169,7 @@ namespace UpYun_Model
                 IfRemember = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifremember"));
                 IfAutoLogin = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifauto"));
                 upYun = new UpYunLibrary.UpYun(BucketName, OperatorName, OperatorPwd);
+                UseSpace = upYun.getBucketUsage();
                 setNetWork();
             }
         }

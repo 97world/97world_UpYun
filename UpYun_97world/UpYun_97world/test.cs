@@ -65,10 +65,17 @@ namespace UpYun_97world
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            IniFile ini = new IniFile();
-            label1.Text = ini.IniReadValue("user","name");
-            label2.Text = ini.IniReadValue("user","password");
-            label3.Text = ini.IniReadValue("user","url");
+            progressBarControl1.Position = progressBarControl1.Position + 20;
+        }
+
+        private void BtnUpFolder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
