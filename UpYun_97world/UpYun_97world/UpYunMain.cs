@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using ToolsLibrary;
 
 namespace UpYun_97world
 {
@@ -44,6 +45,8 @@ namespace UpYun_97world
 
         public delegate void setUrlBar(string webpath);
         public delegate void setProgressBarDelegate(double num);
+        public bool iscopyweb = false, iscopylocal=false;
+        public Point menutrippoint = new Point();
 
         /// <summary>
         /// 窗体载入事件
@@ -453,10 +456,44 @@ namespace UpYun_97world
 
         private void ListViewLocal_MouseUp(object sender, MouseEventArgs e)
         {
-            if (ListViewLocal.SelectedItems.Count != 0 && e.Button == MouseButtons.Right)
+            LocalPopupMenuCopy.Enabled = true;
+            LocalPopupMenuDefault.Enabled = true;
+            LocalPopupMenuDel.Enabled = true;
+            LocalPopupMenuNewFile.Enabled = true;
+            LocalPopupMenuNewFolder.Enabled = true;
+            LocalPopupMenuOpen.Enabled = true;
+            LocalPopupMenuProperty.Enabled = true;
+            LocalPopupMenuRefresh.Enabled = true;
+            LocalPopupMenuRename.Enabled = true;
+            LocalPopupMenuStick.Enabled = true;
+            LocalPopupMenuTrans.Enabled = true;
+            if (ListViewLocal.SelectedItems.Count > 0 && iscopylocal == false)
+            {
+                LocalPopupMenuStick.Enabled = false;
+            }
+            else if (ListViewLocal.SelectedItems.Count > 0 && iscopylocal == true)
+            {
+                LocalPopupMenuCopy.Enabled = false;
+            }
+            else
+            {
+                LocalPopupMenuCopy.Enabled = false;
+                LocalPopupMenuDefault.Enabled = false;
+                LocalPopupMenuDel.Enabled = false;
+                LocalPopupMenuNewFile.Enabled = false;
+                LocalPopupMenuNewFolder.Enabled = false;
+                LocalPopupMenuOpen.Enabled = false;
+                LocalPopupMenuProperty.Enabled = false;
+                LocalPopupMenuRefresh.Enabled = false;
+                LocalPopupMenuRename.Enabled = false;
+                LocalPopupMenuStick.Enabled = false;
+                LocalPopupMenuTrans.Enabled = false;
+            }
+            if (e.Button == MouseButtons.Right)
             {
                 Point p = new Point(Cursor.Position.X, Cursor.Position.Y);
                 PopupMenuLocal.ShowPopup(p);
+                menutrippoint = p;
             }
         }
 
@@ -639,7 +676,41 @@ namespace UpYun_97world
 
         private void ListViewWeb_MouseUp(object sender, MouseEventArgs e)
         {
-            if (ListViewWeb.SelectedItems.Count != 0 && e.Button == MouseButtons.Right)
+            WebPopupMenuStick.Enabled = false;
+            WebPopupMenuTrans.Enabled = false;
+            WebPopupMenuOpen.Enabled = false;
+            WebPopupMenuCopy.Enabled = false;
+            WebPopupMenuDel.Enabled = false;
+            WebPopupMenuProperty.Enabled = false;
+            WebPopupMenuRename.Enabled = false;
+            WebPopupMenuNewFile.Enabled = false;
+            WebPopupMenuNewFolder.Enabled = false;
+            WebPopupMenuRefresh.Enabled = false;
+            if (ListViewWeb.SelectedItems.Count != 0 && iscopyweb == false && IfLogin == true)
+            {
+                WebPopupMenuTrans.Enabled = true;
+                WebPopupMenuOpen.Enabled = true;
+                WebPopupMenuCopy.Enabled = true;
+                WebPopupMenuDel.Enabled = true;
+                WebPopupMenuProperty.Enabled = true;
+                WebPopupMenuRename.Enabled = true;
+                WebPopupMenuNewFile.Enabled = true;
+                WebPopupMenuNewFolder.Enabled = true;
+                WebPopupMenuRefresh.Enabled = true;
+            }
+            else if (ListViewWeb.SelectedItems.Count != 0 && iscopyweb == true && IfLogin == true)
+            {
+                WebPopupMenuStick.Enabled = true;
+                WebPopupMenuTrans.Enabled = true;
+                WebPopupMenuOpen.Enabled = true;
+                WebPopupMenuDel.Enabled = true;
+                WebPopupMenuProperty.Enabled = true;
+                WebPopupMenuRename.Enabled = true;
+                WebPopupMenuNewFile.Enabled = true;
+                WebPopupMenuNewFolder.Enabled = true;
+                WebPopupMenuRefresh.Enabled = true;
+            }
+            if (e.Button == MouseButtons.Right)
             {
                 Point p = new Point(Cursor.Position.X, Cursor.Position.Y);
                 PopupMenuWeb.ShowPopup(p);
@@ -652,7 +723,7 @@ namespace UpYun_97world
 
         private void LocalPopupMenuTrans_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            BtnRefreshLocal_click(sender, new EventArgs());
+            BtnTransLocal_click(sender, new EventArgs());
         }
 
         private void LocalPopupMenuOpen_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -661,7 +732,11 @@ namespace UpYun_97world
         }
 
         private void LocalPopupMenuDefault_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
+        {           
+            ShellContextMenu scm = new ShellContextMenu();
+            FileInfo[] files = new FileInfo[1];
+            files[0] = new FileInfo(LocalPath+ListViewLocal.SelectedItems[0].Text);
+            scm.ShowContextMenu(files, menutrippoint);
             
         }
 

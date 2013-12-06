@@ -45,6 +45,7 @@
     <Compile Include="GetIcon.cs" />
     <Compile Include="GetTargetByShortCuts.cs" />
     <Compile Include="IniFile.cs" />
+    <Compile Include="ShellContextMenu.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
