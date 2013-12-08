@@ -51,6 +51,11 @@ namespace UpYun_Controller
             fileinformationforlistview.newFolderForLocal(foldername, path);
         }
 
+        public void newFile(string filename, string path)
+        {
+            fileinformationforlistview.newFileForLocal(filename, path);
+        }
+
         public void rmFileForWeb(string webpath, UserInformation userinformation,ListView listview)
         {
             fileinformationforlistview.rmFile(webpath, userinformation, listview);

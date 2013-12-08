@@ -52,6 +52,7 @@
             // 
             // BtnOK
             // 
+            this.BtnOK.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnOK.Location = new System.Drawing.Point(55, 83);
             this.BtnOK.Name = "BtnOK";
             this.BtnOK.Size = new System.Drawing.Size(75, 23);
@@ -61,6 +62,7 @@
             // 
             // BtnEsc
             // 
+            this.BtnEsc.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnEsc.Location = new System.Drawing.Point(155, 83);
             this.BtnEsc.Name = "BtnEsc";
             this.BtnEsc.Size = new System.Drawing.Size(75, 23);
@@ -70,8 +72,10 @@
             // 
             // UpYunNewFolder
             // 
+            this.AcceptButton = this.BtnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.BtnEsc;
             this.ClientSize = new System.Drawing.Size(284, 122);
             this.Controls.Add(this.BtnEsc);
             this.Controls.Add(this.BtnOK);
@@ -79,7 +83,8 @@
             this.Controls.Add(this.LabelControlFolderName);
             this.Name = "UpYunNewFolder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "新建文件夹";
+            this.Text = "建立文件夹";
+            this.Load += new System.EventHandler(this.UpYunNewFolder_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

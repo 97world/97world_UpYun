@@ -103,6 +103,8 @@
             this.WebPopupMenuNewFolder = new DevExpress.XtraBars.BarButtonItem();
             this.WebPopupMenuNewFile = new DevExpress.XtraBars.BarButtonItem();
             this.WebPopupMenuRefresh = new DevExpress.XtraBars.BarButtonItem();
+            this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
+            this.WebPopupMenuLink = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
@@ -592,8 +594,10 @@
             this.WebPopupMenuProperty,
             this.WebPopupMenuNewFolder,
             this.WebPopupMenuNewFile,
-            this.WebPopupMenuRefresh});
-            this.barManagerBlank.MaxItemId = 26;
+            this.WebPopupMenuRefresh,
+            this.barCheckItem1,
+            this.WebPopupMenuLink});
+            this.barManagerBlank.MaxItemId = 28;
             // 
             // barDockControl1
             // 
@@ -695,7 +699,7 @@
             // 
             // LocalPopupMenuRename
             // 
-            this.LocalPopupMenuRename.Caption = "重命名(&R)";
+            this.LocalPopupMenuRename.Caption = "重命名(&N)";
             this.LocalPopupMenuRename.Id = 13;
             this.LocalPopupMenuRename.Name = "LocalPopupMenuRename";
             this.LocalPopupMenuRename.ShortcutKeyDisplayString = "F2";
@@ -762,7 +766,7 @@
             // 
             // WebPopupMenuRename
             // 
-            this.WebPopupMenuRename.Caption = "重命名(&R)";
+            this.WebPopupMenuRename.Caption = "重命名(&N)";
             this.WebPopupMenuRename.Enabled = false;
             this.WebPopupMenuRename.Id = 21;
             this.WebPopupMenuRename.Name = "WebPopupMenuRename";
@@ -803,6 +807,21 @@
             this.WebPopupMenuRefresh.Name = "WebPopupMenuRefresh";
             this.WebPopupMenuRefresh.ShortcutKeyDisplayString = "F5";
             this.WebPopupMenuRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuRefresh_ItemClick);
+            // 
+            // barCheckItem1
+            // 
+            this.barCheckItem1.Caption = "barCheckItem1";
+            this.barCheckItem1.Id = 26;
+            this.barCheckItem1.Name = "barCheckItem1";
+            // 
+            // WebPopupMenuLink
+            // 
+            this.WebPopupMenuLink.Caption = "复制链接(&L)";
+            this.WebPopupMenuLink.Enabled = false;
+            this.WebPopupMenuLink.Id = 27;
+            this.WebPopupMenuLink.Name = "WebPopupMenuLink";
+            this.WebPopupMenuLink.ShortcutKeyDisplayString = "Shift+Ctrl+C";
+            this.WebPopupMenuLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuLink_ItemClick);
             // 
             // barButtonItem1
             // 
@@ -848,7 +867,8 @@
             // PopupMenuWeb
             // 
             this.PopupMenuWeb.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuTrans),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuLink),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuTrans, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuOpen, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuCopy, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuStick),
@@ -856,7 +876,6 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuRename),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuProperty),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuNewFolder, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuNewFile),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuRefresh, true)});
             this.PopupMenuWeb.Manager = this.barManagerBlank;
             this.PopupMenuWeb.Name = "PopupMenuWeb";
@@ -975,5 +994,7 @@
         private DevExpress.XtraBars.BarButtonItem WebPopupMenuNewFile;
         private DevExpress.XtraBars.BarButtonItem WebPopupMenuRefresh;
         private DevExpress.XtraBars.PopupMenu PopupMenuWeb;
+        private DevExpress.XtraBars.BarCheckItem barCheckItem1;
+        private DevExpress.XtraBars.BarButtonItem WebPopupMenuLink;
     }
 }

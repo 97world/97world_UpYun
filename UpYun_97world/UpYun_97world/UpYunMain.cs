@@ -449,6 +449,7 @@ namespace UpYun_97world
         {
             UpYunNewFolder newfolder = new UpYunNewFolder();
             newfolder.Owner = this;
+            newfolder.newstatus = "folder";
             newfolder.Path = LocalPath;
             newfolder.ShowDialog();
             LocalUrlTextChanged();
@@ -563,9 +564,11 @@ namespace UpYun_97world
                 WebPath = WebPath.Substring(0, WebPath.Length - 1);
                 WebPath = WebPath.Substring(0, WebPath.LastIndexOf(@"/") + 1);
             }
-            else if (!(ListViewWeb.SelectedItems[0].Text.Contains(".") && ListViewWeb.SelectedItems[0].Text.Substring(ListViewWeb.SelectedItems[0].Text.LastIndexOf(".")).Length==4))
-            {
+            else if (!(ListViewWeb.SelectedItems[0].Text.Contains(".") && ListViewWeb.SelectedItems[0].Text.Substring(ListViewWeb.SelectedItems[0].Text.LastIndexOf(".")).Length == 4))
                 WebPath = WebPath + ListViewWeb.SelectedItems[0].Text + "/";
+            else
+            { 
+                
             }
             WebUrlTextChanged();
             Cursor.Current = Cursors.Default;
@@ -651,6 +654,7 @@ namespace UpYun_97world
             UpYunNewFolder newfolder = new UpYunNewFolder();
             newfolder.Owner = this;
             newfolder.Path = WebPath;
+            newfolder.newstatus = "folder";
             newfolder.userinformation = userInformation;
             newfolder.ShowDialog();
             WebUrlTextChanged();
@@ -676,6 +680,7 @@ namespace UpYun_97world
 
         private void ListViewWeb_MouseUp(object sender, MouseEventArgs e)
         {
+            WebPopupMenuLink.Enabled = false;
             WebPopupMenuStick.Enabled = false;
             WebPopupMenuTrans.Enabled = false;
             WebPopupMenuOpen.Enabled = false;
@@ -688,6 +693,7 @@ namespace UpYun_97world
             WebPopupMenuRefresh.Enabled = false;
             if (ListViewWeb.SelectedItems.Count != 0 && iscopyweb == false && IfLogin == true)
             {
+                WebPopupMenuLink.Enabled = true;
                 WebPopupMenuTrans.Enabled = true;
                 WebPopupMenuOpen.Enabled = true;
                 WebPopupMenuCopy.Enabled = true;
@@ -757,12 +763,34 @@ namespace UpYun_97world
 
         private void LocalPopupMenuRename_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            UpYunNewFolder newfolder = new UpYunNewFolder();
+            newfolder.Owner = this;
+            newfolder.Path = LocalPath;
+            if (ListViewLocal.SelectedItems[0].SubItems[1].Text.Equals("      "))
+                newfolder.newstatus = "renamefolder";
+            else
+                newfolder.newstatus = "renamefile";
+            newfolder.oldname = ListViewLocal.SelectedItems[0].Text;
+            newfolder.ShowDialog();
+            LocalUrlTextChanged();
         }
 
         private void LocalPopupMenuProperty_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            const string discVerb = "属性(&R)";
+            string sourceFile = LocalPath + ListViewLocal.SelectedItems[0].Text;
+            FileInfo file = new FileInfo(sourceFile);
+            Shell32.Shell shell = new Shell32.Shell();
+            Shell32.Folder folder = shell.NameSpace(file.DirectoryName);
+            Shell32.FolderItem folderItem = folder.ParseName(file.Name);
+            foreach (Shell32.FolderItemVerb Fib in folderItem.Verbs())
+            {
+                if (Fib.Name == discVerb)
+                {
+                    Fib.DoIt();
+                    break;
+                }
+            }
         }
 
         private void LocalPopupMenuNewFloder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -772,7 +800,12 @@ namespace UpYun_97world
 
         private void LocalPopupMenuNewFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            UpYunNewFolder newfolder = new UpYunNewFolder();
+            newfolder.Owner = this;
+            newfolder.Path = LocalPath;
+            newfolder.newstatus = "file";
+            newfolder.ShowDialog();
+            LocalUrlTextChanged();
         }
 
         private void LocalPopupMenuRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -832,6 +865,11 @@ namespace UpYun_97world
         private void WebPopupMenuRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             WebUrlTextChanged();
+        }
+
+        private void WebPopupMenuLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
         }
 
         #endregion

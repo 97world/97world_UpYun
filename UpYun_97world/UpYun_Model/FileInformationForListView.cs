@@ -154,6 +154,11 @@ namespace UpYun_Model
             System.IO.Directory.CreateDirectory(fullfoldername);
         }
 
+        public void newFileForLocal(string filename, string path)
+        {
+            System.IO.File.CreateText(path + filename);
+        }
+
         /// <summary>
         /// Web新建文件夹
         /// </summary>
