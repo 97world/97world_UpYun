@@ -45,7 +45,8 @@ namespace UpYun_97world
 
         public delegate void setUrlBar(string webpath);
         public delegate void setProgressBarDelegate(double num);
-        public bool iscopyweb = false, iscopylocal=false;
+        public string localcopyoldurl = "", webcopyoldurl = "";
+        public string[] localcopyoldname, webcopyoldname;
         public Point menutrippoint = new Point();
 
         /// <summary>
@@ -55,6 +56,12 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void UpYunMain_Load(object sender, EventArgs e)
         {
+            ListViewLocal.ListViewItemSorter = new ListViewColumnSorter();
+            ListViewLocal.ColumnClick += new ColumnClickEventHandler(ListViewHelper.ListView_ColumnClick);
+
+            ListViewWeb.ListViewItemSorter = new ListViewColumnSorter();
+            ListViewWeb.ColumnClick += new ColumnClickEventHandler(ListViewHelper.ListView_ColumnClick);
+
             ToolsLibrary.IniFile iniFile=new ToolsLibrary.IniFile();
             if (String.Compare(iniFile.IniReadValue("ifconfig", "auto"), "true", true) == 0)
             {
@@ -468,13 +475,27 @@ namespace UpYun_97world
             LocalPopupMenuRename.Enabled = true;
             LocalPopupMenuStick.Enabled = true;
             LocalPopupMenuTrans.Enabled = true;
-            if (ListViewLocal.SelectedItems.Count > 0 && iscopylocal == false)
+            if (ListViewLocal.SelectedItems.Count > 0 && localcopyoldurl.Equals("") && !ListViewLocal.SelectedItems[0].Text.Equals("上级目录") && !LocalPath.Equals("MyComputer"))
             {
                 LocalPopupMenuStick.Enabled = false;
             }
-            else if (ListViewLocal.SelectedItems.Count > 0 && iscopylocal == true)
+            else if (ListViewLocal.SelectedItems.Count > 0 && localcopyoldurl.Length > 0 && !ListViewLocal.SelectedItems[0].Text.Equals("上级目录") && !LocalPath.Equals("MyComputer"))
             {
                 LocalPopupMenuCopy.Enabled = false;
+            }
+            else if(ListViewLocal.SelectedItems.Count == 0 && localcopyoldurl.Length>0)
+            {
+                LocalPopupMenuCopy.Enabled = false;
+                LocalPopupMenuDefault.Enabled = false;
+                LocalPopupMenuDel.Enabled = false;
+                LocalPopupMenuNewFile.Enabled = false;
+                LocalPopupMenuNewFolder.Enabled = false;
+                LocalPopupMenuOpen.Enabled = false;
+                LocalPopupMenuProperty.Enabled = true;
+                LocalPopupMenuRefresh.Enabled = false;
+                LocalPopupMenuRename.Enabled = false;
+                LocalPopupMenuTrans.Enabled = false;
+                LocalPopupMenuStick.Enabled = true;
             }
             else
             {
@@ -485,7 +506,7 @@ namespace UpYun_97world
                 LocalPopupMenuNewFolder.Enabled = false;
                 LocalPopupMenuOpen.Enabled = false;
                 LocalPopupMenuProperty.Enabled = false;
-                LocalPopupMenuRefresh.Enabled = false;
+                //LocalPopupMenuRefresh.Enabled = false;
                 LocalPopupMenuRename.Enabled = false;
                 LocalPopupMenuStick.Enabled = false;
                 LocalPopupMenuTrans.Enabled = false;
@@ -691,7 +712,7 @@ namespace UpYun_97world
             WebPopupMenuNewFile.Enabled = false;
             WebPopupMenuNewFolder.Enabled = false;
             WebPopupMenuRefresh.Enabled = false;
-            if (ListViewWeb.SelectedItems.Count != 0 && iscopyweb == false && IfLogin == true)
+            if (ListViewWeb.SelectedItems.Count != 0 && webcopyoldurl.Equals("") && IfLogin == true)
             {
                 WebPopupMenuLink.Enabled = true;
                 WebPopupMenuTrans.Enabled = true;
@@ -704,7 +725,7 @@ namespace UpYun_97world
                 WebPopupMenuNewFolder.Enabled = true;
                 WebPopupMenuRefresh.Enabled = true;
             }
-            else if (ListViewWeb.SelectedItems.Count != 0 && iscopyweb == true && IfLogin == true)
+            else if (ListViewWeb.SelectedItems.Count != 0 && webcopyoldurl.Length>0 && IfLogin == true)
             {
                 WebPopupMenuStick.Enabled = true;
                 WebPopupMenuTrans.Enabled = true;
@@ -741,19 +762,27 @@ namespace UpYun_97world
         {           
             ShellContextMenu scm = new ShellContextMenu();
             FileInfo[] files = new FileInfo[1];
-            files[0] = new FileInfo(LocalPath+ListViewLocal.SelectedItems[0].Text);
+            Point p = this.ListViewLocal.PointToClient(new Point(menutrippoint.X, menutrippoint.Y));
+            files[0] = new FileInfo(LocalPath + ListViewLocal.GetItemAt(p.X, p.Y).Text);
             scm.ShowContextMenu(files, menutrippoint);
-            
         }
 
         private void LocalPopupMenuCopy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            localcopyoldname = new string[ListViewLocal.SelectedItems.Count];
+            for (int i = 0; i < ListViewLocal.SelectedItems.Count; i++)
+                localcopyoldname[i] = ListViewLocal.SelectedItems[i].Text;
+            localcopyoldurl = LocalPath;
         }
 
         private void LocalPopupMenuStick_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            if (localcopyoldurl.Length == 0)
+                return;
+            UpYun_Controller.Main main = new UpYun_Controller.Main();
+            main.copyFileLocal(localcopyoldurl, localcopyoldname, LocalPath);
+            LocalUrlTextChanged();
+            localcopyoldurl = "";
         }
 
         private void LocalPopupMenuDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -766,11 +795,12 @@ namespace UpYun_97world
             UpYunNewFolder newfolder = new UpYunNewFolder();
             newfolder.Owner = this;
             newfolder.Path = LocalPath;
-            if (ListViewLocal.SelectedItems[0].SubItems[1].Text.Equals("      "))
+            Point p = this.ListViewLocal.PointToClient(new Point(menutrippoint.X, menutrippoint.Y));
+            if (ListViewLocal.GetItemAt(p.X, p.Y).SubItems[1].Text.Equals("      "))
                 newfolder.newstatus = "renamefolder";
             else
                 newfolder.newstatus = "renamefile";
-            newfolder.oldname = ListViewLocal.SelectedItems[0].Text;
+            newfolder.oldname = ListViewLocal.GetItemAt(p.X, p.Y).Text;
             newfolder.ShowDialog();
             LocalUrlTextChanged();
         }
@@ -778,7 +808,8 @@ namespace UpYun_97world
         private void LocalPopupMenuProperty_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             const string discVerb = "属性(&R)";
-            string sourceFile = LocalPath + ListViewLocal.SelectedItems[0].Text;
+            Point p = this.ListViewLocal.PointToClient(new Point(menutrippoint.X, menutrippoint.Y));
+            string sourceFile = LocalPath + ListViewLocal.GetItemAt(p.X, p.Y).Text;
             FileInfo file = new FileInfo(sourceFile);
             Shell32.Shell shell = new Shell32.Shell();
             Shell32.Folder folder = shell.NameSpace(file.DirectoryName);
@@ -869,9 +900,50 @@ namespace UpYun_97world
 
         private void WebPopupMenuLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            BtnLinkWeb_click(sender, new EventArgs());
         }
 
         #endregion
+
+        private void UpYunMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            Control con =this.ActiveControl;
+            if (con.Name.Equals("ListViewLocal"))
+            {
+                if (e.Control && e.KeyCode == Keys.O)
+                    ListViewLocal_DoubleClick(sender, new EventArgs());
+                else if (e.Control && e.KeyCode == Keys.T && IfLogin == true)
+                    BtnTransWeb_click(sender, new EventArgs());
+                else if (e.Control && e.KeyCode == Keys.C)
+                    LocalPopupMenuCopy_ItemClick(sender, new DevExpress.XtraBars.ItemClickEventArgs(null, null));
+                else if (e.Control && e.KeyCode == Keys.V)
+                    LocalPopupMenuStick_ItemClick(sender, new DevExpress.XtraBars.ItemClickEventArgs(null, null));
+                else if (e.KeyCode == Keys.Delete)
+                    BtnDelLocal_click(sender, new EventArgs());
+                else if (e.KeyCode == Keys.F2)
+                    LocalPopupMenuRename_ItemClick(sender, new DevExpress.XtraBars.ItemClickEventArgs(null, null));
+                else if (e.KeyCode == Keys.Insert)
+                    BtnNewFolderLocal_click(sender, new EventArgs());
+                else if (e.Control && e.Shift && e.KeyCode == Keys.Insert)
+                    LocalPopupMenuNewFile_ItemClick(sender, new DevExpress.XtraBars.ItemClickEventArgs(null, null));
+                else if (e.KeyCode == Keys.F5)
+                    LocalUrlTextChanged();
+            }
+            else if(con.Name.Equals("ListViewWeb"))
+            {
+                if (e.Control && e.KeyCode == Keys.O)
+                    ListViewWeb_DoubleClick(sender, new EventArgs());
+                else if (e.Control && e.KeyCode == Keys.T)
+                    BtnTransWeb_click(sender, new EventArgs());
+                else if (e.Control && e.Shift && e.KeyCode == Keys.C)
+                    BtnLinkWeb_click(sender, new EventArgs());
+                else if (e.KeyCode == Keys.Delete)
+                    BtnDelWeb_click(sender, new EventArgs());
+                else if (e.KeyCode == Keys.Insert)
+                    BtnNewFolderWeb_click(sender, new EventArgs());
+                else if (e.KeyCode == Keys.F5)
+                    BtnRefreshWeb_click(sender, new EventArgs());
+            }
+        }
     }
 }

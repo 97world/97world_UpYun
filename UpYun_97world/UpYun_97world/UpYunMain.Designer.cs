@@ -744,6 +744,7 @@
             this.WebPopupMenuCopy.Id = 18;
             this.WebPopupMenuCopy.Name = "WebPopupMenuCopy";
             this.WebPopupMenuCopy.ShortcutKeyDisplayString = "Ctrl+C";
+            this.WebPopupMenuCopy.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.WebPopupMenuCopy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPoPupMenuCopy_ItemClick);
             // 
             // WebPopupMenuStick
@@ -753,6 +754,7 @@
             this.WebPopupMenuStick.Id = 19;
             this.WebPopupMenuStick.Name = "WebPopupMenuStick";
             this.WebPopupMenuStick.ShortcutKeyDisplayString = "Ctrl+V";
+            this.WebPopupMenuStick.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.WebPopupMenuStick.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuStick_ItemClick);
             // 
             // WebPopupMenuDel
@@ -771,6 +773,7 @@
             this.WebPopupMenuRename.Id = 21;
             this.WebPopupMenuRename.Name = "WebPopupMenuRename";
             this.WebPopupMenuRename.ShortcutKeyDisplayString = "F2";
+            this.WebPopupMenuRename.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.WebPopupMenuRename.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuRename_ItemClick);
             // 
             // WebPopupMenuProperty
@@ -779,6 +782,7 @@
             this.WebPopupMenuProperty.Enabled = false;
             this.WebPopupMenuProperty.Id = 22;
             this.WebPopupMenuProperty.Name = "WebPopupMenuProperty";
+            this.WebPopupMenuProperty.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.WebPopupMenuProperty.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuProperty_ItemClick);
             // 
             // WebPopupMenuNewFolder
@@ -894,10 +898,12 @@
             this.Controls.Add(this.barDockControl4);
             this.Controls.Add(this.barDockControl2);
             this.Controls.Add(this.barDockControl1);
+            this.KeyPreview = true;
             this.Name = "UpYunMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "又拍云客户端 v1.0";
             this.Load += new System.EventHandler(this.UpYunMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UpYunMain_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.xafBarManagerMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FileUploadProgressBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();

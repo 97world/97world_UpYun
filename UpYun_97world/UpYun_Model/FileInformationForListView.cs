@@ -283,7 +283,6 @@ namespace UpYun_Model
             for (int i = 0; i < SelectNum; i++ )
             {
                 Fs = new FileStream(localpath + selecttext[i], FileMode.Create);
-                //byte[] contents = userinformation.upYun.readFile(webpath + selecttext[i], setprogressbar);
                 string CopyLink = "";
                 if (userinformation.Url.Substring(userinformation.Url.Length - 1).Equals("/"))
                     CopyLink = userinformation.Url + webpath.Substring(1) + selecttext[i];
@@ -309,6 +308,20 @@ namespace UpYun_Model
         {
             TransSpeed = TempDataSize / 1.0;
             TempDataSize = 0;
+        }
+
+        public int copyFileLocal(StringBuilder frompath, StringBuilder topath)
+        {
+            ToolsLibrary.CopyFile.SHFILEOPSTRUCT op = new ToolsLibrary.CopyFile.SHFILEOPSTRUCT();
+            op.hwnd = IntPtr.Zero;
+            op.wFunc = ToolsLibrary.CopyFile.FileFuncFlags.FO_COPY;
+            op.pFrom = frompath.ToString();// 需要注意，最后需要加入"\0"表示字符串结束，如果需要拷贝多个文件，则 file1 + "\0" + file2 + "\0"...
+            op.pTo = topath.ToString();// 需要注意，最后需要加入"\0"表示字符串结束
+            op.hNameMappings = IntPtr.Zero;
+            op.fFlags = ToolsLibrary.CopyFile.FILEOP_FLAGS.FOF_NOCONFIRMMKDIR;
+            op.fAnyOperationsAborted = false;
+            int ret = ToolsLibrary.CopyFile.SHFileOperation(ref op);
+            return ret;
         }
     }
 }

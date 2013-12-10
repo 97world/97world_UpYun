@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -74,6 +75,18 @@ namespace UpYun_Controller
         public void downloadFile(string localpath, string webpath, ListView weblistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
             fileinformationforlistview.downloadFile(localpath, webpath, weblistview, userinformation, refresh, setprogressbar);
+        }
+
+        public void copyFileLocal(string oldpath, string[] name, string localpath)
+        {
+            StringBuilder frompath = new StringBuilder(), topath = new StringBuilder();
+            int count = name.Length;
+            for (int i = 0; i < count; i++)
+            {
+                frompath.Append(oldpath + name[i] + "\0");
+                topath.Append(localpath + "\0");
+            }
+            fileinformationforlistview.copyFileLocal(frompath, topath);
         }
     }
 }

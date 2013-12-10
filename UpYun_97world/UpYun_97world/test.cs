@@ -43,6 +43,14 @@ namespace UpYun_97world
             ////ImageListLocalIcon = fileInformationForListView.FileIconList;
             
             ////ListViewLocal.SmallImageList = ImageListLocalIcon;
+            string[] info = new string[3];
+            info[0] = "test";
+            info[1] = "test";
+            info[2] = "test";
+            ListViewItem lvi = new ListViewItem(info, "test1");
+            listView1.Items.Add(lvi);
+            lvi = new ListViewItem(info, "test2");
+            listView2.Items.Add(lvi);
         }
 
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -57,10 +65,11 @@ namespace UpYun_97world
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            IniFile ini = new IniFile();
-            ini.IniWriteValue("user","name",textEdit1.Text);
-            ini.IniWriteValue("user", "password", textEdit2.Text);
-            ini.IniWriteValue("user","url",textEdit4.Text);
+            //IniFile ini = new IniFile();
+            //ini.IniWriteValue("user","name",textEdit1.Text);
+            //ini.IniWriteValue("user", "password", textEdit2.Text);
+            //ini.IniWriteValue("user","url",textEdit4.Text);
+
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -76,6 +85,23 @@ namespace UpYun_97world
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void test_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                Control con = this.ActiveControl;
+                if (con.Name.Equals("listView2"))
+                {
+
+                    label1.Text = "你选中了listview2";
+                }
+                else if (con.Name.Equals("listView1"))
+                {
+                    label1.Text = "你选中了listview1";
+                }
+            }
         }
     }
 }
