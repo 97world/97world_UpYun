@@ -141,6 +141,12 @@
     <Compile Include="UpYunNewFolder.Designer.cs">
       <DependentUpon>UpYunNewFolder.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpYunPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpYunPreview.Designer.cs">
+      <DependentUpon>UpYunPreview.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Controls\LocalToolsBar.resx">
       <DependentUpon>LocalToolsBar.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UpYunNewFolder.resx">
       <DependentUpon>UpYunNewFolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpYunPreview.resx">
+      <DependentUpon>UpYunPreview.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

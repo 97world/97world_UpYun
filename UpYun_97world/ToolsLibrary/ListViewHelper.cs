@@ -95,13 +95,14 @@ namespace ToolsLibrary
             listviewX = (System.Windows.Forms.ListViewItem)x;
             listviewY = (System.Windows.Forms.ListViewItem)y;
 
-            if (listviewX.SubItems[0].Text == "上一目录" || listviewY.SubItems[0].Text == "上一目录")
+            if (listviewX.SubItems[0].Text.Equals("上级目录") || listviewY.SubItems[0].Text.Equals ("上级目录"))
                 return 0;
 
             string xText = listviewX.SubItems[ColumnToSort].Text;
             string yText = listviewY.SubItems[ColumnToSort].Text;
 
             int xInt, yInt;
+            DateTime xDt, yDt;
 
             // 比较,如果值为IP地址，则根据IP地址的规则排序。
             if (IsIP(xText) && IsIP(yText))
@@ -113,6 +114,36 @@ namespace ToolsLibrary
                 //比较数字
                 compareResult = CompareInt(xInt, yInt);
             }
+            else if (DateTime.TryParse(xText, out xDt) && DateTime.TryParse(yText, out yDt))//判断是否为日期数据
+            {
+                //比较时间
+                compareResult = DateTime.Compare(yDt, xDt);
+            }
+            //else if (xText.Substring(xText.Length - 1, 1).Equals("B") && yText.Substring(yText.Length - 1, 1).Equals("B")) //判断是否为容量单位
+            //{
+            //    //比较容量大小
+            //    xInt = Convert.ToInt32(getByteSize(xText));
+            //    yInt = Convert.ToInt32(getByteSize(yText));
+            //    compareResult = CompareInt(xInt, yInt);
+            //}
+            //else if (xText.Substring(xText.Length - 1, 1).Equals(" ") && yText.Substring(yText.Length - 1, 1).Equals("B"))
+            //{
+            //    xInt = Convert.ToInt32(getByteSize(xText));
+            //    yInt = Convert.ToInt32(getByteSize(yText));
+            //    compareResult = CompareInt(xInt, yInt);
+            //}
+            //else if (xText.Substring(xText.Length - 1, 1).Equals("B") && yText.Substring(yText.Length - 1, 1).Equals(" "))
+            //{
+            //    xInt = Convert.ToInt32(getByteSize(xText));
+            //    yInt = Convert.ToInt32(getByteSize(yText));
+            //    compareResult = CompareInt(xInt, yInt);
+            //}
+            //else if (xText.Substring(xText.Length - 1, 1).Equals(" ") && yText.Substring(yText.Length - 1, 1).Equals(" "))
+            //{
+            //    xInt = Convert.ToInt32(getByteSize(xText));
+            //    yInt = Convert.ToInt32(getByteSize(yText));
+            //    compareResult = CompareInt(xInt, yInt);
+            //}
             else
             {
                 //比较对象
@@ -135,6 +166,57 @@ namespace ToolsLibrary
                 // 如果相等返回0
                 return 0;
             }
+        }
+
+        /// <summary>
+        /// 根据字符串转换单位大小
+        /// </summary>
+        /// <param name="str">字符串</param>
+        /// <returns></returns>
+        private double getByteSize(string str)
+        {
+            double size = 0;
+            if (str.Contains("KB"))
+            {
+                str = str.Substring(0, str.Length - 3);
+                Double.TryParse(str, out size);
+                size = size * 1024;
+            }
+            else if (str.Contains("MB"))
+            {
+                str = str.Substring(0, str.Length - 3);
+                Double.TryParse(str, out size);
+                size = size * 1024 * 1024;
+            }
+            else if (str.Contains("GB"))
+            {
+                str = str.Substring(0, str.Length - 3);
+                Double.TryParse(str, out size);
+                size = size * 1024 * 1024 * 1024;
+            }
+            else if (str.Contains("TB"))
+            {
+                str = str.Substring(0, str.Length - 3);
+                Double.TryParse(str, out size);
+                size = size * 1024 * 1024 * 1024 * 1024;
+            }
+            else if (str.Contains("PB"))
+            {
+                str = str.Substring(0, str.Length - 3);
+                Double.TryParse(str, out size);
+                size = size * 1024 * 1024 * 1024 * 1024 * 1024;
+            }
+            else if (str.Contains("EB"))
+            {
+                str = str.Substring(0, str.Length - 3);
+                Double.TryParse(str, out size);
+                size = size * 1024 * 1024 * 1024 * 1024 * 1024 * 1024;
+            }
+            else if (str.Equals("      "))
+                return size;
+            else
+                size = Convert.ToInt32(str);
+            return size;
         }
 
         /// <summary>

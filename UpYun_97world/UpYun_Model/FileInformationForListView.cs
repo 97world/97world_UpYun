@@ -7,6 +7,7 @@ using DevExpress.XtraEditors;
 using System.Collections;
 using System.Threading;
 using System.Net;
+using System.Drawing;
 
 namespace UpYun_Model
 {
@@ -73,17 +74,18 @@ namespace UpYun_Model
                 {
                     string[] info = new string[3];//定义一个数组
                     FileInfo fi = new FileInfo(files[i]);//根据文件的路径实例化FileInfo类
-                    string Filetype = "unknown";
-                    if (fi.Name.Contains("."))
-                        Filetype = fi.Name.Substring(fi.Name.LastIndexOf(".")).ToLower();//获取文件的类型              
-                    if (!(Filetype == "sys" || Filetype == "ini" || Filetype == "bin" || Filetype == "log" || Filetype == "com" || Filetype == "bat" || Filetype == "db") && (fi.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
+                    //string Filetype = "unknown";
+                    //if (fi.Name.Contains("."))
+                    //    Filetype = fi.Name.Substring(fi.Name.LastIndexOf(".")).ToLower();//获取文件的类型  
+                    //!(Filetype == "sys" || Filetype == "ini" || Filetype == "bin" || Filetype == "log" || Filetype == "com" || Filetype == "bat" || Filetype == "db") && 
+                    if ((fi.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
                     {
                         info[0] = fi.Name;
                         info[1] = ToolsLibrary.Tools.getCommonSize(fi.Length);
                         info[2] = fi.LastWriteTime.ToString();
                         ListViewItem item = new ListViewItem(info, index);//实例化ListViewItem类
                         dglistview.Items.Add(item);//添加当前文件的基本信息
-                        dgimagelist.Images.Add(fi.Name, ToolsLibrary.GetIcon.GetFileIcon(Filetype, false));
+                        dgimagelist.Images.Add(fi.Name, ToolsLibrary.GetIcon.GetFileIcon(fi.Name, false));
                         index++;
                     }
                 }
@@ -156,7 +158,7 @@ namespace UpYun_Model
 
         public void newFileForLocal(string filename, string path)
         {
-            System.IO.File.CreateText(path + filename);
+            using (System.IO.File.CreateText(path + filename)){}
         }
 
         /// <summary>
@@ -200,6 +202,7 @@ namespace UpYun_Model
             }catch{ }
             RefreshListViewWeb rlv = new RefreshListViewWeb(delegate(ListView dglistview, ImageList dgimagelist, string dgpath)
                 {
+                    dglistview.BeginUpdate();
                     dglistview.Items.Clear();
                     dgimagelist.Images.Clear();
                     if (dgpath != @"/")
@@ -226,6 +229,7 @@ namespace UpYun_Model
                         lvi.SubItems.Add(ToolsLibrary.Tools.getCommonTime(Convert.ToDouble(a.number)).ToString());
                         dglistview.Items.Add(lvi);
                     }
+                    dglistview.EndUpdate();
                 });
             listview.Invoke(rlv,listview,imagelist,path);
         }
@@ -322,6 +326,16 @@ namespace UpYun_Model
             op.fAnyOperationsAborted = false;
             int ret = ToolsLibrary.CopyFile.SHFileOperation(ref op);
             return ret;
+        }
+
+
+        public Image previewFile(string url)
+        {
+            HttpWebRequest Hwr = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebResponse rps = (HttpWebResponse)Hwr.GetResponse();
+            Stream stream = rps.GetResponseStream();
+            Image i = Bitmap.FromStream(stream);
+            return i;
         }
     }
 }

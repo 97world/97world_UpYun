@@ -42,6 +42,8 @@
             this.CbbUrl.Name = "CbbUrl";
             this.CbbUrl.Size = new System.Drawing.Size(214, 20);
             this.CbbUrl.TabIndex = 4;
+            this.CbbUrl.DropDown += new System.EventHandler(this.CbbUrl_DropDown);
+            this.CbbUrl.SelectedIndexChanged += new System.EventHandler(this.CbbUrl_SelectedIndexChanged);
             // 
             // BtnUpFolder
             // 

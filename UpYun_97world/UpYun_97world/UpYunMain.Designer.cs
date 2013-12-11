@@ -105,6 +105,7 @@
             this.WebPopupMenuRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
             this.WebPopupMenuLink = new DevExpress.XtraBars.BarButtonItem();
+            this.WebPopupMenuPreview = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
@@ -206,7 +207,7 @@
             // 
             // SubItemInternet
             // 
-            this.SubItemInternet.Caption = "网络选择(&I)";
+            this.SubItemInternet.Caption = "网络(&I)";
             this.SubItemInternet.Id = 1;
             this.SubItemInternet.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.BarCheckItemAuto),
@@ -596,8 +597,9 @@
             this.WebPopupMenuNewFile,
             this.WebPopupMenuRefresh,
             this.barCheckItem1,
-            this.WebPopupMenuLink});
-            this.barManagerBlank.MaxItemId = 28;
+            this.WebPopupMenuLink,
+            this.WebPopupMenuPreview});
+            this.barManagerBlank.MaxItemId = 29;
             // 
             // barDockControl1
             // 
@@ -827,6 +829,14 @@
             this.WebPopupMenuLink.ShortcutKeyDisplayString = "Shift+Ctrl+C";
             this.WebPopupMenuLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuLink_ItemClick);
             // 
+            // WebPopupMenuPreview
+            // 
+            this.WebPopupMenuPreview.Caption = "预览(&Q)";
+            this.WebPopupMenuPreview.Id = 28;
+            this.WebPopupMenuPreview.Name = "WebPopupMenuPreview";
+            this.WebPopupMenuPreview.ShortcutKeyDisplayString = "Ctrl+Q";
+            this.WebPopupMenuPreview.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPopupMenuPreview_ItemClick);
+            // 
             // barButtonItem1
             // 
             this.barButtonItem1.Caption = "自动识别网络";
@@ -873,6 +883,7 @@
             this.PopupMenuWeb.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuLink),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuTrans, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuPreview, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuOpen, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuCopy, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.WebPopupMenuStick),
@@ -1002,5 +1013,6 @@
         private DevExpress.XtraBars.PopupMenu PopupMenuWeb;
         private DevExpress.XtraBars.BarCheckItem barCheckItem1;
         private DevExpress.XtraBars.BarButtonItem WebPopupMenuLink;
+        private DevExpress.XtraBars.BarButtonItem WebPopupMenuPreview;
     }
 }

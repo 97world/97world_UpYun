@@ -54,7 +54,7 @@ namespace ToolsLibrary
         /// 根据文件扩展名得到图标
         /// </summary>
         /// <param name="fileName">文件名(如：win.rar;setup.exe;temp.txt)</param>
-        /// <param name="largeIcon">图标的大小</param>
+        /// <param name="largeIcon">获取图标的大小</param>
         /// <returns></returns>
         public static Image GetFileIcon(string fileName, bool largeIcon)
         {

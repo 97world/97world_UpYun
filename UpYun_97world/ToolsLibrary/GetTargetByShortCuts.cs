@@ -9,6 +9,11 @@ namespace ToolsLibrary
 {
     public class GetTargetByShortCuts
     {
+        /// <summary>
+        /// 获取快捷方式的真实路径
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string getTarget(string path)
         {
             IWshShortcut _shortcut = null;

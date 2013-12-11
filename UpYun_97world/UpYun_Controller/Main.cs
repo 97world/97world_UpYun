@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -87,6 +88,13 @@ namespace UpYun_Controller
                 topath.Append(localpath + "\0");
             }
             fileinformationforlistview.copyFileLocal(frompath, topath);
+        }
+
+        public Image previewFile(string url, string path, string filename)
+        {
+            string downurl = url + path + filename;
+            Image i = fileinformationforlistview.previewFile(downurl);
+            return i;
         }
     }
 }

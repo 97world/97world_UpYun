@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using System.Collections;
 
 namespace UpYun_97world.Controls
 {
@@ -31,6 +32,28 @@ namespace UpYun_97world.Controls
         public System.Windows.Forms.ComboBox CBEUrl
         {
             get { return CbbUrl; }
+        }
+
+        private void CbbUrl_DropDown(object sender, EventArgs e)
+        {
+            Hashtable ht = new Hashtable();
+            for (int i = 0; i < this.CbbUrl.Items.Count; i++)
+            {
+                if (!ht.ContainsValue(this.CbbUrl.Items[i].ToString()))
+                {
+                    ht.Add(i, this.CbbUrl.Items[i].ToString());
+                }
+            }
+            this.CbbUrl.Items.Clear();
+            foreach (DictionaryEntry de in ht)
+            {
+                this.CbbUrl.Items.Add(de.Value);
+            }
+        }
+
+        private void CbbUrl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

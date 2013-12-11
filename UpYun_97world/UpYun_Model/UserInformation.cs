@@ -163,7 +163,7 @@ namespace UpYun_Model
             {
                 BucketName = ini.IniReadValue("operatorinformation","bucket");
                 OperatorName = ini.IniReadValue("operatorinformation", "operatorname");
-                OperatorPwd = ini.IniReadValue("operatorinformation", "operatorpwd");
+                OperatorPwd = ToolsLibrary.Tools.DecryptDES( ini.IniReadValue("operatorinformation", "operatorpwd"), "WORLDCOM");
                 Url = ini.IniReadValue("operatorinformation", "url");
                 Internet = ini.IniReadValue("operatorinformation", "internet");
                 IfRemember = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifremember"));
@@ -218,7 +218,7 @@ namespace UpYun_Model
             {
                 ini.IniWriteValue("operatorinformation", "bucket", BucketName);
                 ini.IniWriteValue("operatorinformation", "operatorname", OperatorName);
-                ini.IniWriteValue("operatorinformation", "operatorpwd", OperatorPwd);
+                ini.IniWriteValue("operatorinformation", "operatorpwd", ToolsLibrary.Tools.EncryptDES(OperatorPwd, "WORLDCOM"));
                 ini.IniWriteValue("operatorinformation", "url", Url);
                 ini.IniWriteValue("operatorinformation", "internet", Internet);
                 ini.IniWriteValue("operatorinformation", "ifremember", IfRemember.ToString());

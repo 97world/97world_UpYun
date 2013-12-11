@@ -33,15 +33,26 @@ namespace UpYun_97world
         /// </summary>
         public UpYun_Model.FileInformationForListView fileInformationForListView { get; set; }
 
-
+        /// <summary>
+        /// 本地浏览器设置桌面为默认路径
+        /// </summary>
         private string _localpath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"\";
+        /// <summary>
+        /// 本地浏览器所显示的路径
+        /// </summary>
         public string LocalPath
         {
             get { return _localpath; }
-            set { _localpath=value; }
+            set { _localpath = value; }
         }
 
+        /// <summary>
+        /// 远程浏览器设置根目录为默认路径
+        /// </summary>
         private string _webpath = @"/";
+        /// <summary>
+        /// 远程浏览器所显示的路径
+        /// </summary>
         public string WebPath
         {
             get { return _webpath; }

@@ -18,12 +18,24 @@ namespace UpYun_97world
 
         #region 公共变量
 
+        /// <summary>
+        /// 操作所在的当前目录路径
+        /// </summary>
         public string Path { get; set; }
 
+        /// <summary>
+        /// 远程浏览器完成新建、重命名文件/文件夹操作所需要的用户信息对象
+        /// </summary>
         public UpYun_Model.UserInformation userinformation { get; set; }
 
+        /// <summary>
+        /// 所进行的操作的行为状态（新建文件/文件夹，重命名文件/文件夹）
+        /// </summary>
         public string newstatus { get; set; }
 
+        /// <summary>
+        /// 进行重命名的文件/文件夹的未经修改的名称
+        /// </summary>
         public string oldname { get; set; }
 
         #endregion
@@ -38,7 +50,7 @@ namespace UpYun_97world
                 else
                     main.newFolder(TextBoxFolderName.Text, Path);
             }
-            else if(newstatus.Equals("file"))
+            else if(newstatus.Equals("newfile"))
             {
                 main.newFile(TextBoxFolderName.Text, Path);
                 System.Diagnostics.Process.Start("notepad.exe", Path + TextBoxFolderName.Text);
@@ -60,11 +72,21 @@ namespace UpYun_97world
             this.Close();
         }
 
+        /// <summary>
+        /// “取消”按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnEsc_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// 窗体载入事件（根据当前的操作行为更改窗体部分控件的信息）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpYunNewFolder_Load(object sender, EventArgs e)
         {
             if (newstatus.Equals("newfile"))
