@@ -8,6 +8,7 @@ using System.Collections;
 using System.Threading;
 using System.Net;
 using System.Drawing;
+using System.Collections;
 
 namespace UpYun_Model
 {
@@ -120,7 +121,7 @@ namespace UpYun_Model
                     listview.Items.Add(item);
                 }
             }
-            catch { }
+            catch { }   //如果不使用try catch抓取错误并以此跳过错误，在添加没有放入光盘的光驱Items时会提示错误
         }
 
         /// <summary>
@@ -209,7 +210,6 @@ namespace UpYun_Model
                         dglistview.Items.Add("上级目录");
                     ListViewItem lvi = new ListViewItem();
                     int index = 1;
-                    string filetypename = "unknown";
                     dgimagelist.Images.Add("folder", ToolsLibrary.GetIcon.GetDirectoryIcon(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles) + @"\"));
                     foreach (var item in str)
                     {
@@ -220,9 +220,7 @@ namespace UpYun_Model
                         else if (a.filetype == "N")
                         {
                             lvi.ImageIndex = index;
-                            if (a.filename.Contains("."))
-                                filetypename = a.filename.Substring(a.filename.LastIndexOf(".")).ToLower();//获取文件的类型
-                            dgimagelist.Images.Add(a.filename, ToolsLibrary.GetIcon.GetFileIcon(filetypename, false));
+                            dgimagelist.Images.Add(a.filename, ToolsLibrary.GetIcon.GetFileIcon(a.filename, false));
                             index++;
                         }
                         lvi.SubItems.Add(ToolsLibrary.Tools.getCommonSize(a.size));
@@ -234,64 +232,59 @@ namespace UpYun_Model
             listview.Invoke(rlv,listview,imagelist,path);
         }
 
-        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation, RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
+        public void upFile(string webpath, string localpath, ArrayList filenamelist, UserInformation userinformation, RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
-            string[] SelectText = new string[locallistview.SelectedItems.Count];
-            for (int i = 0; i < SelectText.Length; i++)
-            {
-                SelectText[i] = locallistview.SelectedItems[i].Text;
-            }
-            Thread thread = new Thread(() => upFileByUpYun(localpath, webpath, SelectText, userinformation, refresh, setprogressbar));
+            Thread thread = new Thread(() => upFileByUpYun(localpath, webpath, filenamelist, userinformation, refresh, setprogressbar));
             thread.Start();
         }
 
-        public void upFileByUpYun(string localpath, string webpath, string[] selectedtext, UserInformation userinformation, RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
+        //public void upFolder(string webpath, string localpath, ArrayList foldername, UserInformation userinformation, RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
+        //{ 
+            
+        //}
+
+        public void upFileByUpYun(string localpath, string webpath, ArrayList filenamelist, UserInformation userinformation, RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
-            int SelectNum = selectedtext.Length;
+            int SelectNum = filenamelist.Count;
             try
             {
                 for (int i = 0; i < SelectNum; i++)
                 {
-                    string localpath_up = localpath + selectedtext[i];
+                    string localpath_up = localpath + filenamelist[i];
                     FileStream fs = new FileStream(localpath_up, FileMode.Open, FileAccess.Read);
                     BinaryReader r = new BinaryReader(fs);
                     byte[] postArray = r.ReadBytes((int)fs.Length);
-                    string webpath_up = webpath + selectedtext[i];
+                    string webpath_up = webpath + filenamelist[i];
                     userinformation.upYun.writeFile(webpath_up, postArray, true, setprogressbar);
+                    fs.Close();
                 }
             }
             catch
             {
                 XtraMessageBox.Show("上传出错：文件只能是图像文件！");
                 refresh(false);
-                return;
             }
             refresh(true);
         }
 
-        public void downloadFile(string localpath, string webpath, ListView weblistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
+        public void downloadFile(string localpath, string webpath, ArrayList filenamelist, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
-            string[] SelectText = new string[weblistview.SelectedItems.Count];
-            for (int i = 0; i < SelectText.Length; i++)
-            {
-                SelectText[i] = weblistview.SelectedItems[i].Text;
-            }
-            Thread thread = new Thread(() => downloadFileByUpYun(localpath, webpath, SelectText, userinformation, refresh, setprogressbar));
+            Thread thread = new Thread(() => downloadFileByUpYun(localpath, webpath, filenamelist, userinformation, refresh, setprogressbar));
             thread.Start();
         }
 
-        public void downloadFileByUpYun(string localpath, string webpath, string[] selecttext, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
+        public void downloadFileByUpYun(string localpath, string webpath, ArrayList filenamelist, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
-            int SelectNum = selecttext.Length, count;
+            int SelectNum = filenamelist.Count, count;
             FileStream Fs = null;
             for (int i = 0; i < SelectNum; i++ )
             {
-                Fs = new FileStream(localpath + selecttext[i], FileMode.Create);
+                Fs = new FileStream(localpath + filenamelist[i], FileMode.Create);
                 string CopyLink = "";
                 if (userinformation.Url.Substring(userinformation.Url.Length - 1).Equals("/"))
-                    CopyLink = userinformation.Url + webpath.Substring(1) + selecttext[i];
+                    CopyLink = userinformation.Url + webpath.Substring(1) + filenamelist[i];
                 else
-                    CopyLink = userinformation.Url + "/" + webpath.Substring(1) + selecttext[i];
+                    CopyLink = userinformation.Url + "/" + webpath.Substring(1) + filenamelist[i];
                 HttpWebRequest Hwr = (HttpWebRequest)WebRequest.Create(CopyLink);
                 HttpWebResponse rps = (HttpWebResponse)Hwr.GetResponse();
                 Stream stream = rps.GetResponseStream();
@@ -301,7 +294,7 @@ namespace UpYun_Model
                 {
                     TempDataSize += count;
                     Fs.Write(byts, 0, count);
-                    setprogressbar(false, selecttext[i], (Fs.Length / Convert.ToDouble(byts.Length))* 100.0, TransSpeed);
+                    setprogressbar(false, filenamelist[i].ToString(), (Fs.Length / Convert.ToDouble(byts.Length)) * 100.0, TransSpeed);
                 }
             }
             Fs.Close();
@@ -328,7 +321,11 @@ namespace UpYun_Model
             return ret;
         }
 
-
+        /// <summary>
+        /// 根据url预览图片
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public Image previewFile(string url)
         {
             HttpWebRequest Hwr = (HttpWebRequest)WebRequest.Create(url);

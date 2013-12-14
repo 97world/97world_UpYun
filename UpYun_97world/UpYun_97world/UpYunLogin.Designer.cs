@@ -273,6 +273,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem3),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem4)});
             this.PopupMenuInternet.Manager = this.barManagerBlank;
+            this.PopupMenuInternet.MinWidth = 160;
             this.PopupMenuInternet.Name = "PopupMenuInternet";
             // 
             // barButtonItem1

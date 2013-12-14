@@ -50,5 +50,10 @@ namespace UpYun_97world.Controls
         /// 按钮：新建文件夹
         /// </summary>
         public DevExpress.XtraBars.BarButtonItem BtnNewFloder { get { return BtnItemNewFloder; } }
+
+        /// <summary>
+        /// 按钮：新建文件
+        /// </summary>
+        public DevExpress.XtraBars.BarButtonItem BtnNewFile  { get { return BtnItemNewFile; } }
     }
 }

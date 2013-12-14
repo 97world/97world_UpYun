@@ -38,9 +38,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CbbUrl.FormattingEnabled = true;
-            this.CbbUrl.Location = new System.Drawing.Point(21, 2);
+            this.CbbUrl.Location = new System.Drawing.Point(17, 1);
             this.CbbUrl.Name = "CbbUrl";
-            this.CbbUrl.Size = new System.Drawing.Size(214, 20);
+            this.CbbUrl.Size = new System.Drawing.Size(210, 20);
             this.CbbUrl.TabIndex = 4;
             this.CbbUrl.DropDown += new System.EventHandler(this.CbbUrl_DropDown);
             this.CbbUrl.SelectedIndexChanged += new System.EventHandler(this.CbbUrl_SelectedIndexChanged);
@@ -51,9 +51,9 @@
             this.BtnUpFolder.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.BtnUpFolder.Image = global::UpYun_97world.Properties.Resources.Ribbon_Close_16x16;
             this.BtnUpFolder.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopLeft;
-            this.BtnUpFolder.Location = new System.Drawing.Point(2, 2);
+            this.BtnUpFolder.Location = new System.Drawing.Point(0, 1);
             this.BtnUpFolder.Name = "BtnUpFolder";
-            this.BtnUpFolder.Size = new System.Drawing.Size(19, 19);
+            this.BtnUpFolder.Size = new System.Drawing.Size(18, 18);
             this.BtnUpFolder.TabIndex = 43;
             // 
             // UrlBar
@@ -64,7 +64,7 @@
             this.Controls.Add(this.BtnUpFolder);
             this.Controls.Add(this.CbbUrl);
             this.Name = "UrlBar";
-            this.Size = new System.Drawing.Size(287, 26);
+            this.Size = new System.Drawing.Size(283, 24);
             this.ResumeLayout(false);
 
         }

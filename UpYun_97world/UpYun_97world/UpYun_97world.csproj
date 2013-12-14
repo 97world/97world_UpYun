@@ -117,6 +117,12 @@
     <Compile Include="test.Designer.cs">
       <DependentUpon>test.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpYunAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpYunAbout.Designer.cs">
+      <DependentUpon>UpYunAbout.cs</DependentUpon>
+    </Compile>
     <Compile Include="UpYunBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </Compile>
     <EmbeddedResource Include="test.resx">
       <DependentUpon>test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpYunAbout.resx">
+      <DependentUpon>UpYunAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpYunBase.resx">
       <DependentUpon>UpYunBase.cs</DependentUpon>
@@ -234,6 +243,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\Ribbon_Close_16x16.png" />
+    <None Include="Resources\upyun_logo.png" />
+    <None Include="Resources\97world.jpg" />
     <Content Include="upyun.ico" />
   </ItemGroup>
   <ItemGroup>

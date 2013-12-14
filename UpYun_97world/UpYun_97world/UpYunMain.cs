@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -29,10 +27,12 @@ namespace UpYun_97world
             LocalToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDelLocal_click);
             LocalToolsBarMain.BtnNewFloder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolderLocal_click);
             LocalToolsBarMain.BtnMyFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnMyFolderLocal_click);
+            LocalToolsBarMain.BtnNewFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFileLocal_click);
 
             //远程浏览器地址栏相关控件事件的绑定和实现
             UrlBarWeb.CBEUrl.KeyDown += new KeyEventHandler(WebUrlEnter);
             UrlBarWeb.UpButton.Click += new EventHandler(BtnUpWeb);
+            UrlBarWeb.CBEUrl.SelectedIndexChanged += new EventHandler(WebUrlBarSelectedItemChanged);
 
             //远程浏览器工具栏相关控件时间的绑定和实现
             WebToolsBarMain.BtnOperator.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnOperatorWeb_click);
@@ -42,6 +42,7 @@ namespace UpYun_97world
             WebToolsBarMain.BtnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnDelWeb_click);
             WebToolsBarMain.BtnNewFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnNewFolderWeb_click);
             WebToolsBarMain.BtnLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnLinkWeb_click);
+            WebToolsBarMain.BtnPreview.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnPreviewWeb_click);
         }
 
         public delegate void setUrlBar(string webpath);
@@ -62,7 +63,11 @@ namespace UpYun_97world
         /// </summary>
         public Point menutrippoint = new Point();
 
-        
+        /// <summary>
+        /// 为实现单选菜单而设置的临时变量，传递上一次选中的item
+        /// </summary>
+        public DevExpress.XtraBars.BarCheckItem tempItem = new DevExpress.XtraBars.BarCheckItem();
+
         /// <summary>
         /// 窗体载入事件
         /// </summary>
@@ -89,7 +94,8 @@ namespace UpYun_97world
             //添加主题样式
             foreach (DevExpress.Skins.SkinContainer cnt in DevExpress.Skins.SkinManager.Default.Skins)
             {
-                DevExpress.XtraBars.BarButtonItem subMenu = new DevExpress.XtraBars.BarButtonItem(xafBarManagerMain, cnt.SkinName);
+                DevExpress.XtraBars.BarCheckItem subMenu = new DevExpress.XtraBars.BarCheckItem(xafBarManagerMain);
+                subMenu.Caption = cnt.SkinName;
                 subMenu.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(SubItemTheme_ItemClick);
                 SubItemTheme.AddItem(subMenu);
             }
@@ -126,7 +132,17 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void BarButtonItemSuper_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            System.Diagnostics.Process.Start("https://github.com/97world/UpYun_97world");
+        }
 
+        /// <summary>
+        /// 菜单“访问我的BLOG”
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void barButtonItemMyblog_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.97world.com/");
         }
 
         /// <summary>
@@ -136,6 +152,9 @@ namespace UpYun_97world
         /// <param name="e"></param>
         public void SubItemTheme_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (tempItem.Caption != null)
+                tempItem.Checked = false;
+            tempItem = (DevExpress.XtraBars.BarCheckItem)e.Item;
             DevExpress.LookAndFeel.UserLookAndFeel.Default.SkinName = e.Item.Caption;
         }
 
@@ -153,21 +172,13 @@ namespace UpYun_97world
             BarCheckItemMobile.Checked = false;
             ((DevExpress.XtraBars.BarCheckItem)sender).Checked = true;
             if (BarCheckItemTelecom.Checked == true && userInformation != null)
-            {
                 userInformation.upYun.setApiDomain("v1.api.upyun.com");
-            }
             else if (BarCheckItemUnicom.Checked == true && userInformation != null)
-            {
                 userInformation.upYun.setApiDomain("v2.api.upyun.com");
-            }
             else if (BarCheckItemMobile.Checked == true && userInformation != null)
-            {
                 userInformation.upYun.setApiDomain("v3.api.upyun.com");
-            }
             else if (BarCheckItemAuto.Checked == true && userInformation != null)
-            {
                 userInformation.upYun.setApiDomain("v0.api.upyun.com");
-            }
         }
 
         private void BarCheckItemAuto_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -199,6 +210,12 @@ namespace UpYun_97world
         {
             LocalPath = UrlBarLocal.CBEUrl.SelectedItem.ToString();
             LocalUrlTextChanged();
+        }
+
+        public void WebUrlBarSelectedItemChanged(object sender, EventArgs e)
+        {
+            WebPath = UrlBarWeb.CBEUrl.SelectedItem.ToString();
+            WebUrlTextChanged();
         }
 
         /// <summary>
@@ -237,6 +254,7 @@ namespace UpYun_97world
             WebToolsBarMain.BtnNewFolder.Enabled = true;
             WebToolsBarMain.BtnDel.Enabled = true;
             WebToolsBarMain.BtnLink.Enabled = true;
+            WebToolsBarMain.BtnPreview.Enabled = true;
             BarButtonItemLogout.Enabled = true;
             UrlBarWeb.Enabled = true;
         }
@@ -474,7 +492,7 @@ namespace UpYun_97world
         public void BtnTransLocal_click(object sender, EventArgs e)
         {
             UpYun_Controller.Main main = new UpYun_Controller.Main();
-            main.upFile(WebPath, LocalPath, ListViewLocal, userInformation, WebUrlTextChanged, setProgressBar);
+            main.upFileOrFolder(WebPath, LocalPath, ListViewLocal, userInformation, WebUrlTextChanged, setProgressBar);
         }
 
         /// <summary>
@@ -504,6 +522,16 @@ namespace UpYun_97world
             newfolder.Path = LocalPath;
             newfolder.ShowDialog();
             LocalUrlTextChanged();
+        }
+
+        /// <summary>
+        /// LOCAL工具栏按钮“新建文件”
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnNewFileLocal_click(object sender, EventArgs e)
+        {
+            LocalPopupMenuNewFile_ItemClick(sender, new DevExpress.XtraBars.ItemClickEventArgs(null, null));
         }
 
         /// <summary>
@@ -604,12 +632,14 @@ namespace UpYun_97world
                     setUrlBar sub = new setUrlBar(delegate(string webpath)
                         {
                             UrlBarWeb.CBEUrl.Text = webpath;
+                            UrlBarWeb.CBEUrl.Items.Add(WebPath);
                         });
                     UrlBarWeb.CBEUrl.Invoke(sub, WebPath);
                 }
                 else
                 {
                     UrlBarWeb.CBEUrl.Text = WebPath;
+                    UrlBarWeb.CBEUrl.Items.Add(WebPath);
                 }
                 UpYun_Controller.Main main = new UpYun_Controller.Main();
                 main.getFileInformationWeb(ListViewWeb, ImageListWebIcon, WebPath, userInformation);
@@ -646,8 +676,15 @@ namespace UpYun_97world
             else if (!(ListViewWeb.SelectedItems[0].Text.Contains(".") && ListViewWeb.SelectedItems[0].Text.Substring(ListViewWeb.SelectedItems[0].Text.LastIndexOf(".")).Length == 4))
                 WebPath = WebPath + ListViewWeb.SelectedItems[0].Text + "/";
             else
-            { 
-                
+            {
+                UpYunPreview upYunPreview = new UpYunPreview();
+                UpYun_Controller.Main main = new UpYun_Controller.Main();
+                Image i = main.previewFile(userInformation.Url, WebPath, ListViewWeb.SelectedItems[0].Text);
+                upYunPreview.Width = i.Width;
+                upYunPreview.Height = i.Height;
+                upYunPreview.BackgroundImage = i;
+                upYunPreview.Show();
+                return;
             }
             WebUrlTextChanged();
             Cursor.Current = Cursors.Default;
@@ -758,6 +795,22 @@ namespace UpYun_97world
                     CopyLink = userInformation.Url + "/" + WebPath.Substring(1) + ListViewWeb.SelectedItems[0].Text;
                 Clipboard.SetDataObject(CopyLink);
             }
+        }
+
+        /// <summary>
+        /// WEB工具栏按钮：预览
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void BtnPreviewWeb_click(object sender, EventArgs e)
+        {
+            UpYunPreview upYunPreview = new UpYunPreview();
+            UpYun_Controller.Main main = new UpYun_Controller.Main();
+            Image i = main.previewFile(userInformation.Url, WebPath, ListViewWeb.SelectedItems[0].Text);
+            upYunPreview.Width = i.Width;
+            upYunPreview.Height = i.Height;
+            upYunPreview.BackgroundImage = i;
+            upYunPreview.Show();
         }
 
         /// <summary>
@@ -1151,5 +1204,14 @@ namespace UpYun_97world
                     BtnRefreshWeb_click(sender, new EventArgs());
             }
         }
+
+        private void barButtonItemAbout_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            UpYunAbout upYunAbout = new UpYunAbout();
+            upYunAbout.Owner = this;
+            upYunAbout.ShowDialog();
+        }
+
+
     }
 }

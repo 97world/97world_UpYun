@@ -34,6 +34,7 @@
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.BtnItemMyPC = new DevExpress.XtraBars.BarButtonItem();
             this.BtnItemDesktop = new DevExpress.XtraBars.BarButtonItem();
+            this.BtnItemMyFolder = new DevExpress.XtraBars.BarButtonItem();
             this.BtnItemRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.BtnItemTrans = new DevExpress.XtraBars.BarButtonItem();
             this.BtnItemDel = new DevExpress.XtraBars.BarButtonItem();
@@ -48,7 +49,7 @@
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemMemoExEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.BtnItemMyFolder = new DevExpress.XtraBars.BarButtonItem();
+            this.BtnItemNewFile = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.BarManagerLocal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoExEdit1)).BeginInit();
@@ -74,8 +75,9 @@
             this.BtnItemDel,
             this.barButtonItem7,
             this.BtnItemDesktop,
-            this.BtnItemMyFolder});
-            this.BarManagerLocal.MaxItemId = 19;
+            this.BtnItemMyFolder,
+            this.BtnItemNewFile});
+            this.BarManagerLocal.MaxItemId = 20;
             this.BarManagerLocal.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1,
             this.repositoryItemMemoExEdit1,
@@ -94,7 +96,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemRefresh, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemTrans),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemDel),
-            new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemNewFloder, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemNewFloder, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemNewFile)});
             this.bar1.OptionsBar.DrawDragBorder = false;
             this.bar1.Text = "Tools";
             // 
@@ -112,11 +115,18 @@
             this.BtnItemDesktop.ImageIndex = 2;
             this.BtnItemDesktop.Name = "BtnItemDesktop";
             // 
+            // BtnItemMyFolder
+            // 
+            this.BtnItemMyFolder.Caption = "我的文档";
+            this.BtnItemMyFolder.Id = 18;
+            this.BtnItemMyFolder.ImageIndex = 9;
+            this.BtnItemMyFolder.Name = "BtnItemMyFolder";
+            // 
             // BtnItemRefresh
             // 
             this.BtnItemRefresh.Caption = "重新载入";
             this.BtnItemRefresh.Id = 2;
-            this.BtnItemRefresh.ImageIndex = 9;
+            this.BtnItemRefresh.ImageIndex = 6;
             this.BtnItemRefresh.Name = "BtnItemRefresh";
             // 
             // BtnItemTrans
@@ -130,14 +140,14 @@
             // 
             this.BtnItemDel.Caption = "删除";
             this.BtnItemDel.Id = 5;
-            this.BtnItemDel.ImageIndex = 8;
+            this.BtnItemDel.ImageIndex = 7;
             this.BtnItemDel.Name = "BtnItemDel";
             // 
             // BtnItemNewFloder
             // 
             this.BtnItemNewFloder.Caption = "新建文件夹";
             this.BtnItemNewFloder.Id = 4;
-            this.BtnItemNewFloder.ImageIndex = 4;
+            this.BtnItemNewFloder.ImageIndex = 3;
             this.BtnItemNewFloder.Name = "BtnItemNewFloder";
             // 
             // barDockControlTop
@@ -145,14 +155,14 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(378, 47);
+            this.barDockControlTop.Size = new System.Drawing.Size(356, 47);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 47);
-            this.barDockControlBottom.Size = new System.Drawing.Size(378, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(356, 0);
             // 
             // barDockControlLeft
             // 
@@ -165,26 +175,24 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(378, 47);
+            this.barDockControlRight.Location = new System.Drawing.Point(356, 47);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 0);
             // 
             // ImageListToolIcon
             // 
             this.ImageListToolIcon.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ImageListToolIcon.ImageStream")));
             this.ImageListToolIcon.TransparentColor = System.Drawing.Color.Transparent;
-            this.ImageListToolIcon.Images.SetKeyName(0, "Accept.png");
-            this.ImageListToolIcon.Images.SetKeyName(1, "Computer.png");
-            this.ImageListToolIcon.Images.SetKeyName(2, "Desktop.png");
-            this.ImageListToolIcon.Images.SetKeyName(3, "Down.png");
-            this.ImageListToolIcon.Images.SetKeyName(4, "Folder add.png");
-            this.ImageListToolIcon.Images.SetKeyName(5, "Globe.png");
-            this.ImageListToolIcon.Images.SetKeyName(6, "Image.png");
-            this.ImageListToolIcon.Images.SetKeyName(7, "Refresh.png");
-            this.ImageListToolIcon.Images.SetKeyName(8, "Remove.png");
-            this.ImageListToolIcon.Images.SetKeyName(9, "Repeat.png");
-            this.ImageListToolIcon.Images.SetKeyName(10, "User.png");
-            this.ImageListToolIcon.Images.SetKeyName(11, "Up.png");
-            this.ImageListToolIcon.Images.SetKeyName(12, "MyFolder.png");
+            this.ImageListToolIcon.Images.SetKeyName(0, "import-picture-document.png");
+            this.ImageListToolIcon.Images.SetKeyName(1, "terminal.png");
+            this.ImageListToolIcon.Images.SetKeyName(2, "desktop.png");
+            this.ImageListToolIcon.Images.SetKeyName(3, "add.png");
+            this.ImageListToolIcon.Images.SetKeyName(4, "web-browser.png");
+            this.ImageListToolIcon.Images.SetKeyName(5, "spotlight-blue-button.png");
+            this.ImageListToolIcon.Images.SetKeyName(6, "backup-green-button.png");
+            this.ImageListToolIcon.Images.SetKeyName(7, "remove.png");
+            this.ImageListToolIcon.Images.SetKeyName(8, "user.png");
+            this.ImageListToolIcon.Images.SetKeyName(9, "document.png");
+            this.ImageListToolIcon.Images.SetKeyName(10, "new-document.png");
             // 
             // barButtonItem2
             // 
@@ -215,12 +223,12 @@
             this.repositoryItemTextEdit1.AutoHeight = false;
             this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
             // 
-            // BtnItemMyFolder
+            // BtnItemNewFile
             // 
-            this.BtnItemMyFolder.Caption = "我的文档";
-            this.BtnItemMyFolder.Id = 18;
-            this.BtnItemMyFolder.ImageIndex = 12;
-            this.BtnItemMyFolder.Name = "BtnItemMyFolder";
+            this.BtnItemNewFile.Caption = "新建文件";
+            this.BtnItemNewFile.Id = 19;
+            this.BtnItemNewFile.ImageIndex = 10;
+            this.BtnItemNewFile.Name = "BtnItemNewFile";
             // 
             // LocalToolsBar
             // 
@@ -231,7 +239,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "LocalToolsBar";
-            this.Size = new System.Drawing.Size(378, 47);
+            this.Size = new System.Drawing.Size(356, 47);
             ((System.ComponentModel.ISupportInitialize)(this.BarManagerLocal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoExEdit1)).EndInit();
@@ -260,6 +268,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit repositoryItemMemoExEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraBars.BarButtonItem BtnItemNewFile;
         private DevExpress.XtraBars.BarButtonItem BtnItemMyFolder;
 
     }

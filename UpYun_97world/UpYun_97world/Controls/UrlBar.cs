@@ -37,17 +37,17 @@ namespace UpYun_97world.Controls
         private void CbbUrl_DropDown(object sender, EventArgs e)
         {
             Hashtable ht = new Hashtable();
-            for (int i = 0; i < this.CbbUrl.Items.Count; i++)
+            for (int i = 0; i < CbbUrl.Items.Count; i++)
             {
-                if (!ht.ContainsValue(this.CbbUrl.Items[i].ToString()))
+                if (!ht.ContainsValue(CbbUrl.Items[i].ToString()))
                 {
-                    ht.Add(i, this.CbbUrl.Items[i].ToString());
+                    ht.Add(i, CbbUrl.Items[i].ToString());
                 }
             }
             this.CbbUrl.Items.Clear();
             foreach (DictionaryEntry de in ht)
             {
-                this.CbbUrl.Items.Add(de.Value);
+                CbbUrl.Items.Add(de.Value);
             }
         }
 

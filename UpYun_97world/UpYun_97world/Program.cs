@@ -20,7 +20,7 @@ namespace UpYun_97world
 
             DevExpress.Skins.SkinManager.EnableFormSkins();
             DevExpress.UserSkins.BonusSkins.Register();
-            UserLookAndFeel.Default.SetSkinStyle("Seven Classic");
+            UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
 
             Application.Run(new UpYunMain());
         }

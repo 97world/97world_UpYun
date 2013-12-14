@@ -63,9 +63,29 @@ namespace UpYun_97world.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap _97world {
+            get {
+                object obj = ResourceManager.GetObject("97world", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Ribbon_Close_16x16 {
             get {
                 object obj = ResourceManager.GetObject("Ribbon_Close_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap upyun_logo {
+            get {
+                object obj = ResourceManager.GetObject("upyun_logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using UpYun_Model;
+using System.Collections;
 
 namespace UpYun_Controller
 {
@@ -68,14 +69,29 @@ namespace UpYun_Controller
             fileinformationforlistview.getFileInformationForListViewWeb(listview, imagelist, path, userInformation);
         }
 
-        public void upFile(string webpath, string localpath, ListView locallistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
+        public void upFileOrFolder(string webpath, string localpath, ListView locallistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
-            fileinformationforlistview.upFile(webpath, localpath, locallistview, userinformation, refresh, setprogressbar);
+            ArrayList filename = new ArrayList();//foldername = new ArrayList();
+            for (int i = 0; i < locallistview.SelectedItems.Count; i++)
+            {
+                if (!locallistview.SelectedItems[i].SubItems[1].Text.Equals("      "))
+                    filename.Add(locallistview.SelectedItems[i].Text);
+                //else
+                //    foldername.Add(locallistview.Items[i].Text);
+            }
+            fileinformationforlistview.upFile(webpath, localpath, filename, userinformation, refresh, setprogressbar);
         }
 
         public void downloadFile(string localpath, string webpath, ListView weblistview, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
-            fileinformationforlistview.downloadFile(localpath, webpath, weblistview, userinformation, refresh, setprogressbar);
+            ArrayList filename = new ArrayList();//foldername = new ArrayList();
+            for (int i = 0; i < weblistview.SelectedItems.Count; i++)
+            {
+                if (!weblistview.SelectedItems[i].SubItems[1].Text.Equals("0 B"))
+                    filename.Add(weblistview.SelectedItems[i].Text);
+            }
+
+            fileinformationforlistview.downloadFile(localpath, webpath, filename, userinformation, refresh, setprogressbar);
         }
 
         public void copyFileLocal(string oldpath, string[] name, string localpath)

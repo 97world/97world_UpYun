@@ -52,5 +52,10 @@ namespace UpYun_97world.Controls
         /// 按钮：一键复制外链
         /// </summary>
         public DevExpress.XtraBars.BarButtonItem BtnLink { get { return BtnItemLink; } }
+
+        /// <summary>
+        /// 按钮：预览图片
+        /// </summary>
+        public DevExpress.XtraBars.BarButtonItem BtnPreview { get { return BtnItemPreview; } }
     }
 }

@@ -39,6 +39,7 @@
             this.BtnItemDel = new DevExpress.XtraBars.BarButtonItem();
             this.BtnItemNewFolder = new DevExpress.XtraBars.BarButtonItem();
             this.BtnItemLink = new DevExpress.XtraBars.BarButtonItem();
+            this.BtnItemPreview = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -64,8 +65,9 @@
             this.BtnItemTrans,
             this.BtnItemNewFolder,
             this.BtnItemLink,
-            this.BtnItemDel});
-            this.BarManagerWeb.MaxItemId = 10;
+            this.BtnItemDel,
+            this.BtnItemPreview});
+            this.BarManagerWeb.MaxItemId = 13;
             // 
             // bar1
             // 
@@ -81,7 +83,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemTrans),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemDel),
             new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemNewFolder, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemLink)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemLink),
+            new DevExpress.XtraBars.LinkPersistInfo(this.BtnItemPreview)});
             this.bar1.OptionsBar.DrawDragBorder = false;
             this.bar1.Text = "Tools";
             // 
@@ -89,7 +92,7 @@
             // 
             this.BtnItemOperator.Caption = "操作员登录";
             this.BtnItemOperator.Id = 0;
-            this.BtnItemOperator.ImageIndex = 10;
+            this.BtnItemOperator.ImageIndex = 9;
             this.BtnItemOperator.Name = "BtnItemOperator";
             // 
             // BtnItemHome
@@ -97,7 +100,7 @@
             this.BtnItemHome.Caption = "返回主目录";
             this.BtnItemHome.Enabled = false;
             this.BtnItemHome.Id = 1;
-            this.BtnItemHome.ImageIndex = 11;
+            this.BtnItemHome.ImageIndex = 10;
             this.BtnItemHome.Name = "BtnItemHome";
             // 
             // BtnItemRefresh
@@ -105,7 +108,7 @@
             this.BtnItemRefresh.Caption = "重新载入";
             this.BtnItemRefresh.Enabled = false;
             this.BtnItemRefresh.Id = 2;
-            this.BtnItemRefresh.ImageIndex = 9;
+            this.BtnItemRefresh.ImageIndex = 6;
             this.BtnItemRefresh.Name = "BtnItemRefresh";
             // 
             // BtnItemTrans
@@ -129,7 +132,7 @@
             this.BtnItemNewFolder.Caption = "新建文件夹";
             this.BtnItemNewFolder.Enabled = false;
             this.BtnItemNewFolder.Id = 4;
-            this.BtnItemNewFolder.ImageIndex = 4;
+            this.BtnItemNewFolder.ImageIndex = 3;
             this.BtnItemNewFolder.Name = "BtnItemNewFolder";
             // 
             // BtnItemLink
@@ -137,22 +140,30 @@
             this.BtnItemLink.Caption = "一键获取链接";
             this.BtnItemLink.Enabled = false;
             this.BtnItemLink.Id = 8;
-            this.BtnItemLink.ImageIndex = 5;
+            this.BtnItemLink.ImageIndex = 4;
             this.BtnItemLink.Name = "BtnItemLink";
+            // 
+            // BtnItemPreview
+            // 
+            this.BtnItemPreview.Caption = "预览";
+            this.BtnItemPreview.Enabled = false;
+            this.BtnItemPreview.Id = 12;
+            this.BtnItemPreview.ImageIndex = 5;
+            this.BtnItemPreview.Name = "BtnItemPreview";
             // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(393, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(357, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlBottom.Size = new System.Drawing.Size(393, 47);
+            this.barDockControlBottom.Size = new System.Drawing.Size(357, 47);
             // 
             // barDockControlLeft
             // 
@@ -165,25 +176,24 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(393, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(357, 0);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 0);
             // 
             // ImageListToolIcon
             // 
             this.ImageListToolIcon.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ImageListToolIcon.ImageStream")));
             this.ImageListToolIcon.TransparentColor = System.Drawing.Color.Transparent;
-            this.ImageListToolIcon.Images.SetKeyName(0, "Accept.png");
-            this.ImageListToolIcon.Images.SetKeyName(1, "Computer.png");
-            this.ImageListToolIcon.Images.SetKeyName(2, "Desktop.png");
-            this.ImageListToolIcon.Images.SetKeyName(3, "Down.png");
-            this.ImageListToolIcon.Images.SetKeyName(4, "Folder add.png");
-            this.ImageListToolIcon.Images.SetKeyName(5, "Globe.png");
-            this.ImageListToolIcon.Images.SetKeyName(6, "Image.png");
-            this.ImageListToolIcon.Images.SetKeyName(7, "Refresh.png");
-            this.ImageListToolIcon.Images.SetKeyName(8, "Remove.png");
-            this.ImageListToolIcon.Images.SetKeyName(9, "Repeat.png");
-            this.ImageListToolIcon.Images.SetKeyName(10, "User.png");
-            this.ImageListToolIcon.Images.SetKeyName(11, "Home.png");
+            this.ImageListToolIcon.Images.SetKeyName(0, "export-to-picture-document.png");
+            this.ImageListToolIcon.Images.SetKeyName(1, "terminal.png");
+            this.ImageListToolIcon.Images.SetKeyName(2, "desktop.png");
+            this.ImageListToolIcon.Images.SetKeyName(3, "add.png");
+            this.ImageListToolIcon.Images.SetKeyName(4, "web-browser.png");
+            this.ImageListToolIcon.Images.SetKeyName(5, "spotlight-blue-button.png");
+            this.ImageListToolIcon.Images.SetKeyName(6, "backup-green-button.png");
+            this.ImageListToolIcon.Images.SetKeyName(7, "Repeat.png");
+            this.ImageListToolIcon.Images.SetKeyName(8, "remove.png");
+            this.ImageListToolIcon.Images.SetKeyName(9, "user.png");
+            this.ImageListToolIcon.Images.SetKeyName(10, "green-ball.png");
             // 
             // WebToolsBar
             // 
@@ -194,7 +204,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "WebToolsBar";
-            this.Size = new System.Drawing.Size(393, 47);
+            this.Size = new System.Drawing.Size(357, 47);
             ((System.ComponentModel.ISupportInitialize)(this.BarManagerWeb)).EndInit();
             this.ResumeLayout(false);
 
@@ -215,6 +225,7 @@
         private DevExpress.XtraBars.BarButtonItem BtnItemTrans;
         private DevExpress.XtraBars.BarButtonItem BtnItemNewFolder;
         private DevExpress.XtraBars.BarButtonItem BtnItemLink;
+        private DevExpress.XtraBars.BarButtonItem BtnItemPreview;
         private DevExpress.XtraBars.BarButtonItem BtnItemDel;
     }
 }

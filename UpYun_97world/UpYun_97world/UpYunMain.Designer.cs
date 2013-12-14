@@ -169,7 +169,7 @@
             this.MenuBar.DockRow = 0;
             this.MenuBar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.MenuBar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.SubItemOperator),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.SubItemOperator, DevExpress.XtraBars.BarItemPaintStyle.Standard),
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemInternet),
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemTheme),
             new DevExpress.XtraBars.LinkPersistInfo(this.SubItemHelp),
@@ -261,20 +261,22 @@
             // 
             // barButtonItemMyblog
             // 
-            this.barButtonItemMyblog.Caption = "访问我的BLOG";
+            this.barButtonItemMyblog.Caption = "访问我的BLOG...";
             this.barButtonItemMyblog.Id = 5;
             this.barButtonItemMyblog.Name = "barButtonItemMyblog";
+            this.barButtonItemMyblog.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemMyblog_ItemClick);
             // 
             // barButtonItemAbout
             // 
             this.barButtonItemAbout.Caption = "关于(&A)";
             this.barButtonItemAbout.Id = 6;
             this.barButtonItemAbout.Name = "barButtonItemAbout";
+            this.barButtonItemAbout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemAbout_ItemClick);
             // 
             // BarButtonItemSuper
             // 
             this.BarButtonItemSuper.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
-            this.BarButtonItemSuper.Caption = "点击有惊喜";
+            this.BarButtonItemSuper.Caption = "点此访问本项目GitHub主页(&G)";
             this.BarButtonItemSuper.Id = 21;
             this.BarButtonItemSuper.Name = "BarButtonItemSuper";
             this.BarButtonItemSuper.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItemSuper_ItemClick);
@@ -340,28 +342,32 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(774, 24);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControlTop.Size = new System.Drawing.Size(814, 24);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 532);
-            this.barDockControlBottom.Size = new System.Drawing.Size(774, 27);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 585);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControlBottom.Size = new System.Drawing.Size(814, 27);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 508);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 561);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(774, 24);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 508);
+            this.barDockControlRight.Location = new System.Drawing.Point(814, 24);
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 561);
             // 
             // actionContainerBarItem1
             // 
@@ -389,14 +395,15 @@
             this.splitContainerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainerControl1.Location = new System.Drawing.Point(2, 28);
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 23);
+            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainerControl1.Name = "splitContainerControl1";
             this.splitContainerControl1.Panel1.Controls.Add(this.GroupControlLocal);
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.GroupControlWeb);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(770, 500);
-            this.splitContainerControl1.SplitterPosition = 383;
+            this.splitContainerControl1.Size = new System.Drawing.Size(814, 560);
+            this.splitContainerControl1.SplitterPosition = 404;
             this.splitContainerControl1.TabIndex = 4;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
@@ -408,9 +415,10 @@
             this.GroupControlLocal.Controls.Add(this.ListViewLocal);
             this.GroupControlLocal.Controls.Add(this.UrlBarLocal);
             this.GroupControlLocal.Controls.Add(this.LocalToolsBarMain);
-            this.GroupControlLocal.Location = new System.Drawing.Point(4, 3);
+            this.GroupControlLocal.Location = new System.Drawing.Point(3, 4);
+            this.GroupControlLocal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GroupControlLocal.Name = "GroupControlLocal";
-            this.GroupControlLocal.Size = new System.Drawing.Size(377, 494);
+            this.GroupControlLocal.Size = new System.Drawing.Size(398, 556);
             this.GroupControlLocal.TabIndex = 0;
             this.GroupControlLocal.Text = "本地浏览器";
             // 
@@ -425,9 +433,10 @@
             this.columnHeader3});
             this.ListViewLocal.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListViewLocal.FullRowSelect = true;
-            this.ListViewLocal.Location = new System.Drawing.Point(5, 94);
+            this.ListViewLocal.Location = new System.Drawing.Point(0, 92);
+            this.ListViewLocal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ListViewLocal.Name = "ListViewLocal";
-            this.ListViewLocal.Size = new System.Drawing.Size(366, 395);
+            this.ListViewLocal.Size = new System.Drawing.Size(398, 464);
             this.ListViewLocal.SmallImageList = this.ImageListLocalIcon;
             this.ListViewLocal.TabIndex = 3;
             this.ListViewLocal.UseCompatibleStateImageBehavior = false;
@@ -438,7 +447,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "名称";
-            this.columnHeader1.Width = 155;
+            this.columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
@@ -460,18 +469,20 @@
             this.UrlBarLocal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UrlBarLocal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.UrlBarLocal.Location = new System.Drawing.Point(3, 67);
+            this.UrlBarLocal.Location = new System.Drawing.Point(0, 66);
+            this.UrlBarLocal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.UrlBarLocal.Name = "UrlBarLocal";
-            this.UrlBarLocal.Size = new System.Drawing.Size(368, 26);
+            this.UrlBarLocal.Size = new System.Drawing.Size(398, 28);
             this.UrlBarLocal.TabIndex = 2;
             // 
             // LocalToolsBarMain
             // 
             this.LocalToolsBarMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LocalToolsBarMain.Location = new System.Drawing.Point(5, 21);
+            this.LocalToolsBarMain.Location = new System.Drawing.Point(1, 21);
+            this.LocalToolsBarMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LocalToolsBarMain.Name = "LocalToolsBarMain";
-            this.LocalToolsBarMain.Size = new System.Drawing.Size(366, 46);
+            this.LocalToolsBarMain.Size = new System.Drawing.Size(390, 47);
             this.LocalToolsBarMain.TabIndex = 1;
             // 
             // GroupControlWeb
@@ -482,9 +493,10 @@
             this.GroupControlWeb.Controls.Add(this.ListViewWeb);
             this.GroupControlWeb.Controls.Add(this.UrlBarWeb);
             this.GroupControlWeb.Controls.Add(this.WebToolsBarMain);
-            this.GroupControlWeb.Location = new System.Drawing.Point(2, 3);
+            this.GroupControlWeb.Location = new System.Drawing.Point(2, 4);
+            this.GroupControlWeb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GroupControlWeb.Name = "GroupControlWeb";
-            this.GroupControlWeb.Size = new System.Drawing.Size(375, 494);
+            this.GroupControlWeb.Size = new System.Drawing.Size(400, 556);
             this.GroupControlWeb.TabIndex = 0;
             this.GroupControlWeb.Text = "远程浏览器";
             // 
@@ -499,9 +511,10 @@
             this.columnHeader6});
             this.ListViewWeb.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListViewWeb.FullRowSelect = true;
-            this.ListViewWeb.Location = new System.Drawing.Point(5, 94);
+            this.ListViewWeb.Location = new System.Drawing.Point(0, 92);
+            this.ListViewWeb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ListViewWeb.Name = "ListViewWeb";
-            this.ListViewWeb.Size = new System.Drawing.Size(365, 395);
+            this.ListViewWeb.Size = new System.Drawing.Size(400, 464);
             this.ListViewWeb.SmallImageList = this.ImageListWebIcon;
             this.ListViewWeb.TabIndex = 4;
             this.ListViewWeb.UseCompatibleStateImageBehavior = false;
@@ -512,7 +525,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "名称";
-            this.columnHeader4.Width = 155;
+            this.columnHeader4.Width = 200;
             // 
             // columnHeader5
             // 
@@ -535,18 +548,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UrlBarWeb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.UrlBarWeb.Enabled = false;
-            this.UrlBarWeb.Location = new System.Drawing.Point(3, 67);
+            this.UrlBarWeb.Location = new System.Drawing.Point(0, 66);
+            this.UrlBarWeb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.UrlBarWeb.Name = "UrlBarWeb";
-            this.UrlBarWeb.Size = new System.Drawing.Size(367, 26);
+            this.UrlBarWeb.Size = new System.Drawing.Size(399, 28);
             this.UrlBarWeb.TabIndex = 3;
             // 
             // WebToolsBarMain
             // 
             this.WebToolsBarMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.WebToolsBarMain.Location = new System.Drawing.Point(5, 21);
+            this.WebToolsBarMain.Location = new System.Drawing.Point(1, 21);
+            this.WebToolsBarMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.WebToolsBarMain.Name = "WebToolsBarMain";
-            this.WebToolsBarMain.Size = new System.Drawing.Size(365, 46);
+            this.WebToolsBarMain.Size = new System.Drawing.Size(390, 47);
             this.WebToolsBarMain.TabIndex = 1;
             // 
             // ImageListToolIcon
@@ -606,28 +621,32 @@
             this.barDockControl1.CausesValidation = false;
             this.barDockControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControl1.Location = new System.Drawing.Point(0, 0);
-            this.barDockControl1.Size = new System.Drawing.Size(774, 0);
+            this.barDockControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControl1.Size = new System.Drawing.Size(814, 0);
             // 
             // barDockControl2
             // 
             this.barDockControl2.CausesValidation = false;
             this.barDockControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControl2.Location = new System.Drawing.Point(0, 559);
-            this.barDockControl2.Size = new System.Drawing.Size(774, 0);
+            this.barDockControl2.Location = new System.Drawing.Point(0, 612);
+            this.barDockControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControl2.Size = new System.Drawing.Size(814, 0);
             // 
             // barDockControl3
             // 
             this.barDockControl3.CausesValidation = false;
             this.barDockControl3.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControl3.Location = new System.Drawing.Point(0, 0);
-            this.barDockControl3.Size = new System.Drawing.Size(0, 559);
+            this.barDockControl3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControl3.Size = new System.Drawing.Size(0, 612);
             // 
             // barDockControl4
             // 
             this.barDockControl4.CausesValidation = false;
             this.barDockControl4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControl4.Location = new System.Drawing.Point(774, 0);
-            this.barDockControl4.Size = new System.Drawing.Size(0, 559);
+            this.barDockControl4.Location = new System.Drawing.Point(814, 0);
+            this.barDockControl4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.barDockControl4.Size = new System.Drawing.Size(0, 612);
             // 
             // LocalPopupMenuOpen
             // 
@@ -897,9 +916,11 @@
             // 
             // UpYunMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Appearance.Options.UseFont = true;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 559);
+            this.ClientSize = new System.Drawing.Size(814, 612);
             this.Controls.Add(this.splitContainerControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -910,9 +931,10 @@
             this.Controls.Add(this.barDockControl2);
             this.Controls.Add(this.barDockControl1);
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "UpYunMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "又拍云客户端 v1.0";
+            this.Text = "又拍云客户端 Ver.1.0.1";
             this.Load += new System.EventHandler(this.UpYunMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UpYunMain_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.xafBarManagerMain)).EndInit();
