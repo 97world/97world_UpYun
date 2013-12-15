@@ -1,6 +1,7 @@
-#ABOUT UpYun_97world （项目简介）#
+#ABOUT UpYun_97world #
 
 这一款高效、简洁的UpYun（又拍云）第三方Windows客户端.
+
 （现在征求界面的美化方案，包括软件Icon的设计方案，目前使用的Icon为UpYun的LOGO）
 
 ---
@@ -33,8 +34,11 @@
 ## Contact Me （联系我） ##
 
 BLOG：  http://www.97world.com/
+
 Twitter:https://twitter.com/97world
+
 Weibo： http://weibo.com/80378091
+
 Email:	97world#Gmail.Com（将#替换成@）
 
 ---
@@ -42,4 +46,5 @@ Email:	97world#Gmail.Com（将#替换成@）
 ## Support My Work （支持我的工作） ##
 
 PayPal:97world#Gmail.Com （将#替换成@）
+
 AliPay:https://me.alipay.com/97world
