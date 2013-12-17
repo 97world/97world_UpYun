@@ -36,8 +36,8 @@
             this.barMdiChildrenListItem1 = new DevExpress.XtraBars.BarMdiChildrenListItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
-            this.barEditItem2 = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemRadioGroup3 = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
+            this.barEditItem3 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemRadioGroup4 = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -45,6 +45,8 @@
             this.barLargeButtonItem1 = new DevExpress.XtraBars.BarLargeButtonItem();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.repositoryItemPopupContainerEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPopupContainerEdit();
+            this.barEditItem2 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemRadioGroup3 = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.repositoryItemRadioGroup1 = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
             this.repositoryItemRadioGroup2 = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
@@ -73,12 +75,12 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.barEditItem3 = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemRadioGroup4 = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPopupContainerEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup2)).BeginInit();
@@ -88,7 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBarControl1.Properties)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dropDownButton1
@@ -168,16 +170,16 @@
             this.bar1.OptionsBar.UseWholeRow = true;
             this.bar1.Text = "Custom 2";
             // 
-            // barEditItem2
+            // barEditItem3
             // 
-            this.barEditItem2.Caption = "test";
-            this.barEditItem2.Edit = this.repositoryItemRadioGroup3;
-            this.barEditItem2.Id = 9;
-            this.barEditItem2.Name = "barEditItem2";
+            this.barEditItem3.Caption = "test";
+            this.barEditItem3.Edit = this.repositoryItemRadioGroup4;
+            this.barEditItem3.Id = 10;
+            this.barEditItem3.Name = "barEditItem3";
             // 
-            // repositoryItemRadioGroup3
+            // repositoryItemRadioGroup4
             // 
-            this.repositoryItemRadioGroup3.Name = "repositoryItemRadioGroup3";
+            this.repositoryItemRadioGroup4.Name = "repositoryItemRadioGroup4";
             // 
             // barDockControlTop
             // 
@@ -226,6 +228,17 @@
             this.repositoryItemPopupContainerEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemPopupContainerEdit1.Name = "repositoryItemPopupContainerEdit1";
+            // 
+            // barEditItem2
+            // 
+            this.barEditItem2.Caption = "test";
+            this.barEditItem2.Edit = this.repositoryItemRadioGroup3;
+            this.barEditItem2.Id = 9;
+            this.barEditItem2.Name = "barEditItem2";
+            // 
+            // repositoryItemRadioGroup3
+            // 
+            this.repositoryItemRadioGroup3.Name = "repositoryItemRadioGroup3";
             // 
             // repositoryItemTextEdit1
             // 
@@ -408,22 +421,20 @@
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
             // 
-            // barEditItem3
+            // pictureBox1
             // 
-            this.barEditItem3.Caption = "test";
-            this.barEditItem3.Edit = this.repositoryItemRadioGroup4;
-            this.barEditItem3.Id = 10;
-            this.barEditItem3.Name = "barEditItem3";
-            // 
-            // repositoryItemRadioGroup4
-            // 
-            this.repositoryItemRadioGroup4.Name = "repositoryItemRadioGroup4";
+            this.pictureBox1.Location = new System.Drawing.Point(413, 153);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 52;
+            this.pictureBox1.TabStop = false;
             // 
             // test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 262);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.BtnUpFolder);
             this.Controls.Add(this.urlBar1);
@@ -451,8 +462,9 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.test_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPopupContainerEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup2)).EndInit();
@@ -462,7 +474,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBarControl1.Properties)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRadioGroup4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -516,6 +528,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup repositoryItemRadioGroup3;
         private DevExpress.XtraBars.BarEditItem barEditItem3;
         private DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup repositoryItemRadioGroup4;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
 
     }

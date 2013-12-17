@@ -131,18 +131,17 @@ namespace UpYun_Model
         /// <param name="path"></param>
         public void delFileByListView(ListView listview,string path)
         {
-            if (XtraMessageBox.Show("确定删除选中文件(文件夹)？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+            for (int i = 0; i < listview.SelectedItems.Count; i++)
             {
-                for (int i = 0; i < listview.SelectedItems.Count; i++)
+                if (listview.SelectedItems[i].SubItems.Count>1 && listview.SelectedItems[i].SubItems[1].Text == "      ")
                 {
-                    if (listview.SelectedItems[i].SubItems[1].Text == "      ")
-                    {
-                        DirectoryInfo di = new DirectoryInfo(path + listview.SelectedItems[i].Text);
-                        di.Delete(true);
-                    }
-                    else
-                        File.Delete(path + listview.SelectedItems[i].Text);
+                    DirectoryInfo di = new DirectoryInfo(path + listview.SelectedItems[i].Text);
+                    di.Delete(true);
                 }
+                else if (listview.SelectedItems[i].Text == "上级目录")
+                    return;
+                else
+                    File.Delete(path + listview.SelectedItems[i].Text);
             }
         }
 
@@ -235,6 +234,7 @@ namespace UpYun_Model
         public void upFile(string webpath, string localpath, ArrayList filenamelist, UserInformation userinformation, RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
             Thread thread = new Thread(() => upFileByUpYun(localpath, webpath, filenamelist, userinformation, refresh, setprogressbar));
+            thread.IsBackground = true;
             thread.Start();
         }
 
@@ -259,10 +259,10 @@ namespace UpYun_Model
                     fs.Close();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                XtraMessageBox.Show("上传出错：文件只能是图像文件！");
                 refresh(false);
+                XtraMessageBox.Show(ex.ToString(), "错误信息");
             }
             refresh(true);
         }
@@ -270,6 +270,7 @@ namespace UpYun_Model
         public void downloadFile(string localpath, string webpath, ArrayList filenamelist, UserInformation userinformation, FileInformationForListView.RefreshListViewSuccess refresh, UpYunLibrary.UpYun.SetProgressBar setprogressbar)
         {
             Thread thread = new Thread(() => downloadFileByUpYun(localpath, webpath, filenamelist, userinformation, refresh, setprogressbar));
+            thread.IsBackground = true;
             thread.Start();
         }
 
@@ -277,28 +278,39 @@ namespace UpYun_Model
         {
             int SelectNum = filenamelist.Count, count;
             FileStream Fs = null;
-            for (int i = 0; i < SelectNum; i++ )
+            try
             {
-                Fs = new FileStream(localpath + filenamelist[i], FileMode.Create);
-                string CopyLink = "";
-                if (userinformation.Url.Substring(userinformation.Url.Length - 1).Equals("/"))
-                    CopyLink = userinformation.Url + webpath.Substring(1) + filenamelist[i];
-                else
-                    CopyLink = userinformation.Url + "/" + webpath.Substring(1) + filenamelist[i];
-                HttpWebRequest Hwr = (HttpWebRequest)WebRequest.Create(CopyLink);
-                HttpWebResponse rps = (HttpWebResponse)Hwr.GetResponse();
-                Stream stream = rps.GetResponseStream();
-                byte[] byts = new byte[rps.ContentLength];
-                System.Threading.Timer FileTm = new System.Threading.Timer(CalculateSpeedTime, null, 0, 1000);
-                while ((count = stream.Read(byts, 0, 5000)) != 0)
+                for (int i = 0; i < SelectNum; i++)
                 {
-                    TempDataSize += count;
-                    Fs.Write(byts, 0, count);
-                    setprogressbar(false, filenamelist[i].ToString(), (Fs.Length / Convert.ToDouble(byts.Length)) * 100.0, TransSpeed);
+                    Fs = new FileStream(localpath + filenamelist[i], FileMode.Create);
+                    string CopyLink = "";
+                    if (userinformation.Url.Substring(userinformation.Url.Length - 1).Equals("/"))
+                        CopyLink = userinformation.Url + webpath.Substring(1) + filenamelist[i];
+                    else
+                        CopyLink = userinformation.Url + "/" + webpath.Substring(1) + filenamelist[i];
+                    HttpWebRequest Hwr = (HttpWebRequest)WebRequest.Create(CopyLink);
+                    HttpWebResponse rps = (HttpWebResponse)Hwr.GetResponse();
+                    Stream stream = rps.GetResponseStream();
+                    byte[] byts = new byte[rps.ContentLength];
+                    System.Threading.Timer FileTm = new System.Threading.Timer(CalculateSpeedTime, null, 0, 1000);
+                    while ((count = stream.Read(byts, 0, 5000)) != 0)
+                    {
+                        TempDataSize += count;
+                        Fs.Write(byts, 0, count);
+                        setprogressbar(false, filenamelist[i].ToString(), (Fs.Length / Convert.ToDouble(byts.Length)) * 100.0, TransSpeed);
+                    }
                 }
             }
-            Fs.Close();
-            refresh(true);
+            catch (Exception ex)
+            {
+                refresh(false);
+                XtraMessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                refresh(true);
+                Fs.Close();
+            }
         }
 
         public void CalculateSpeedTime(object state)

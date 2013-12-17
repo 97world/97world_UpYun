@@ -40,34 +40,57 @@ namespace UpYun_97world
 
         #endregion
 
+        /// <summary>
+        /// 确定按钮点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnOK_Click(object sender, EventArgs e)
         {
             UpYun_Controller.Main main = new UpYun_Controller.Main();
             if (newstatus.Equals("folder"))
             {
                 if (Path.Substring(0, 1).Equals("/"))
-                    main.newFolder(TextBoxFolderName.Text, Path, userinformation);
+                    main.newFolder(TextBoxFolderName.Text.Trim(), Path, userinformation);
                 else
-                    main.newFolder(TextBoxFolderName.Text, Path);
+                {
+                    if (System.IO.Directory.Exists(Path + TextBoxFolderName.Text.Trim()))
+                    {
+                        if (XtraMessageBox.Show("该目录下存在相同名称的文件夹，是否合并？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) != DialogResult.OK)
+                            return;
+                    }
+                    main.newFolder(TextBoxFolderName.Text.Trim(), Path);
+                }
             }
             else if(newstatus.Equals("newfile"))
             {
+                if(System.IO.File.Exists(Path + TextBoxFolderName.Text.Trim()))
+                {
+                    if (XtraMessageBox.Show("该目录下存在相同名称的文件，是否覆盖原文件？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) != DialogResult.OK)
+                        return;
+                }
                 main.newFile(TextBoxFolderName.Text, Path);
-                System.Diagnostics.Process.Start("notepad.exe", Path + TextBoxFolderName.Text);
+                System.Diagnostics.Process.Start("notepad.exe", Path + TextBoxFolderName.Text.Trim());
             }
             else if (newstatus.Equals("renamefile"))
             {
-                if (!System.IO.File.Exists(Path + TextBoxFolderName.Text))
+                if (!System.IO.File.Exists(Path + TextBoxFolderName.Text.Trim()))
                     System.IO.File.Move(Path + oldname, Path + TextBoxFolderName.Text);
                 else
-                    XtraMessageBox.Show("存在同名文件，是否覆盖？");
+                {
+                    XtraMessageBox.Show("存在同名文件！", "提示");
+                    return;
+                }
             }
             else if (newstatus.Equals("renamefolder"))
             {
-                if(!System.IO.Directory.Exists(Path + TextBoxFolderName.Text))
-                    System.IO.Directory.Move(Path + oldname, Path + TextBoxFolderName.Text);
+                if (!System.IO.Directory.Exists(Path + TextBoxFolderName.Text.Trim()))
+                    System.IO.Directory.Move(Path + oldname, Path + TextBoxFolderName.Text.Trim());
                 else
-                    XtraMessageBox.Show("存在同名文件夹，是否覆盖？");
+                {
+                    XtraMessageBox.Show("存在同名文件夹！", "提示");
+                    return;
+                }
             }
             this.Close();
         }

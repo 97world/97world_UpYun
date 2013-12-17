@@ -504,8 +504,11 @@ namespace UpYun_97world
         public void BtnDelLocal_click(object sender, EventArgs e)
         {
             UpYun_Controller.Main main = new UpYun_Controller.Main();
-            main.delFileByListView(ListViewLocal,LocalPath);
-            BarStaticItemStatus.Caption = "删除成功！";
+            if (XtraMessageBox.Show("确定删除选中文件(文件夹)？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+            {
+                main.delFileByListView(ListViewLocal, LocalPath);
+                BarStaticItemStatus.Caption = "删除成功！";
+            }
             LocalUrlTextChanged();
         }
 
@@ -517,10 +520,11 @@ namespace UpYun_97world
         public void BtnNewFolderLocal_click(object sender, EventArgs e)
         {
             UpYunNewFolder newfolder = new UpYunNewFolder();
-            newfolder.Owner = this;
+            //newfolder.Owner = this;
             newfolder.newstatus = "folder";
             newfolder.Path = LocalPath;
-            newfolder.ShowDialog();
+            //newfolder.ShowDialog();
+            newfolder.Show();
             LocalUrlTextChanged();
         }
 
@@ -653,7 +657,7 @@ namespace UpYun_97world
         public void WebUrlTextChanged(bool isuploadsuccess)
         {
             WebUrlTextChanged();
-            if (isuploadsuccess==true)
+            if (isuploadsuccess == true)
                 BarStaticItemStatus.Caption = "上传成功！";
             else
                 BarStaticItemStatus.Caption = "上传失败！";
@@ -1167,6 +1171,10 @@ namespace UpYun_97world
         private void UpYunMain_KeyDown(object sender, KeyEventArgs e)
         {
             Control con =this.ActiveControl;
+            if(e.KeyCode == Keys.F8)
+                BarButtonItemLogin_ItemClick(sender, new DevExpress.XtraBars.ItemClickEventArgs(null, null));
+            else if (e.Alt && e.KeyCode == Keys.X)
+                this.Close();
             if (con.Name.Equals("ListViewLocal"))
             {
                 if (e.Control && e.KeyCode == Keys.O)

@@ -35,6 +35,7 @@
             this.SubItemOperator = new DevExpress.XtraBars.BarSubItem();
             this.BarButtonItemLogin = new DevExpress.XtraBars.BarButtonItem();
             this.BarButtonItemLogout = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemExit = new DevExpress.XtraBars.BarButtonItem();
             this.SubItemInternet = new DevExpress.XtraBars.BarSubItem();
             this.BarCheckItemAuto = new DevExpress.XtraBars.BarCheckItem();
             this.BarCheckItemTelecom = new DevExpress.XtraBars.BarCheckItem();
@@ -42,6 +43,7 @@
             this.BarCheckItemMobile = new DevExpress.XtraBars.BarCheckItem();
             this.SubItemTheme = new DevExpress.XtraBars.BarSubItem();
             this.SubItemHelp = new DevExpress.XtraBars.BarSubItem();
+            this.barButtonItemOfficial = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemMyblog = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemAbout = new DevExpress.XtraBars.BarButtonItem();
             this.BarButtonItemSuper = new DevExpress.XtraBars.BarButtonItem();
@@ -155,9 +157,11 @@
             this.BarCheckItemUnicom,
             this.BarCheckItemMobile,
             this.barEditItemUploadBar,
-            this.SubItemTheme});
+            this.SubItemTheme,
+            this.barButtonItemOfficial,
+            this.barButtonItemExit});
             this.xafBarManagerMain.MainMenu = this.MenuBar;
-            this.xafBarManagerMain.MaxItemId = 30;
+            this.xafBarManagerMain.MaxItemId = 32;
             this.xafBarManagerMain.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.FileUploadProgressBar});
             this.xafBarManagerMain.StatusBar = this.BottomBar;
@@ -187,7 +191,8 @@
             this.SubItemOperator.Id = 0;
             this.SubItemOperator.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.BarButtonItemLogin),
-            new DevExpress.XtraBars.LinkPersistInfo(this.BarButtonItemLogout)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.BarButtonItemLogout),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemExit, true)});
             this.SubItemOperator.Name = "SubItemOperator";
             // 
             // BarButtonItemLogin
@@ -195,6 +200,7 @@
             this.BarButtonItemLogin.Caption = "操作员登录(&L)";
             this.BarButtonItemLogin.Id = 3;
             this.BarButtonItemLogin.Name = "BarButtonItemLogin";
+            this.BarButtonItemLogin.ShortcutKeyDisplayString = "F8";
             this.BarButtonItemLogin.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItemLogin_ItemClick);
             // 
             // BarButtonItemLogout
@@ -204,6 +210,13 @@
             this.BarButtonItemLogout.Id = 4;
             this.BarButtonItemLogout.Name = "BarButtonItemLogout";
             this.BarButtonItemLogout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarButtonItemLogout_ItemClick);
+            // 
+            // barButtonItemExit
+            // 
+            this.barButtonItemExit.Caption = "退出(&X)";
+            this.barButtonItemExit.Id = 31;
+            this.barButtonItemExit.Name = "barButtonItemExit";
+            this.barButtonItemExit.ShortcutKeyDisplayString = "Alt+X";
             // 
             // SubItemInternet
             // 
@@ -255,13 +268,20 @@
             this.SubItemHelp.Caption = "帮助(&H)";
             this.SubItemHelp.Id = 2;
             this.SubItemHelp.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemOfficial),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemMyblog),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAbout)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAbout, true)});
             this.SubItemHelp.Name = "SubItemHelp";
+            // 
+            // barButtonItemOfficial
+            // 
+            this.barButtonItemOfficial.Caption = "访问又拍云官网...";
+            this.barButtonItemOfficial.Id = 30;
+            this.barButtonItemOfficial.Name = "barButtonItemOfficial";
             // 
             // barButtonItemMyblog
             // 
-            this.barButtonItemMyblog.Caption = "访问我的BLOG...";
+            this.barButtonItemMyblog.Caption = "访问作者的BLOG...";
             this.barButtonItemMyblog.Id = 5;
             this.barButtonItemMyblog.Name = "barButtonItemMyblog";
             this.barButtonItemMyblog.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemMyblog_ItemClick);
@@ -418,7 +438,7 @@
             this.GroupControlLocal.Location = new System.Drawing.Point(3, 4);
             this.GroupControlLocal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GroupControlLocal.Name = "GroupControlLocal";
-            this.GroupControlLocal.Size = new System.Drawing.Size(398, 556);
+            this.GroupControlLocal.Size = new System.Drawing.Size(401, 556);
             this.GroupControlLocal.TabIndex = 0;
             this.GroupControlLocal.Text = "本地浏览器";
             // 
@@ -436,7 +456,7 @@
             this.ListViewLocal.Location = new System.Drawing.Point(0, 92);
             this.ListViewLocal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ListViewLocal.Name = "ListViewLocal";
-            this.ListViewLocal.Size = new System.Drawing.Size(398, 464);
+            this.ListViewLocal.Size = new System.Drawing.Size(401, 464);
             this.ListViewLocal.SmallImageList = this.ImageListLocalIcon;
             this.ListViewLocal.TabIndex = 3;
             this.ListViewLocal.UseCompatibleStateImageBehavior = false;
@@ -472,7 +492,7 @@
             this.UrlBarLocal.Location = new System.Drawing.Point(0, 66);
             this.UrlBarLocal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.UrlBarLocal.Name = "UrlBarLocal";
-            this.UrlBarLocal.Size = new System.Drawing.Size(398, 28);
+            this.UrlBarLocal.Size = new System.Drawing.Size(401, 28);
             this.UrlBarLocal.TabIndex = 2;
             // 
             // LocalToolsBarMain
@@ -482,7 +502,7 @@
             this.LocalToolsBarMain.Location = new System.Drawing.Point(1, 21);
             this.LocalToolsBarMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LocalToolsBarMain.Name = "LocalToolsBarMain";
-            this.LocalToolsBarMain.Size = new System.Drawing.Size(390, 47);
+            this.LocalToolsBarMain.Size = new System.Drawing.Size(393, 47);
             this.LocalToolsBarMain.TabIndex = 1;
             // 
             // GroupControlWeb
@@ -493,10 +513,10 @@
             this.GroupControlWeb.Controls.Add(this.ListViewWeb);
             this.GroupControlWeb.Controls.Add(this.UrlBarWeb);
             this.GroupControlWeb.Controls.Add(this.WebToolsBarMain);
-            this.GroupControlWeb.Location = new System.Drawing.Point(2, 4);
+            this.GroupControlWeb.Location = new System.Drawing.Point(0, 4);
             this.GroupControlWeb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GroupControlWeb.Name = "GroupControlWeb";
-            this.GroupControlWeb.Size = new System.Drawing.Size(400, 556);
+            this.GroupControlWeb.Size = new System.Drawing.Size(402, 556);
             this.GroupControlWeb.TabIndex = 0;
             this.GroupControlWeb.Text = "远程浏览器";
             // 
@@ -514,7 +534,7 @@
             this.ListViewWeb.Location = new System.Drawing.Point(0, 92);
             this.ListViewWeb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ListViewWeb.Name = "ListViewWeb";
-            this.ListViewWeb.Size = new System.Drawing.Size(400, 464);
+            this.ListViewWeb.Size = new System.Drawing.Size(402, 464);
             this.ListViewWeb.SmallImageList = this.ImageListWebIcon;
             this.ListViewWeb.TabIndex = 4;
             this.ListViewWeb.UseCompatibleStateImageBehavior = false;
@@ -551,7 +571,7 @@
             this.UrlBarWeb.Location = new System.Drawing.Point(0, 66);
             this.UrlBarWeb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.UrlBarWeb.Name = "UrlBarWeb";
-            this.UrlBarWeb.Size = new System.Drawing.Size(399, 28);
+            this.UrlBarWeb.Size = new System.Drawing.Size(401, 28);
             this.UrlBarWeb.TabIndex = 3;
             // 
             // WebToolsBarMain
@@ -561,7 +581,7 @@
             this.WebToolsBarMain.Location = new System.Drawing.Point(1, 21);
             this.WebToolsBarMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.WebToolsBarMain.Name = "WebToolsBarMain";
-            this.WebToolsBarMain.Size = new System.Drawing.Size(390, 47);
+            this.WebToolsBarMain.Size = new System.Drawing.Size(392, 47);
             this.WebToolsBarMain.TabIndex = 1;
             // 
             // ImageListToolIcon
@@ -1036,5 +1056,7 @@
         private DevExpress.XtraBars.BarCheckItem barCheckItem1;
         private DevExpress.XtraBars.BarButtonItem WebPopupMenuLink;
         private DevExpress.XtraBars.BarButtonItem WebPopupMenuPreview;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemExit;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemOfficial;
     }
 }

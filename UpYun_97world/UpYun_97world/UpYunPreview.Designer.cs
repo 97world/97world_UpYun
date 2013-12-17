@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 262);
+            this.ClientSize = new System.Drawing.Size(406, 330);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "UpYunPreview";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -48,5 +48,7 @@
         }
 
         #endregion
+
+
     }
 }

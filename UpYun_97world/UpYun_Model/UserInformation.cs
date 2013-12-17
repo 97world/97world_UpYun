@@ -146,8 +146,8 @@ namespace UpYun_Model
                 }
                 catch(Exception ex)
                 {
-                    XtraMessageBox.Show(ex.Message);
                     upYun = null;
+                    XtraMessageBox.Show(ex.Message,"错误提示");
                 }
             }
 
@@ -159,7 +159,7 @@ namespace UpYun_Model
         public UserInformation()
         {
             ToolsLibrary.IniFile ini = new ToolsLibrary.IniFile();
-            if (ini.IniReadValue("ifconfig","remember")!="" && Convert.ToBoolean(string.Compare(ini.IniReadValue("ifconfig", "remember"), "true", false)))
+            if (ini.IniReadValue("ifconfig","remember")!="" && !Convert.ToBoolean(string.Compare(ini.IniReadValue("ifconfig", "remember"), "true", true)))
             {
                 BucketName = ini.IniReadValue("operatorinformation","bucket");
                 OperatorName = ini.IniReadValue("operatorinformation", "operatorname");
