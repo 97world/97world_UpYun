@@ -45,12 +45,13 @@ namespace UpYun_97world
             WebToolsBarMain.BtnPreview.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(BtnPreviewWeb_click);
         }
 
+        #region 变量
         public delegate void setUrlBar(string webpath);
         public delegate void setProgressBarDelegate(double num);
 
-       /// <summary>
-       /// 本地浏览器、远程浏览器复制文件的源路径
-       /// </summary>
+        /// <summary>
+        /// 本地浏览器、远程浏览器复制文件的源路径
+        /// </summary>
         public string localcopyoldurl = "", webcopyoldurl = "";
 
         /// <summary>
@@ -67,6 +68,7 @@ namespace UpYun_97world
         /// 为实现单选菜单而设置的临时变量，传递上一次选中的item
         /// </summary>
         public DevExpress.XtraBars.BarCheckItem tempItem = new DevExpress.XtraBars.BarCheckItem();
+        #endregion
 
         /// <summary>
         /// 窗体载入事件
@@ -81,7 +83,7 @@ namespace UpYun_97world
             ListViewWeb.ListViewItemSorter = new ListViewColumnSorter();
             ListViewWeb.ColumnClick += new ColumnClickEventHandler(ListViewHelper.ListView_ColumnClick);
 
-            IniFile iniFile=new IniFile();
+            IniFile iniFile = new IniFile();
             if (String.Compare(iniFile.IniReadValue("ifconfig", "auto"), "true", true) == 0)
             {
                 IfLogin = true;
@@ -226,7 +228,7 @@ namespace UpYun_97world
             if (IfLogin == true)
             {
                 BarStaticItemOperator.Caption = "操作员：" + userInformation.OperatorName;
-                BarStaticItemUseSpace.Caption = "空间已使用：" + Tools.getCommonSize( userInformation.UseSpace);
+                BarStaticItemUseSpace.Caption = "空间已使用：" + Tools.getCommonSize(userInformation.UseSpace);
                 BarStaticItemStatus.Caption = "登录成功！";
                 setControlsWhenLoginSuccess();
                 UrlBarWeb.CBEUrl.Text = WebPath;
@@ -255,6 +257,7 @@ namespace UpYun_97world
             WebToolsBarMain.BtnDel.Enabled = true;
             WebToolsBarMain.BtnLink.Enabled = true;
             WebToolsBarMain.BtnPreview.Enabled = true;
+            WebToolsBarMain.BtnPreview.Enabled = true;
             BarButtonItemLogout.Enabled = true;
             UrlBarWeb.Enabled = true;
         }
@@ -264,19 +267,21 @@ namespace UpYun_97world
         /// </summary>
         public void setControlsWhenLogout()
         {
-            WebToolsBarMain.BtnHome.Enabled = false;;
+            WebToolsBarMain.BtnHome.Enabled = false; ;
             WebToolsBarMain.BtnRefresh.Enabled = false;
             WebToolsBarMain.BtnTrans.Enabled = false;
             WebToolsBarMain.BtnNewFolder.Enabled = false;
             WebToolsBarMain.BtnDel.Enabled = false;
             WebToolsBarMain.BtnLink.Enabled = false;
+            WebToolsBarMain.BtnPreview.Enabled = false;
             BarButtonItemLogout.Enabled = false;
             ListViewWeb.Items.Clear();
             UrlBarWeb.CBEUrl.Text = "/";
             WebPath = "/";
             UrlBarWeb.Enabled = false;
+            IfLogin = false;
         }
-        
+
         /// <summary>
         /// 控制进度条和相关信息的显示
         /// </summary>
@@ -284,7 +289,7 @@ namespace UpYun_97world
         /// <param name="uploadinformation"></param>
         /// <param name="num"></param>
         /// <param name="speed"></param>
-        public void setProgressBar(bool isupload, string uploadinformation, double num,double speed)
+        public void setProgressBar(bool isupload, string uploadinformation, double num, double speed)
         {
             if (isupload == true)
                 //BarStaticItemStatus.Caption = "正在上传" + uploadinformation + "上传速度：" + ToolsLibrary.Tools.getCommonSize(speed) + "/s";
@@ -520,11 +525,10 @@ namespace UpYun_97world
         public void BtnNewFolderLocal_click(object sender, EventArgs e)
         {
             UpYunNewFolder newfolder = new UpYunNewFolder();
-            //newfolder.Owner = this;
+            newfolder.Owner = this;
             newfolder.newstatus = "folder";
             newfolder.Path = LocalPath;
-            //newfolder.ShowDialog();
-            newfolder.Show();
+            newfolder.ShowDialog();
             LocalUrlTextChanged();
         }
 
@@ -545,59 +549,46 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void ListViewLocal_MouseUp(object sender, MouseEventArgs e)
         {
-            LocalPopupMenuCopy.Enabled = true;
-            LocalPopupMenuDefault.Enabled = true;
-            LocalPopupMenuDel.Enabled = true;
-            LocalPopupMenuNewFile.Enabled = true;
-            LocalPopupMenuNewFolder.Enabled = true;
-            LocalPopupMenuOpen.Enabled = true;
-            LocalPopupMenuProperty.Enabled = true;
-            LocalPopupMenuRefresh.Enabled = true;
-            LocalPopupMenuRename.Enabled = true;
-            LocalPopupMenuStick.Enabled = true;
-            LocalPopupMenuTrans.Enabled = true;
-            if (ListViewLocal.SelectedItems.Count > 0 && localcopyoldurl.Equals("") && !ListViewLocal.SelectedItems[0].Text.Equals("上级目录") && !LocalPath.Equals("MyComputer"))
-            {
-                LocalPopupMenuStick.Enabled = false;
-            }
-            //else if (ListViewLocal.SelectedItems.Count > 0 && localcopyoldurl.Length > 0 && !ListViewLocal.SelectedItems[0].Text.Equals("上级目录") && !LocalPath.Equals("MyComputer"))
-            //{
-            //    LocalPopupMenuCopy.Enabled = false;
-            //}
-            else if(ListViewLocal.SelectedItems.Count == 0 && localcopyoldurl.Length>0)
-            {
-                LocalPopupMenuCopy.Enabled = false;
-                LocalPopupMenuDefault.Enabled = false;
-                LocalPopupMenuDel.Enabled = false;
-                LocalPopupMenuNewFile.Enabled = false;
-                LocalPopupMenuNewFolder.Enabled = false;
-                LocalPopupMenuOpen.Enabled = false;
-                LocalPopupMenuProperty.Enabled = true;
-                LocalPopupMenuRefresh.Enabled = false;
-                LocalPopupMenuRename.Enabled = false;
-                LocalPopupMenuTrans.Enabled = false;
-            }
-            else
-            {
-                LocalPopupMenuCopy.Enabled = false;
-                LocalPopupMenuDefault.Enabled = false;
-                LocalPopupMenuDel.Enabled = false;
-                LocalPopupMenuNewFile.Enabled = true;
-                LocalPopupMenuNewFolder.Enabled = true;
-                LocalPopupMenuOpen.Enabled = false;
-                LocalPopupMenuProperty.Enabled = false;
-                LocalPopupMenuRename.Enabled = false;
-                LocalPopupMenuStick.Enabled = false;
-                LocalPopupMenuTrans.Enabled = false;
-            }
-            if (IfLogin == false)
-                LocalPopupMenuTrans.Enabled = false;
             if (e.Button == MouseButtons.Right)
             {
-                Point p = new Point(Cursor.Position.X, Cursor.Position.Y);
+                Point p = this.ListViewLocal.PointToClient(new Point(Cursor.Position.X, Cursor.Position.Y));
+                LocalPopupMenuCopy.Enabled = true;
+                LocalPopupMenuDefault.Enabled = true;
+                LocalPopupMenuDel.Enabled = true;
+                LocalPopupMenuNewFile.Enabled = true;
+                LocalPopupMenuNewFolder.Enabled = true;
+                LocalPopupMenuOpen.Enabled = true;
+                LocalPopupMenuProperty.Enabled = true;
+                LocalPopupMenuRefresh.Enabled = true;
+                LocalPopupMenuRename.Enabled = true;
+                LocalPopupMenuStick.Enabled = false;
+                LocalPopupMenuTrans.Enabled = true;
+                //判断是否有选中条目或者选中条目是否为“上级目录”
+                if (ListViewLocal.GetItemAt(p.X, p.Y) != null && ListViewLocal.GetItemAt(p.X, p.Y).SubItems.Count > 1)
+                {
+                    //判断选中的条目是否是文件夹，选中条目为文件夹禁止传输
+                    if (ListViewLocal.GetItemAt(p.X, p.Y).SubItems[1].Text.Equals("      ") || IfLogin == false)
+                        LocalPopupMenuTrans.Enabled = false;
+                }
+                else
+                {
+                    LocalPopupMenuCopy.Enabled = false;
+                    LocalPopupMenuDefault.Enabled = false;
+                    LocalPopupMenuDel.Enabled = false;
+                    LocalPopupMenuOpen.Enabled = false;
+                    LocalPopupMenuProperty.Enabled = false;
+                    LocalPopupMenuRename.Enabled = false;
+                    LocalPopupMenuTrans.Enabled = false;
+                }
+                //判断是否进行了“复制”的操作
+                if (localcopyoldurl.Length > 0)
+                    LocalPopupMenuStick.Enabled = true;
+                //弹出右键菜单并记录弹出坐标
+                p = new Point(Cursor.Position.X, Cursor.Position.Y);
                 PopupMenuLocal.ShowPopup(p);
                 menutrippoint = p;
             }
+
         }
 
         #endregion
@@ -629,7 +620,7 @@ namespace UpYun_97world
         /// <param name="e"></param>
         public void WebUrlTextChanged()
         {
-            if(userInformation!=null)
+            if (userInformation != null)
             {
                 if (UrlBarWeb.CBEUrl.InvokeRequired)
                 {
@@ -672,7 +663,7 @@ namespace UpYun_97world
         private void ListViewWeb_DoubleClick(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            if(ListViewWeb.SelectedItems[0].Text=="上级目录")
+            if (ListViewWeb.SelectedItems[0].Text == "上级目录")
             {
                 WebPath = WebPath.Substring(0, WebPath.Length - 1);
                 WebPath = WebPath.Substring(0, WebPath.LastIndexOf(@"/") + 1);
@@ -700,8 +691,8 @@ namespace UpYun_97world
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void BtnUpWeb(object sender, EventArgs e)
-        { 
-            if(WebPath.Equals("/"))
+        {
+            if (WebPath.Equals("/"))
                 return;
             WebPath = WebPath.Substring(0, WebPath.Length - 1);
             WebPath = WebPath.Substring(0, WebPath.LastIndexOf(@"/") + 1);
@@ -762,7 +753,7 @@ namespace UpYun_97world
             if (XtraMessageBox.Show("确定删除选中文件(文件夹)？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
             {
                 UpYun_Controller.Main main = new UpYun_Controller.Main();
-                main.rmFileForWeb(WebPath, userInformation,ListViewWeb);
+                main.rmFileForWeb(WebPath, userInformation, ListViewWeb);
                 WebUrlTextChanged();
             }
         }
@@ -826,52 +817,29 @@ namespace UpYun_97world
         {
             if (e.Button == MouseButtons.Right)
             {
+                Point p = this.ListViewWeb.PointToClient(new Point(Cursor.Position.X, Cursor.Position.Y));
                 WebPopupMenuLink.Enabled = false;
-                WebPopupMenuStick.Enabled = false;
                 WebPopupMenuTrans.Enabled = false;
-                WebPopupMenuOpen.Enabled = false;
-                WebPopupMenuCopy.Enabled = false;
                 WebPopupMenuDel.Enabled = false;
-                WebPopupMenuProperty.Enabled = false;
-                WebPopupMenuRename.Enabled = false;
-                WebPopupMenuNewFile.Enabled = false;
                 WebPopupMenuNewFolder.Enabled = false;
                 WebPopupMenuRefresh.Enabled = false;
                 WebPopupMenuPreview.Enabled = false;
-                if (ListViewWeb.SelectedItems.Count != 0 && webcopyoldurl.Equals("") && IfLogin == true)
-                {
-                    WebPopupMenuLink.Enabled = true;
-                    WebPopupMenuTrans.Enabled = true;
-                    WebPopupMenuOpen.Enabled = true;
-                    WebPopupMenuCopy.Enabled = true;
-                    WebPopupMenuDel.Enabled = true;
-                    WebPopupMenuProperty.Enabled = true;
-                    WebPopupMenuRename.Enabled = true;
-                    WebPopupMenuNewFile.Enabled = true;
-                    WebPopupMenuNewFolder.Enabled = true;
-                    WebPopupMenuRefresh.Enabled = true;
-                }
-                else if (ListViewWeb.SelectedItems.Count != 0 && webcopyoldurl.Length > 0 && IfLogin == true)
-                {
-                    WebPopupMenuStick.Enabled = true;
-                    WebPopupMenuTrans.Enabled = true;
-                    WebPopupMenuOpen.Enabled = true;
-                    WebPopupMenuDel.Enabled = true;
-                    WebPopupMenuProperty.Enabled = true;
-                    WebPopupMenuRename.Enabled = true;
-                    WebPopupMenuNewFile.Enabled = true;
-                    WebPopupMenuNewFolder.Enabled = true;
-                    WebPopupMenuRefresh.Enabled = true;
-                }
-                else if (ListViewWeb.SelectedItems.Count == 0 && IfLogin == true)
+                //判断操作员是否登录
+                if (IfLogin == true)
                 {
                     WebPopupMenuRefresh.Enabled = true;
                     WebPopupMenuNewFolder.Enabled = true;
+                    if (ListViewWeb.GetItemAt(p.X, p.Y) != null)
+                    {
+                        WebPopupMenuDel.Enabled = true;
+                        if (!ListViewWeb.GetItemAt(p.X, p.Y).SubItems[1].Text.Equals("0 B"))
+                        {
+                            WebPopupMenuLink.Enabled = true;
+                            WebPopupMenuTrans.Enabled = true;
+                            WebPopupMenuPreview.Enabled = true;
+                        }
+                    }
                 }
-                Point p = this.ListViewWeb.PointToClient(new Point(Cursor.Position.X, Cursor.Position.Y));
-                if (ListViewWeb.GetItemAt(p.X, p.Y).Text.Contains("."))
-                    WebPopupMenuPreview.Enabled = true;
-
                 p = new Point(Cursor.Position.X, Cursor.Position.Y);
                 PopupMenuWeb.ShowPopup(p);
                 menutrippoint = p;
@@ -908,7 +876,7 @@ namespace UpYun_97world
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void LocalPopupMenuDefault_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {           
+        {
             ShellContextMenu scm = new ShellContextMenu();
             FileInfo[] files = new FileInfo[1];
             Point p = this.ListViewLocal.PointToClient(new Point(menutrippoint.X, menutrippoint.Y));
@@ -923,6 +891,7 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void LocalPopupMenuCopy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            localcopyoldurl = "";
             localcopyoldname = null;
             localcopyoldname = new string[ListViewLocal.SelectedItems.Count];
             for (int i = 0; i < ListViewLocal.SelectedItems.Count; i++)
@@ -1170,8 +1139,8 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void UpYunMain_KeyDown(object sender, KeyEventArgs e)
         {
-            Control con =this.ActiveControl;
-            if(e.KeyCode == Keys.F8)
+            Control con = this.ActiveControl;
+            if (e.KeyCode == Keys.F8)
                 BarButtonItemLogin_ItemClick(sender, new DevExpress.XtraBars.ItemClickEventArgs(null, null));
             else if (e.Alt && e.KeyCode == Keys.X)
                 this.Close();
@@ -1196,7 +1165,7 @@ namespace UpYun_97world
                 else if (e.KeyCode == Keys.F5)
                     LocalUrlTextChanged();
             }
-            else if(con.Name.Equals("ListViewWeb"))
+            else if (con.Name.Equals("ListViewWeb"))
             {
                 if (e.Control && e.KeyCode == Keys.O)
                     ListViewWeb_DoubleClick(sender, new EventArgs());

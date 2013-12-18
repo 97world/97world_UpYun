@@ -17,8 +17,6 @@ namespace UpYun_97world
         /// <param name="e"></param>
         private void UpYunLogin_Load(object sender, EventArgs e)
         {
-            UpYun_Controller.Login CtrGetUserIfm = new UpYun_Controller.Login();
-            userInformation = CtrGetUserIfm.getUserInformationByIni();
             setControl();
         }
 
@@ -108,15 +106,16 @@ namespace UpYun_97world
         /// </summary>
         public void setControl()
         {
-            if (userInformation.IfRemember)
+            ToolsLibrary.IniFile ini = new ToolsLibrary.IniFile();
+            if (ini.IniReadValue("ifconfig", "remember") != "" && !Convert.ToBoolean(string.Compare(ini.IniReadValue("ifconfig", "remember"), "true", true)))
             {
-                TextEditBucket.Text = userInformation.BucketName;
-                TextEditOperator.Text = userInformation.OperatorName;
-                TextEditPwd.Text = userInformation.OperatorPwd;
-                TextEditUrl.Text = userInformation.Url;
-                DropDownButtonInternet.Text = userInformation.Internet;
-                CheEditRemember.Checked = Convert.ToBoolean(userInformation.IfRemember);
-                CheEditAutoLogin.Checked = Convert.ToBoolean(userInformation.IfAutoLogin);
+                TextEditBucket.Text = ini.IniReadValue("operatorinformation", "bucket");
+                TextEditOperator.Text = ini.IniReadValue("operatorinformation", "operatorname");
+                TextEditPwd.Text = ToolsLibrary.Tools.DecryptDES(ini.IniReadValue("operatorinformation", "operatorpwd"), "WORLDCOM");
+                TextEditUrl.Text = ini.IniReadValue("operatorinformation", "url");
+                DropDownButtonInternet.Text = ini.IniReadValue("operatorinformation", "internet");
+                CheEditRemember.Checked = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifremember"));
+                CheEditAutoLogin.Checked = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifauto"));
             }
         }
 

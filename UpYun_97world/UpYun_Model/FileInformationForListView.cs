@@ -8,7 +8,6 @@ using System.Collections;
 using System.Threading;
 using System.Net;
 using System.Drawing;
-using System.Collections;
 
 namespace UpYun_Model
 {

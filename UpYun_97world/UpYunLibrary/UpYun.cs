@@ -150,7 +150,7 @@ namespace UpYunLibrary
 
             if (postData != null)
             {
-                int UploadNum=0;
+                int UploadNum = 0;
                 Stream dataStream = request.GetRequestStream();
                 UploadNum = postData.Length / 5000;
                 System.Threading.Timer FileTm = new System.Threading.Timer(CalculateSpeedTime, null, 0, 1000);
@@ -166,7 +166,7 @@ namespace UpYunLibrary
                         dataStream.Write(postData, i * 5000, 5000);
                         TempDataSize += 5000;
                     }
-                    setprogressbar(true,Url.Substring(Url.LastIndexOf("/")+1), (i * 5000.0 / postData.Length) * 100.0, TransSpeed);
+                    setprogressbar(true, Url.Substring(Url.LastIndexOf("/") + 1), (i * 5000.0 / postData.Length) * 100.0, TransSpeed);
                 }
                 //dataStream.Write(postData, 0, postData.Length);
                 dataStream.Close();
@@ -195,7 +195,7 @@ namespace UpYunLibrary
 
         /**
         * 获取总体空间的占用信息
-        * return 空间占用量，失败返回 null
+        * return 空间占用量，失败返回 返回null
         */
 
         public int getFolderUsage(string url)
@@ -211,9 +211,9 @@ namespace UpYunLibrary
                 resp.Close();
                 size = int.Parse(strhtml);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                size = 0;
+                size = 0; throw ex;
             }
             return size;
         }
@@ -343,7 +343,7 @@ namespace UpYunLibrary
             //byte[] by = br.ReadBytes(1024 * 1024 * 100); /// 又拍云存储最大文件限制 100Mb，对于普通用户可以改写该值，以减少内存消耗
             int DownloadNum = by.Length / 5000;
             System.Threading.Timer FileTm = new System.Threading.Timer(CalculateSpeedTime, null, 0, 1000);
-            for (int i = 0; i <= DownloadNum; i++ )
+            for (int i = 0; i <= DownloadNum; i++)
             {
                 if (i == DownloadNum)
                 {
@@ -355,7 +355,7 @@ namespace UpYunLibrary
                     by = by.Concat(br.ReadBytes(5000)).ToArray();
                     TempDataSize += 5000;
                 }
-                setprogressbar(false, path.Substring(path.LastIndexOf("/")+1), ((i*5000)/by.Length)*100.0, TransSpeed);
+                setprogressbar(false, path.Substring(path.LastIndexOf("/") + 1), ((i * 5000) / by.Length) * 100.0, TransSpeed);
             }
             resp.Close();
             return by;

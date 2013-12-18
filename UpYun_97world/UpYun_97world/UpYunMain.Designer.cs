@@ -770,6 +770,7 @@
             this.WebPopupMenuOpen.Id = 16;
             this.WebPopupMenuOpen.Name = "WebPopupMenuOpen";
             this.WebPopupMenuOpen.ShortcutKeyDisplayString = "Ctrl+O";
+            this.WebPopupMenuOpen.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.WebPopupMenuOpen.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.WebPoPupMenuOpen_ItemClick);
             // 
             // barButtonItem7

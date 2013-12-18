@@ -147,7 +147,11 @@ namespace UpYun_Model
                 catch(Exception ex)
                 {
                     upYun = null;
-                    XtraMessageBox.Show(ex.Message,"错误提示");
+                    if (ex.Message.Contains("401"))
+                        XtraMessageBox.Show("操作员登录信息填写有误，请确认后再次登录！", "错误提示");
+                    else
+                        XtraMessageBox.Show("网络未连接！", "错误提示");
+                    
                 }
             }
 
@@ -159,11 +163,11 @@ namespace UpYun_Model
         public UserInformation()
         {
             ToolsLibrary.IniFile ini = new ToolsLibrary.IniFile();
-            if (ini.IniReadValue("ifconfig","remember")!="" && !Convert.ToBoolean(string.Compare(ini.IniReadValue("ifconfig", "remember"), "true", true)))
+            if (ini.IniReadValue("ifconfig", "remember") != "" && !Convert.ToBoolean(string.Compare(ini.IniReadValue("ifconfig", "remember"), "true", true)))
             {
-                BucketName = ini.IniReadValue("operatorinformation","bucket");
+                BucketName = ini.IniReadValue("operatorinformation", "bucket");
                 OperatorName = ini.IniReadValue("operatorinformation", "operatorname");
-                OperatorPwd = ToolsLibrary.Tools.DecryptDES( ini.IniReadValue("operatorinformation", "operatorpwd"), "WORLDCOM");
+                OperatorPwd = ToolsLibrary.Tools.DecryptDES(ini.IniReadValue("operatorinformation", "operatorpwd"), "WORLDCOM");
                 Url = ini.IniReadValue("operatorinformation", "url");
                 Internet = ini.IniReadValue("operatorinformation", "internet");
                 IfRemember = Convert.ToBoolean(ini.IniReadValue("operatorinformation", "ifremember"));
