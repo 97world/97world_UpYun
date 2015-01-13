@@ -1,4 +1,4 @@
-#ABOUT UpYun_97world #
+#ABOUT 97world_UpYun #
 
 这一款高效、简洁的UpYun（又拍云）第三方Windows客户端.
 
